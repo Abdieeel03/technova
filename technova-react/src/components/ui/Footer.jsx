@@ -1,6 +1,7 @@
 import logo from "../../assets/img/logo.svg";
 import styles from "../../css_components/Footer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router";
 import {
   faFacebookF,
   faInstagram,
@@ -12,29 +13,29 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.div1}>
         <p>Nuestras Políticas</p>
-        <a href="#">Política de cookies</a>
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos y condiciones</a>
+        <Link to="/politica-cookies">Política de cookies</Link>
+        <Link to="/politica-privacidad">Política de privacidad</Link>
+        <Link to="/terminos-condiciones">Términos y condiciones</Link>
       </div>
       <div className={styles.div2}>
         <p>Enlaces directos</p>
-        <a href="#">Inicia Sesión</a>
-        <a href="#">Productos</a>
-        <a href="#">Contactanos</a>
+        <Link to="/inicia-sesion">Inicia Sesión</Link>
+        <Link to="/productos">Productos</Link>
+        <Link to="/contacto">Contactanos</Link>
       </div>
       <div className={styles.div3}>
         <div className={styles.containerRedes}>
           <h4>Siguenos en:</h4>
           <div className={styles.linksSociales}>
-            <a href="">
+            <Link to="https://www.facebook.com/" target="_blank">
               <FontAwesomeIcon icon={faFacebookF} />
-            </a>
-            <a href="">
+            </Link>
+            <Link to="https://www.instagram.com/" target="_blank">
               <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a href="">
+            </Link>
+            <Link to="https://www.tiktok.com/" target="_blank">
               <FontAwesomeIcon icon={faTiktok} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className={styles.logo}>
