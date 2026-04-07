@@ -4,13 +4,13 @@ import logo from "../../assets/img/logo.svg";
 export default function Header() {
   return (
     <>
-      <header>
+      <header className={styles.header}>
         <a className={styles.headerLink} href="./index.html">
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
         </a>
       </header>
-      <nav>
+      <nav className={styles.nav}>
         <ul>
           <li>
             <a href="./index.html">Inicio</a>
