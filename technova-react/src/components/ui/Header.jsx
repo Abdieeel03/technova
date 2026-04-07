@@ -1,28 +1,58 @@
 import styles from "../../css_components/Header.module.css";
 import logo from "../../assets/img/logo.svg";
+import { NavLink, Link } from "react-router";
 
 export default function Header() {
   return (
     <>
       <header className={styles.header}>
-        <a className={styles.headerLink} href="./index.html">
+        <Link className={styles.headerLink} to="/">
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
-        </a>
+        </Link>
       </header>
       <nav className={styles.nav}>
         <ul>
           <li>
-            <a href="./index.html">Inicio</a>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.active : ""}`
+              }
+              end
+            >
+              Inicio
+            </NavLink>
           </li>
           <li>
-            <a href="./pages/productos.html">Productos</a>
+            <NavLink
+              to="/productos"
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.active : ""}`
+              }
+            >
+              Productos
+            </NavLink>
           </li>
           <li>
-            <a href="./pages/nosotros.html">Nosotros</a>
+            <NavLink
+              to="/nosotros"
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.active : ""}`
+              }
+            >
+              Nosotros
+            </NavLink>
           </li>
           <li>
-            <a href="./pages/contacto.html">Contacto</a>
+            <NavLink
+              to="/contacto"
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.active : ""}`
+              }
+            >
+              Contacto
+            </NavLink>
           </li>
         </ul>
       </nav>
