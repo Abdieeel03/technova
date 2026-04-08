@@ -1,0 +1,35 @@
+.titulo {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 0.4rem;
+}
+
+.subtitulo {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  color: #595758;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 3rem 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
