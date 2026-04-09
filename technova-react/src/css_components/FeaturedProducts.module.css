@@ -1,0 +1,82 @@
+.section {
+  padding: 3rem 0;
+  background-color: #fff;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.titulo {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 1.6rem;
+  color: #1a1a1a;
+  margin: 0 0 1.2rem;
+}
+
+.carouselWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border: 1px solid #e0e0e0;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #ddd;
+  background-color: #fff;
+  color: #595758;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.arrow:hover:not(:disabled) {
+  border-color: #13a4d1;
+  color: #13a4d1;
+  box-shadow: 0 4px 14px rgba(19, 164, 209, 0.2);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 0 0.8rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .arrow {
+    display: none;
+  }
+}
