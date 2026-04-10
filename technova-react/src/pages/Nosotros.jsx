@@ -1,4 +1,6 @@
 import styles from "../css_components/Nosotros.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBullseye, faEye } from "@fortawesome/free-solid-svg-icons";
 
 export default function Nosotros() {
   return (
@@ -30,7 +32,7 @@ export default function Nosotros() {
         <div className={styles.misionVisionContainer}>
           <div className={styles.misionCard}>
             <h3>
-              <i className="fa-solid fa-bullseye"></i>
+              <FontAwesomeIcon icon={faBullseye} />
               Misión
             </h3>
             <p>
@@ -46,7 +48,7 @@ export default function Nosotros() {
 
           <div className={styles.visionCard}>
             <h3>
-              <i className="fa-solid fa-eye"></i>
+              <FontAwesomeIcon icon={faEye} />
               Visión
             </h3>
             <p>
