@@ -1,7 +1,9 @@
+import styles from "../css_components/Nosotros.module.css";
+
 export default function Nosotros() {
   return (
-    <>
-      <div className="nosotros-header">
+    <section className={styles.nosotrosMain}>
+      <div className={styles.nosotrosHeader}>
         <h1>Sobre Nosotros</h1>
         <p>
           Conoce más sobre TechNova y el equipo que hace posible tu experiencia
@@ -9,8 +11,8 @@ export default function Nosotros() {
         </p>
       </div>
 
-      <section className="empresa-info">
-        <div className="empresa-descripcion">
+      <section className={styles.empresaInfo}>
+        <div className={styles.empresaDescripcion}>
           <h2>¿Quiénes Somos?</h2>
           <p>
             TechNova es una empresa especializada en la comercialización de
@@ -25,8 +27,8 @@ export default function Nosotros() {
           </p>
         </div>
 
-        <div className="mision-vision-container">
-          <div className="mision-card">
+        <div className={styles.misionVisionContainer}>
+          <div className={styles.misionCard}>
             <h3>
               <i className="fa-solid fa-bullseye"></i>
               Misión
@@ -42,7 +44,7 @@ export default function Nosotros() {
             </p>
           </div>
 
-          <div className="vision-card">
+          <div className={styles.visionCard}>
             <h3>
               <i className="fa-solid fa-eye"></i>
               Visión
@@ -59,6 +61,6 @@ export default function Nosotros() {
           </div>
         </div>
       </section>
-    </>
+    </section>
   );
 }
