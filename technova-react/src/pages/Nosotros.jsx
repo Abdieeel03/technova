@@ -1,7 +1,7 @@
 export default function Nosotros() {
   return (
     <>
-      <div class="nosotros-header">
+      <div className="nosotros-header">
         <h1>Sobre Nosotros</h1>
         <p>
           Conoce más sobre TechNova y el equipo que hace posible tu experiencia
@@ -9,8 +9,8 @@ export default function Nosotros() {
         </p>
       </div>
 
-      <section class="empresa-info">
-        <div class="empresa-descripcion">
+      <section className="empresa-info">
+        <div className="empresa-descripcion">
           <h2>¿Quiénes Somos?</h2>
           <p>
             TechNova es una empresa especializada en la comercialización de
@@ -25,10 +25,10 @@ export default function Nosotros() {
           </p>
         </div>
 
-        <div class="mision-vision-container">
-          <div class="mision-card">
+        <div className="mision-vision-container">
+          <div className="mision-card">
             <h3>
-              <i class="fa-solid fa-bullseye"></i>
+              <i className="fa-solid fa-bullseye"></i>
               Misión
             </h3>
             <p>
@@ -42,9 +42,9 @@ export default function Nosotros() {
             </p>
           </div>
 
-          <div class="vision-card">
+          <div className="vision-card">
             <h3>
-              <i class="fa-solid fa-eye"></i>
+              <i className="fa-solid fa-eye"></i>
               Visión
             </h3>
             <p>
