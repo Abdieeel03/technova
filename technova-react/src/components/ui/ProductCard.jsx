@@ -1,9 +1,9 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import styles from "../../css_components/ProductCard.module.css";
 
 export default function ProductCard({ producto }) {
   return (
-    <Link to={`/productos/${producto.id}`} className={styles.card}>
+    <Link to={`/productos`} className={styles.card}>
       <div className={styles.imageContainer}>
         <img
           src={producto.imagen}

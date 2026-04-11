@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import data from "../data/productos.json";
-import ProductCard from "../components/ProductCard";
-import styles from "../css_components/Productos.module.css";
+import ProductCard from "../components/ui/ProductCard";
+import styles from "../css_components/Productos.module.css"; 
 
 export default function Productos() {
   const [productos, setProductos] = useState([]);
@@ -32,7 +32,7 @@ export default function Productos() {
       </div>
 
       <div className={styles.grid}>
-        {productosFiltrados.map(p => (
+        {productosFiltrados?.map(p => (
           <ProductCard key={p.id} producto={p} />
         ))}
       </div>
