@@ -1,0 +1,473 @@
+/* ── Detalle Producto Page ── */
+
+.page {
+  min-height: 100vh;
+  background: #f6f6f6;
+}
+
+/* ── Breadcrumb / Back bar ── */
+.backBar {
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 0.9rem 2rem;
+}
+
+.backBarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #13a4d1;
+  text-decoration: none;
+  padding: 6px 16px 6px 12px;
+  border-radius: 8px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.backLink:hover {
+  background: rgba(19, 164, 209, 0.08);
+  color: #0d8cbf;
+}
+
+.backIcon {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.backLink:hover .backIcon {
+  transform: translateX(-3px);
+}
+
+.breadcrumb {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.82rem;
+  color: #999;
+}
+
+.breadcrumb span {
+  color: #555;
+  font-weight: 500;
+}
+
+/* ── Contenedor principal ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* ── Layout superior: imagen + info ── */
+.topSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* ── Galería de imagen ── */
+.imageCard {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.badgeOferta {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(238, 90, 36, 0.35);
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
+  padding: 2rem;
+}
+
+.mainImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageCard:hover .mainImage {
+  transform: scale(1.04);
+}
+
+/* ── Panel de información ── */
+.infoPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.categoria {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #13a4d1;
+}
+
+.nombre {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.marca {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+/* precios */
+.precioSection {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 10px 0 4px;
+}
+
+.precioActual {
+  font-family: "Raleway", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.precioOferta {
+  font-family: "Raleway", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ee5a24;
+}
+
+.precioOriginal {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #b0b0b0;
+  text-decoration: line-through;
+}
+
+.descuentoBadge {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.ahorro {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #27ae60;
+  margin-bottom: 8px;
+}
+
+/* descripción */
+.descripcion {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #555;
+  margin: 0 0 16px;
+}
+
+/* divider */
+.divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 12px 0;
+}
+
+/* stock + garantía */
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.metaIcon {
+  font-size: 1rem;
+}
+
+.stockVerde {
+  color: #27ae60;
+}
+
+.stockRojo {
+  color: #e74c3c;
+}
+
+.garantia {
+  color: #555;
+}
+
+/* ── Sección inferior: características + especificaciones ── */
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardTitleIcon {
+  font-size: 1.2rem;
+}
+
+/* Características lista */
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.featureCheck {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #13a4d1 0%, #0d8cbf 100%);
+  color: #fff;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+/* Especificaciones tabla */
+.specTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specTable tr:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.specLabel {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  padding: 12px 16px 12px 0;
+  width: 45%;
+  vertical-align: top;
+}
+
+.specValue {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #333;
+  padding: 12px 0;
+  vertical-align: top;
+}
+
+/* ── 404 producto no encontrado ── */
+.notFound {
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.notFoundIcon {
+  font-size: 4rem;
+  margin-bottom: 1.2rem;
+}
+
+.notFoundTitle {
+  font-family: "Sour Gummy", sans-serif;
+  font-size: 1.6rem;
+  color: #1a1a1a;
+  margin: 0 0 0.6rem;
+}
+
+.notFoundText {
+  font-family: "Raleway", sans-serif;
+  font-size: 1rem;
+  color: #888;
+  margin: 0 0 2rem;
+}
+
+.notFoundBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #13a4d1 0%, #0d8cbf 100%);
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s,
+    transform 0.2s;
+}
+
+.notFoundBtn:hover {
+  box-shadow: 0 6px 20px rgba(19, 164, 209, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ── Animaciones de entrada ── */
+.fadeIn {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.fadeInDelay {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.6s 0.15s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .topSection {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .imageWrapper {
+    height: 320px;
+  }
+
+  .nombre {
+    font-size: 1.5rem;
+  }
+
+  .precioActual,
+  .precioOferta {
+    font-size: 1.8rem;
+  }
+
+  .bottomSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .backBar {
+    padding: 0.7rem 1rem;
+  }
+
+  .imageWrapper {
+    height: 250px;
+    padding: 1.2rem;
+  }
+
+  .nombre {
+    font-size: 1.3rem;
+  }
+
+  .precioActual,
+  .precioOferta {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 1.4rem;
+  }
+
+  .metaRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
