@@ -9,7 +9,7 @@ import Contacto from "./pages/Contacto";
 
 function App() {
   return (
-    <div className="appLayout">
+    <>
       <Header />
       <main className="appMain">
         <Routes>
@@ -21,7 +21,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 
