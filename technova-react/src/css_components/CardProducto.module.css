@@ -1,0 +1,249 @@
+/* ── CardProducto ── */
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(19, 164, 209, 0.12);
+}
+
+/* ── Badge de oferta ── */
+.badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(238, 90, 36, 0.35);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.85; }
+}
+
+/* ── Imagen ── */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.08);
+}
+
+/* overlay sutil en hover */
+.imageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.04) 100%);
+  pointer-events: none;
+}
+
+/* ── Info ── */
+.info {
+  padding: 1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.categoria {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: #13a4d1;
+}
+
+.nombre {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.35;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.marca {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #8a8a8a;
+}
+
+.descripcion {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #6b6b6b;
+  line-height: 1.5;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Precios ── */
+.precioWrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.precio {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.precioOferta {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ee5a24;
+}
+
+.precioOriginal {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #b0b0b0;
+  text-decoration: line-through;
+}
+
+.descuento {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ee5a24;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+/* ── Stock ── */
+.stock {
+  font-family: "Raleway", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #27ae60;
+  margin-top: 4px;
+}
+
+.stockBajo {
+  color: #e74c3c;
+}
+
+/* ── Botón ver más ── */
+.verMas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #13a4d1 0%, #0d8cbf 100%);
+  color: #fff;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    box-shadow 0.3s,
+    transform 0.2s;
+}
+
+.verMas:hover {
+  background: linear-gradient(135deg, #0d8cbf 0%, #0a7aab 100%);
+  box-shadow: 0 4px 16px rgba(19, 164, 209, 0.35);
+  transform: translateY(-1px);
+}
+
+.verMasIcon {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .verMasIcon {
+  transform: translateX(3px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .imageContainer {
+    height: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .imageContainer {
+    height: 150px;
+  }
+
+  .info {
+    padding: 0.8rem 1rem 1rem;
+  }
+
+  .nombre {
+    font-size: 0.85rem;
+  }
+
+  .precio,
+  .precioOferta {
+    font-size: 1.1rem;
+  }
+}
