@@ -1,54 +1,85 @@
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 2rem;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.header p {
-  color: #666;
-  margin-bottom: 1rem;
-}
-
-.header select {
-  padding: 0.6rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 2.5rem; /* 🔥 separación del footer */
 }
 
-/* responsive */
-@media (max-width: 900px) {
+.card {
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  transition: 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* 🔥 imagen tipo "header real" */
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* cuadrado perfecto */
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 🔥 evita cortes feos */
+  padding: 10px; /* reduce sensación de vacío */
+  transition: transform 0.3s ease;
+}
+
+/* 🔥 efecto pro */
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.info {
+  padding: 0.5rem 0.6rem;
+}
+
+.marca {
+  font-size: 0.75rem;
+  color: gray;
+}
+
+.nombre {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 2px 0;
+}
+
+.precio {
+  font-weight: bold;
+  color: #e63946;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 1rem;
-  }
-
+@media (max-width: 500px) {
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  .header h1 {
-    font-size: 1.6rem;
   }
 }
