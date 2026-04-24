@@ -35,7 +35,7 @@
 }
 
 .tag {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 3px;
@@ -49,13 +49,13 @@
 }
 
 .title {
-  font-family: "Sour Gummy", sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4.2rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+  font-weight: 800;
   color: #f9f5f0;
-  line-height: 1.15;
+  line-height: 1.2;
   margin: 0;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
 }
 
 .highlight {
@@ -76,7 +76,7 @@
 }
 
 .subtitle {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: rgba(249, 245, 240, 0.85);
   max-width: 560px;
@@ -90,7 +90,7 @@
   padding: 14px 40px;
   background-color: #e6b17e;
   color: #1a1a1a;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -134,7 +134,7 @@
   }
 
   .title {
-    font-size: clamp(2rem, 4.8vw, 3.2rem);
+    font-size: clamp(1.8rem, 4.2vw, 2.7rem);
   }
 
   .subtitle {
@@ -149,7 +149,7 @@
   }
 
   .title {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
   }
 
   .subtitle {

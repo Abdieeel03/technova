@@ -24,7 +24,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--color-primary);
@@ -51,7 +51,7 @@
 }
 
 .breadcrumb {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.82rem;
   color: #999;
 }
@@ -92,7 +92,7 @@
   z-index: 2;
   background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: #fff;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.78rem;
   font-weight: 700;
   padding: 6px 16px;
@@ -129,7 +129,7 @@
 }
 
 .categoria {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -138,7 +138,7 @@
 }
 
 .nombre {
-  font-family: "Sour Gummy", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.9rem;
   font-weight: 700;
   color: #1a1a1a;
@@ -147,7 +147,7 @@
 }
 
 .marca {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.9rem;
   font-weight: 500;
   color: #888;
@@ -164,21 +164,21 @@
 }
 
 .precioActual {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 2.2rem;
   font-weight: 800;
   color: #1a1a1a;
 }
 
 .precioOferta {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 2.2rem;
   font-weight: 800;
   color: #ee5a24;
 }
 
 .precioOriginal {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 1.1rem;
   font-weight: 500;
   color: #b0b0b0;
@@ -186,7 +186,7 @@
 }
 
 .descuentoBadge {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.8rem;
   font-weight: 700;
   color: #fff;
@@ -196,7 +196,7 @@
 }
 
 .ahorro {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.82rem;
   font-weight: 600;
   color: #27ae60;
@@ -205,7 +205,7 @@
 
 /* descripción */
 .descripcion {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.95rem;
   line-height: 1.7;
   color: #555;
@@ -231,7 +231,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.85rem;
   font-weight: 500;
 }
@@ -267,7 +267,7 @@
 }
 
 .cardTitle {
-  font-family: "Sour Gummy", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 600;
   color: #1a1a1a;
@@ -295,7 +295,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.9rem;
   color: #444;
   line-height: 1.5;
@@ -326,7 +326,7 @@
 }
 
 .specLabel {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.85rem;
   font-weight: 600;
   color: #555;
@@ -336,7 +336,7 @@
 }
 
 .specValue {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.85rem;
   font-weight: 400;
   color: #333;
@@ -356,14 +356,14 @@
 }
 
 .notFoundTitle {
-  font-family: "Sour Gummy", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.6rem;
   color: #1a1a1a;
   margin: 0 0 0.6rem;
 }
 
 .notFoundText {
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 1rem;
   color: #888;
   margin: 0 0 2rem;
@@ -376,7 +376,7 @@
   padding: 12px 28px;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: #fff;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--font-base);
   font-size: 0.9rem;
   font-weight: 600;
   border: none;
