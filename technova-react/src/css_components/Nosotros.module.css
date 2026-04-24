@@ -13,7 +13,7 @@ p {
   text-align: center;
   margin-bottom: 3rem;
   padding: 2rem 0;
-  background: linear-gradient(135deg, #13a4d1 0%, #11a4d1 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
   color: white;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@ p {
 }
 
 .empresaDescripcion h2 {
-  color: #13a4d1;
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
   font-size: 2rem;
 }
@@ -73,7 +73,7 @@ p {
   background: linear-gradient(135deg, #f6f6f6 0%, #ffffff 100%);
   padding: 2.5rem;
   border-radius: 15px;
-  border-left: 0.5rem solid #13a4d1;
+  border-left: 0.5rem solid var(--color-primary);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -81,12 +81,12 @@ p {
 .misionCard:hover,
 .visionCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(19, 164, 209, 0.2);
+  box-shadow: 0 10px 25px rgba(79, 159, 186, 0.2);
 }
 
 .misionCard h3,
 .visionCard h3 {
-  color: #13a4d1;
+  color: var(--color-primary);
   margin-bottom: 1rem;
   font-size: 1.8rem;
   display: flex;

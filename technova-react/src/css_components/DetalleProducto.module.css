@@ -27,7 +27,7 @@
   font-family: "Raleway", sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
-  color: #13a4d1;
+  color: var(--color-primary);
   text-decoration: none;
   padding: 6px 16px 6px 12px;
   border-radius: 8px;
@@ -37,8 +37,8 @@
 }
 
 .backLink:hover {
-  background: rgba(19, 164, 209, 0.08);
-  color: #0d8cbf;
+  background: rgba(79, 159, 186, 0.1);
+  color: var(--color-primary-dark);
 }
 
 .backIcon {
@@ -134,7 +134,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #13a4d1;
+  color: var(--color-primary);
 }
 
 .nombre {
@@ -306,7 +306,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #13a4d1 0%, #0d8cbf 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: #fff;
   font-size: 0.7rem;
   display: flex;
@@ -374,7 +374,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, #13a4d1 0%, #0d8cbf 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: #fff;
   font-family: "Raleway", sans-serif;
   font-size: 0.9rem;
@@ -389,7 +389,7 @@
 }
 
 .notFoundBtn:hover {
-  box-shadow: 0 6px 20px rgba(19, 164, 209, 0.35);
+  box-shadow: 0 6px 20px rgba(79, 159, 186, 0.35);
   transform: translateY(-2px);
 }
 
