@@ -6,12 +6,16 @@ export default function Header() {
   return (
     <>
       <header className={styles.header}>
-        <Link className={styles.headerLink} to="/">
+        <Link
+          className={styles.headerLink}
+          to="/"
+          aria-label="Ir al inicio de TechNova"
+        >
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
         </Link>
       </header>
-      <nav className={styles.nav}>
+      <nav className={styles.nav} aria-label="Navegacion principal">
         <ul>
           <li>
             <NavLink
@@ -20,6 +24,7 @@ export default function Header() {
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
               end
+              aria-label="Ir a Inicio"
             >
               Inicio
             </NavLink>
@@ -30,6 +35,7 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Productos"
             >
               Productos
             </NavLink>
@@ -40,6 +46,7 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Nosotros"
             >
               Nosotros
             </NavLink>
@@ -50,6 +57,7 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Contacto"
             >
               Contacto
             </NavLink>

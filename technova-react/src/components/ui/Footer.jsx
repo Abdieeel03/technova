@@ -11,13 +11,13 @@ import {
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.div1}>
+      <div className={styles.div1} aria-label="Politicas del sitio">
         <p>Nuestras Políticas</p>
         <Link to="/politica-cookies">Política de cookies</Link>
         <Link to="/politica-privacidad">Política de privacidad</Link>
         <Link to="/terminos-condiciones">Términos y condiciones</Link>
       </div>
-      <div className={styles.div2}>
+      <div className={styles.div2} aria-label="Enlaces principales">
         <p>Enlaces directos</p>
         <Link to="/inicia-sesion">Inicia Sesión</Link>
         <Link to="/productos">Productos</Link>
@@ -27,19 +27,34 @@ export default function Footer() {
         <div className={styles.containerRedes}>
           <h4>Siguenos en:</h4>
           <div className={styles.linksSociales}>
-            <Link to="https://www.facebook.com/" target="_blank">
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Ir a Facebook"
+            >
               <FontAwesomeIcon icon={faFacebookF} />
-            </Link>
-            <Link to="https://www.instagram.com/" target="_blank">
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Ir a Instagram"
+            >
               <FontAwesomeIcon icon={faInstagram} />
-            </Link>
-            <Link to="https://www.tiktok.com/" target="_blank">
+            </a>
+            <a
+              href="https://www.tiktok.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Ir a TikTok"
+            >
               <FontAwesomeIcon icon={faTiktok} />
-            </Link>
+            </a>
           </div>
         </div>
         <div className={styles.logo}>
-          <img src={logo} alt="" width="50px" height="50px" />
+          <img src={logo} alt="Logo de TechNova" width="50" height="50" />
           <h1>TechNova</h1>
         </div>
       </div>
