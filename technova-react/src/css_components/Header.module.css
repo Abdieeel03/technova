@@ -15,13 +15,17 @@
   text-decoration: none;
 }
 
-.headerLink h1 {
+.headerTitle {
   color: var(--color-white);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.005em;
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .nav {
@@ -88,9 +92,13 @@
     gap: var(--space-2);
   }
 
+  .headerTitle {
+    font-size: 1.45rem;
+  }
+
   .logo {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
   }
 
   .nav ul li {

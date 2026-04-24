@@ -10,7 +10,7 @@
 }
 
 .titulo {
-  font-family: "Sour Gummy", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.6rem;
   color: #1a1a1a;
   margin: 0 0 1.2rem;
