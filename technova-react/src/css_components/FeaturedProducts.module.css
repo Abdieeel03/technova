@@ -26,6 +26,7 @@
 .grid {
   flex: 1;
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(6, 1fr);
 }
 
@@ -40,7 +41,7 @@
   font-size: 1.6rem;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   transition:
     border-color 0.2s,
