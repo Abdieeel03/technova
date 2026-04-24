@@ -51,9 +51,9 @@
 }
 
 .arrow:hover:not(:disabled) {
-  border-color: #13a4d1;
-  color: #13a4d1;
-  box-shadow: 0 4px 14px rgba(19, 164, 209, 0.2);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 4px 14px rgba(79, 159, 186, 0.2);
 }
 
 .arrow:disabled {
