@@ -6,7 +6,7 @@
             "marca": "TechSound",
             "categoria": "audio",
             "precio": 89.99,
-            "imagen": "../resources/img/Audifonos.jpg",
+            "imagen": "../recources/img/Audifonos.webp",
             "descripcion": "Audífonos inalámbricos con cancelación de ruido y batería de larga duración.",
             "descripcionDetallada": "Los audífonos Bluetooth X15 ofrecen una experiencia de audio premium con cancelación activa de ruido, perfectos para música y llamadas. Con tecnología de última generación, estos audífonos proporcionan un sonido cristalino y graves profundos.",
             "caracteristicas": [
@@ -42,7 +42,7 @@
             "marca": "CuteTech",
             "categoria": "audio",
             "precio": 45.99,
-            "imagen": "../resources/img/Audifonos2.jpg",
+            "imagen": "../resources/img/Audifonos2.webp",
             "descripcion": "Adorables audífonos con diseño de orejas de gato y luces LED.",
             "descripcionDetallada": "Diseño único y encantador con orejas de gato iluminadas. Perfectos para adolescentes y amantes de los gatos. Combinan estilo y funcionalidad con una calidad de sonido sorprendente.",
             "caracteristicas": [
@@ -68,7 +68,7 @@
             "marca": "SoundWave",
             "categoria": "audio",
             "precio": 129.99,
-            "imagen": "../resources/img/parlante.jpg",
+            "imagen": "../resources/img/parlante.webp",
             "descripcion": "Altavoz portátil resistente al agua con sonido potente.",
             "descripcionDetallada": "El parlante T7 Lite ofrece un sonido de 360 grados con graves profundos. Su diseño resistente al agua lo hace perfecto para llevar a la playa, piscina o cualquier aventura al aire libre.",
             "caracteristicas": [
@@ -104,7 +104,7 @@
             "marca": "Xiaomi",
             "categoria": "accesorios",
             "precio": 35.99,
-            "imagen": "../resources/img/cargador-portatil.jpg",
+            "imagen": "../resources/img/cargador-portatil.webp",
             "descripcion": "Batería portátil de carga rápida para todos tus dispositivos móviles.",
             "descripcionDetallada": "Power Bank compacto de Xiaomi con capacidad de 10.000mAh. Ideal para mantener tus dispositivos cargados durante todo el día. Compatible con carga rápida y múltiples protecciones de seguridad.",
             "caracteristicas": [
@@ -140,7 +140,7 @@
             "marca": "Logitech",
             "categoria": "camaras",
             "precio": 179.99,
-            "imagen": "../resources/img/camara.png",
+            "imagen": "../resources/img/camara.webp",
             "descripcion": "Cámara web profesional para streaming con grabación Full HD.",
             "descripcionDetallada": "La C922 Pro es la elección perfecta para streamers y profesionales. Ofrece grabación Full HD 1080p a 30fps o 720p a 60fps, ideal para streaming fluido y videoconferencias profesionales.",
             "caracteristicas": [
@@ -167,7 +167,7 @@
             "marca": "TechKeys",
             "categoria": "gaming",
             "precio": 199.99,
-            "imagen": "../resources/img/teclado.png",
+            "imagen": "../resources/img/teclado.webp",
             "descripcion": "Teclado mecánico gaming con iluminación RGB personalizable.",
             "descripcionDetallada": "Teclado mecánico premium diseñado para gamers profesionales. Con switches mecánicos de alta precisión, iluminación RGB personalizable por tecla y macros programables para mejorar tu rendimiento.",
             "caracteristicas": [
