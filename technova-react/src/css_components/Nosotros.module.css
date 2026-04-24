@@ -5,7 +5,7 @@
   min-height: calc(100vh - 200px);
 }
 
-p{
+p {
   text-align: justify;
 }
 
@@ -73,17 +73,15 @@ p{
   background: linear-gradient(135deg, #f6f6f6 0%, #ffffff 100%);
   padding: 2.5rem;
   border-radius: 15px;
-  border-left: 5px solid #13a4d1;
+  border-left: 0.5rem solid #13a4d1;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .misionCard:hover,
 .visionCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(19, 164, 209, 0.2);
-  border-left-width: 8px;
-  padding-left: calc(2.5rem - 3px);
 }
 
 .misionCard h3,
