@@ -1,8 +1,7 @@
 .nosotrosMain {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 3rem 2rem;
-  min-height: calc(100vh - 200px);
+  padding: 3rem 2rem 2rem;
 }
 
 p {
@@ -38,7 +37,7 @@ p {
   padding: 3rem;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  margin-bottom: 4rem;
+  margin-bottom: 0;
 }
 
 .empresaDescripcion {
