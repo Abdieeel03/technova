@@ -6,7 +6,6 @@ import Productos from "./pages/Productos";
 import DetalleProducto from "./pages/DetalleProducto";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
-import Productos from "./pages/Productos";
 
 function App() {
   return (
