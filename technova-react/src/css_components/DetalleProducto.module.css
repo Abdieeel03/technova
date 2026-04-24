@@ -1,7 +1,7 @@
 /* ── Detalle Producto Page ── */
 
 .page {
-  min-height: 100vh;
+  min-height: auto;
   background: #f6f6f6;
 }
 
@@ -65,7 +65,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 2rem 4rem;
+  padding: 2.5rem 2rem 2.25rem;
 }
 
 /* ── Layout superior: imagen + info ── */
