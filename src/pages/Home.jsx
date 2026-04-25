@@ -1,4 +1,5 @@
 import Hero from "../components/ui/Hero";
+import PromoCarousel from "../components/ui/PromoCarousel";
 import FeaturedProducts from "../components/ui/FeaturedProducts";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <Hero />
       <FeaturedProducts />
+      <PromoCarousel />
     </>
   );
 }
