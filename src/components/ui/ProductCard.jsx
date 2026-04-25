@@ -14,7 +14,7 @@ export default function ProductCard({ producto }) {
       <div className={styles.info}>
         <span className={styles.marca}>{producto.marca}</span>
         <p className={styles.nombre}>{producto.nombre}</p>
-        <p className={styles.precio}>${producto.precio.toFixed(2)}</p>
+        <p className={styles.precio}>S/. {producto.precio.toFixed(2)}</p>
       </div>
     </Link>
   );
