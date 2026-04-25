@@ -2,8 +2,7 @@ import { Link } from "react-router";
 import styles from "../css_components/CardProducto.module.css";
 
 export default function CardProducto({ producto }) {
-  const tieneOferta =
-    producto.ofertaNavideña && producto.ofertaNavideña.activa;
+  const tieneOferta = producto.ofertaNavideña && producto.ofertaNavideña.activa;
 
   return (
     <Link to={`/productos/${producto.id}`} className={styles.card}>
@@ -30,10 +29,10 @@ export default function CardProducto({ producto }) {
           {tieneOferta ? (
             <>
               <span className={styles.precioOferta}>
-                ${producto.ofertaNavideña.precioOferta.toFixed(2)}
+                S/. {producto.ofertaNavideña.precioOferta.toFixed(2)}
               </span>
               <span className={styles.precioOriginal}>
-                ${producto.ofertaNavideña.precioOriginal.toFixed(2)}
+                S/. {producto.ofertaNavideña.precioOriginal.toFixed(2)}
               </span>
               <span className={styles.descuento}>
                 -{producto.ofertaNavideña.descuento}%
@@ -41,7 +40,7 @@ export default function CardProducto({ producto }) {
             </>
           ) : (
             <span className={styles.precio}>
-              ${producto.precio.toFixed(2)}
+              S/. {producto.precio.toFixed(2)}
             </span>
           )}
         </div>
