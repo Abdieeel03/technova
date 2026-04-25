@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: 50vh;
-  background-image: url("https://placehold.co/1920x1080/1a1a2e/1a1a2e");
+  background-image: url("portada.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -12,13 +12,12 @@
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg,
-      rgba(17, 164, 209, 0.88) 0%,
-      rgba(17, 164, 209, 0.6) 50%,
-      rgba(89, 87, 88, 0.75) 100%);
-  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 22, 40, 0.75) 0%,
+    rgba(10, 22, 40, 0.5) 50%,
+    rgba(10, 22, 40, 0.65) 100%
+  );
 }
 
 .content {
@@ -121,8 +120,7 @@
   }
 }
 
-@media (max-width: 1024px),
-(max-height: 800px) {
+@media (max-width: 1024px), (max-height: 800px) {
   .hero {
     height: 58svh;
     min-height: 380px;
