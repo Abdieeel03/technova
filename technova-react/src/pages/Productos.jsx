@@ -53,7 +53,7 @@ export default function Productos() {
         </span>
       </section>
 
-      {/* ── Filtro ── */}
+      {/* ── Filtros ── */}
       <div className={styles.filtros}>
         {CATEGORIAS.map((cat) => (
           <button
