@@ -1,6 +1,6 @@
 import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import DetalleProducto from "./pages/DetalleProducto";
@@ -49,14 +49,7 @@ function App() {
           />
           <Route
             path="/inicia-sesion"
-            element={
-              <InfoPage
-                title="Inicio de sesion"
-                description="Esta funcionalidad estara disponible en una proxima iteracion. Mientras tanto, puedes contactarnos para soporte comercial."
-                ctaLabel="Ir a contacto"
-                ctaTo="/contacto"
-              />
-            }
+            element={<Navigate to="/?modal=login" replace />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

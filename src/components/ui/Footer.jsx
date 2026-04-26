@@ -1,7 +1,7 @@
 import logo from "../../assets/img/logo.svg";
 import styles from "../../css_components/Footer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import {
   faFacebookF,
   faInstagram,
@@ -9,6 +9,15 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  searchParams.set("modal", "login");
+
+  const loginLinkTo = {
+    pathname: location.pathname,
+    search: `?${searchParams.toString()}`,
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.div1} aria-label="Politicas del sitio">
@@ -19,7 +28,7 @@ export default function Footer() {
       </div>
       <div className={styles.div2} aria-label="Enlaces principales">
         <p>Enlaces directos</p>
-        <Link to="/inicia-sesion">Inicia Sesión</Link>
+        <Link to={loginLinkTo}>Inicia Sesión</Link>
         <Link to="/productos">Productos</Link>
         <Link to="/contacto">Contactanos</Link>
       </div>

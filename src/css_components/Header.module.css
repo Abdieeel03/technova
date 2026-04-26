@@ -28,6 +28,83 @@
   height: 40px;
 }
 
+.loginContainer{
+  display: flex;
+  align-items: center;
+}
+
+.svgIcon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.login{
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.login:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.login:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.loginLogged {
+  cursor: default;
+}
+
+.loginLogged:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.loginText{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.loginLabel {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  opacity: 0.82;
+}
+
+.loginAction,
+.loginValue {
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.logoutButton {
+  border: none;
+  background: transparent;
+  color: var(--color-link-light);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  color: var(--color-accent);
+}
+
 .nav {
   background-color: var(--color-surface-dark);
   display: flex;
@@ -78,6 +155,11 @@
     padding: var(--space-4) var(--space-5);
   }
 
+  .login {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-3);
+  }
+
   .nav ul li {
     margin: 0 var(--space-3);
   }
@@ -99,6 +181,20 @@
   .logo {
     width: 34px;
     height: 34px;
+  }
+
+  .login {
+    border-radius: var(--radius-lg);
+    padding: var(--space-2);
+    gap: var(--space-2);
+  }
+
+  .loginText {
+    display: none;
+  }
+
+  .logoutButton {
+    font-size: var(--text-xs);
   }
 
   .nav ul li {
