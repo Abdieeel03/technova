@@ -12,13 +12,13 @@ Aplicación web construida con Vite, React y React Router. El proyecto tiene una
 1. Clona el repositorio.
 2. Instala las dependencias:
 
-<pre><code>npm install</code></pre>
+<pre><code>pnpm install</code></pre>
 
 ## Ejecución
 
 Para levantar el entorno de desarrollo:
 
-<pre><code>npm run dev</code></pre>
+<pre><code>pnpm run dev</code></pre>
 
 Vite mostrará una URL local, normalmente en:
 
