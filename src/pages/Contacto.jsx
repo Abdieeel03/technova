@@ -54,12 +54,12 @@ export default function Contacto() {
       })
       .then(
         () => {
-          console.log("SUCCESS!");
+          alert("SUCCESS!");
           setFormData(initialForm);
           setShowToast(true);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          alert("FAILED... " + error.text);
         },
       );
   };
