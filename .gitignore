@@ -26,3 +26,4 @@ package-lock.json
 
 pnpm-lock.yaml
 .vite
+.env
