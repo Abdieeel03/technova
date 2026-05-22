@@ -3,11 +3,23 @@ import styles from "../../css_components/Header.module.css";
 import logo from "../../assets/img/logo.svg";
 import { NavLink, Link, useLocation, useNavigate } from "react-router";
 import ModalLogin from "./ModalLogin";
+import CarritoButton from "./CarritoButton";
+import CarritoModal from "./CarritoModal";
+import useCarrito from "../../hooks/useCarrito";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const {
+    items,
+    totalItems,
+    totalPrice,
+    updateItemQty,
+    removeItem,
+    clearCart,
+  } = useCarrito();
   const [user, setUser] = useState(() => {
     try {
       const savedUser = localStorage.getItem("technovaUser");
@@ -54,6 +66,14 @@ export default function Header() {
     clearLoginModalQuery();
   };
 
+  const openCarrito = () => {
+    setIsCarritoOpen(true);
+  };
+
+  const closeCarrito = () => {
+    setIsCarritoOpen(false);
+  };
+
   const handleLogin = (loginData) => {
     setUser(loginData);
     setIsLoginOpen(false);
@@ -98,6 +118,7 @@ export default function Header() {
           <h1 className={styles.headerTitle}>TechNova</h1>
         </Link>
         <div className={styles.loginContainer}>
+          <CarritoButton totalItems={totalItems} onClick={openCarrito} />
           {user ? (
             <div className={`${styles.login} ${styles.loginLogged}`}>
               <div className={styles.svgIcon} aria-hidden="true">
@@ -218,6 +239,15 @@ export default function Header() {
         isOpen={isModalOpen}
         onClose={closeLogin}
         onSubmit={handleLogin}
+      />
+      <CarritoModal
+        isOpen={isCarritoOpen}
+        items={items}
+        totalPrice={totalPrice}
+        onClose={closeCarrito}
+        onUpdateQty={updateItemQty}
+        onRemoveItem={removeItem}
+        onClear={clearCart}
       />
     </>
   );

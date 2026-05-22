@@ -2,10 +2,12 @@ import { useParams, Link } from "react-router";
 import { useEffect } from "react";
 import data from "../data/productos.json";
 import styles from "../css_components/DetalleProducto.module.css";
+import useCarrito from "../hooks/useCarrito";
 
 export default function DetalleProducto() {
   const { id } = useParams();
   const producto = data.productos.find((p) => p.id === Number(id));
+  const { addItem } = useCarrito();
 
   /* Scroll al top al entrar a la página */
   useEffect(() => {
@@ -116,6 +118,16 @@ export default function DetalleProducto() {
             <p className={styles.descripcion}>
               {producto.descripcionDetallada}
             </p>
+
+            <div className={styles.ctaRow}>
+              <button
+                type="button"
+                className={styles.addToCartButton}
+                onClick={() => addItem(producto, 1)}
+              >
+                Agregar al carrito
+              </button>
+            </div>
 
             <hr className={styles.divider} />
 
