@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import styles from "../css_components/CardProducto.module.css";
+import styles from "../../css_components/CardProducto.module.css";
 
 export default function CardProducto({ producto }) {
   const tieneOferta = producto.ofertaNavideña && producto.ofertaNavideña.activa;

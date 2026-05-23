@@ -1,6 +1,6 @@
 import { useState } from "react";
 import data from "../../data/productos.json";
-import ProductCard from "./ProductCard";
+import ProductCard from "../products/ProductCard";
 import styles from "../../css_components/FeaturedProducts.module.css";
 
 const ITEMS_PER_PAGE = 6;

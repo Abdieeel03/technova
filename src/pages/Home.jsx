@@ -1,6 +1,6 @@
-import Hero from "../components/ui/Hero";
-import PromoCarousel from "../components/ui/PromoCarousel";
-import FeaturedProducts from "../components/ui/FeaturedProducts";
+import Hero from "../components/home/Hero";
+import PromoCarousel from "../components/home/PromoCarousel";
+import FeaturedProducts from "../components/home/FeaturedProducts";
 
 export default function Home() {
   return (

@@ -1,5 +1,5 @@
-import Header from "./components/ui/Header";
-import Footer from "./components/ui/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "../../css_components/Header.module.css";
 import logo from "../../assets/img/logo.svg";
 import { NavLink, Link, useLocation, useNavigate } from "react-router";
-import ModalLogin from "./ModalLogin";
-import CarritoButton from "./CarritoButton";
-import CarritoModal from "./CarritoModal";
+import ModalLogin from "../auth/ModalLogin";
+import CarritoButton from "../cart/CarritoButton";
+import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 
 export default function Header() {
