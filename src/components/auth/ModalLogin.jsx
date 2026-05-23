@@ -133,20 +133,24 @@ export default function ModalLogin({ isOpen, onClose, onSubmit }) {
         </p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label className={styles.label} htmlFor="login-name">
-            Nombre
-          </label>
-          <input
-            id="login-name"
-            name="name"
-            className={styles.input}
-            type="text"
-            placeholder="Tu nombre"
-            value={formData.name}
-            onChange={handleChange}
-            autoComplete="name"
-            required={mode === "register"}
-          />
+          {mode === "register" ? (
+            <>
+              <label className={styles.label} htmlFor="login-name">
+                Nombre
+              </label>
+              <input
+                id="login-name"
+                name="name"
+                className={styles.input}
+                type="text"
+                placeholder="Tu nombre"
+                value={formData.name}
+                onChange={handleChange}
+                autoComplete="name"
+                required
+              />
+            </>
+          ) : null}
 
           <label className={styles.label} htmlFor="login-email">
             Correo
@@ -174,7 +178,9 @@ export default function ModalLogin({ isOpen, onClose, onSubmit }) {
             placeholder="********"
             value={formData.password}
             onChange={handleChange}
-            autoComplete="current-password"
+            autoComplete={
+              mode === "login" ? "current-password" : "new-password"
+            }
             required
           />
 
