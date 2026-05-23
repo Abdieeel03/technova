@@ -24,6 +24,6 @@ package-lock.json
 *.sln
 *.sw?
 
-pnpm-lock.yaml
+# pnpm-lock.yaml
 .vite
 .env
