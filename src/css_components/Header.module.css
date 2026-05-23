@@ -66,12 +66,14 @@
 }
 
 .loginLogged {
-  cursor: default;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .loginLogged:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .loginText{

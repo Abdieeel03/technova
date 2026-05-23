@@ -10,10 +10,12 @@ export default function CarritoModal({
   isOpen,
   items,
   totalPrice,
+  notice,
   onClose,
   onUpdateQty,
   onRemoveItem,
   onClear,
+  onCheckout,
 }) {
   const handleClose = useCallback(() => {
     onClose();
@@ -81,6 +83,17 @@ export default function CarritoModal({
             Revisa tus productos antes de continuar
           </p>
         </header>
+
+        {notice ? (
+          <div
+            className={`${styles.notice} ${
+              notice.type === "error" ? styles.noticeError : styles.noticeOk
+            }`}
+            role={notice.type === "error" ? "alert" : "status"}
+          >
+            {notice.text}
+          </div>
+        ) : null}
 
         {items.length === 0 ? (
           <div className={styles.empty}>
@@ -160,7 +173,11 @@ export default function CarritoModal({
                 >
                   Vaciar carrito
                 </button>
-                <button type="button" className={styles.checkoutButton}>
+                <button
+                  type="button"
+                  className={styles.checkoutButton}
+                  onClick={onCheckout}
+                >
                   Continuar compra
                 </button>
               </div>
