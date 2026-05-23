@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "../../css_components/Header.module.css";
 import logo from "../../assets/img/logo.svg";
-import { NavLink, Link, useLocation, useNavigate } from "react-router";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import ModalLogin from "../auth/ModalLogin";
 import CarritoButton from "../cart/CarritoButton";
 import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
+import useAuth from "../../auth/hooks/useAuth";
+import { createOrder } from "../../services/ordersStorage";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -19,24 +21,11 @@ export default function Header() {
     updateItemQty,
     removeItem,
     clearCart,
+    setCartOwner,
   } = useCarrito();
-  const [user, setUser] = useState(() => {
-    try {
-      const savedUser = localStorage.getItem("technovaUser");
-      return savedUser ? JSON.parse(savedUser) : null;
-    } catch {
-      return null;
-    }
-  });
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem("technovaUser", JSON.stringify(user));
-      return;
-    }
-
-    localStorage.removeItem("technovaUser");
-  }, [user]);
+  const { user, logout } = useAuth();
+  const [checkoutNotice, setCheckoutNotice] = useState(null);
 
   const openLogin = () => {
     setIsLoginOpen(true);
@@ -74,19 +63,44 @@ export default function Header() {
     setIsCarritoOpen(false);
   };
 
-  const handleLogin = (loginData) => {
-    setUser(loginData);
-    setIsLoginOpen(false);
-    clearLoginModalQuery();
-  };
-
   const handleLogout = () => {
-    setUser(null);
+    logout();
+    clearCart();
   };
 
   const routeSearchParams = new URLSearchParams(location.search);
   const hasLoginModalQuery = routeSearchParams.get("modal") === "login";
   const isModalOpen = isLoginOpen || (hasLoginModalQuery && !user);
+
+  useEffect(() => {
+    setCartOwner(user?.id ?? null);
+  }, [setCartOwner, user?.id]);
+
+  const handleCheckout = () => {
+    if (!user) {
+      setCheckoutNotice({
+        type: "error",
+        text: "Debes iniciar sesion para continuar con la compra.",
+      });
+      setIsCarritoOpen(false);
+      openLogin();
+      return;
+    }
+    const result = createOrder({
+      userId: user.id,
+      items,
+      total: totalPrice,
+    });
+    if (!result.ok) {
+      setCheckoutNotice({ type: "error", text: result.error });
+      return;
+    }
+    clearCart();
+    setCheckoutNotice({
+      type: "success",
+      text: "Compra registrada. Revisa tu historial en tu perfil.",
+    });
+  };
 
   useEffect(() => {
     if (!user || !hasLoginModalQuery) {
@@ -120,7 +134,11 @@ export default function Header() {
         <div className={styles.loginContainer}>
           <CarritoButton totalItems={totalItems} onClick={openCarrito} />
           {user ? (
-            <div className={`${styles.login} ${styles.loginLogged}`}>
+            <Link
+              to="/mis-compras"
+              className={`${styles.login} ${styles.loginLogged}`}
+              aria-label="Ver mis compras"
+            >
               <div className={styles.svgIcon} aria-hidden="true">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +169,7 @@ export default function Header() {
               >
                 Salir
               </button>
-            </div>
+            </Link>
           ) : (
             <button
               type="button"
@@ -180,7 +198,7 @@ export default function Header() {
               </div>
               <div className={styles.loginText}>
                 <span className={styles.loginLabel}>BIENVENIDO</span>
-                <span className={styles.loginAction}>Iniciar sesión</span>
+                <span className={styles.loginAction}>Inicia sesion</span>
               </div>
             </button>
           )}
@@ -235,15 +253,13 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-      <ModalLogin
-        isOpen={isModalOpen}
-        onClose={closeLogin}
-        onSubmit={handleLogin}
-      />
+      <ModalLogin isOpen={isModalOpen} onClose={closeLogin} />
       <CarritoModal
         isOpen={isCarritoOpen}
         items={items}
         totalPrice={totalPrice}
+        notice={checkoutNotice}
+        onCheckout={handleCheckout}
         onClose={closeCarrito}
         onUpdateQty={updateItemQty}
         onRemoveItem={removeItem}

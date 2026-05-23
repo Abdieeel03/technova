@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "../../css_components/ModalLogin.module.css";
+import useAuth from "../../auth/hooks/useAuth";
 
 const initialFormState = {
   name: "",
@@ -7,10 +8,11 @@ const initialFormState = {
   password: "",
 };
 
-export default function ModalLogin({ isOpen, onClose, onSubmit }) {
+export default function ModalLogin({ isOpen, onClose }) {
   const [formData, setFormData] = useState(initialFormState);
   const [errorMessage, setErrorMessage] = useState("");
   const [mode, setMode] = useState("login");
+  const { login, register } = useAuth();
 
   const handleClose = useCallback(() => {
     setFormData(initialFormState);
@@ -79,13 +81,28 @@ export default function ModalLogin({ isOpen, onClose, onSubmit }) {
       return;
     }
 
-    const displayName = trimmedName || trimmedEmail.split("@")[0] || "Usuario";
+    if (mode === "login") {
+      const result = login({ email: trimmedEmail, password: trimmedPassword });
+      if (!result.ok) {
+        setErrorMessage(result.error);
+        return;
+      }
+      handleClose();
+      return;
+    }
 
-    onSubmit({
-      name: displayName,
+    const result = register({
+      name: trimmedName,
       email: trimmedEmail,
-      mode,
+      password: trimmedPassword,
     });
+
+    if (!result.ok) {
+      setErrorMessage(result.error);
+      return;
+    }
+
+    handleClose();
   };
 
   const toggleMode = () => {
