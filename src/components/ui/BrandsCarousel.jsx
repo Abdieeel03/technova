@@ -33,8 +33,13 @@ export default function BrandsCarousel() {
   };
 
   useEffect(() => {
-    startAutoPlay();
-    return () => clearInterval(intervalRef.current);
+    const timer = setTimeout(() => {
+      startAutoPlay();
+    }, 100);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(intervalRef.current);
+    };
   }, []);
 
   const resetTimer = () => {
