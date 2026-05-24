@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import data from "../data/productos.json";
-import CardProducto from "../components/CardProducto";
+import CardProducto from "../components/products/CardProducto";
 import styles from "../css_components/Productos.module.css";
 
 const CATEGORIAS = [
@@ -97,4 +97,3 @@ export default function Productos() {
     </main>
   );
 }
-
