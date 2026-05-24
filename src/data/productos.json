@@ -473,6 +473,114 @@
       },
       "stock": 15,
       "garantia": "24 meses"
-    }
+    },
+    {
+  "id": 17,
+  "nombre": "Cámara Mirrorless Sony Alpha a6400",
+  "marca": "Sony",
+  "categoria": "camaras",
+  "precio": 899.99,
+  "imagen": "/img/productos/sony-a6400.webp",
+  "descripcion": "Cámara mirrorless con enfoque automático ultrarrápido y grabación 4K.",
+  "descripcionDetallada": "La Sony Alpha a6400 ofrece un sistema de enfoque automático en tiempo real con seguimiento de ojos, grabación 4K sin cortes y una pantalla abatible ideal para vlogs y fotografía profesional.",
+  "caracteristicas": [
+    "Sensor APS-C de 24.2MP",
+    "Enfoque automático en tiempo real",
+    "Grabación 4K sin cortes",
+    "Pantalla abatible 180°",
+    "ISO hasta 32000",
+    "Ráfaga de 11 fps"
+  ],
+  "especificaciones": {
+    "Resolución": "24.2MP",
+    "Sensor": "APS-C CMOS",
+    "Video": "4K 30fps",
+    "Batería": "410 disparos por carga",
+    "Peso": "359g"
+  },
+  "stock": 5,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 899.99,
+    "precioOferta": 899.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 18,
+  "nombre": "Cámara Instantánea Fujifilm Instax Mini 12",
+  "marca": "Fujifilm",
+  "categoria": "camaras",
+  "precio": 89.99,
+  "imagen": "/img/productos/fujifilm-instax.webp",
+  "descripcion": "Cámara instantánea compacta que imprime fotos al instante.",
+  "descripcionDetallada": "La Fujifilm Instax Mini 12 es perfecta para capturar momentos y tenerlos impresos al instante. Diseño compacto, modo selfie integrado y flash automático para cualquier ambiente.",
+  "caracteristicas": [
+    "Impresión instantánea en formato mini",
+    "Modo selfie con espejo",
+    "Flash automático",
+    "Exposición automática",
+    "Diseño compacto y ligero",
+    "Disponible en varios colores"
+  ],
+  "especificaciones": {
+    "Formato": "Instax Mini 54x86mm",
+    "Lente": "60mm f/12.7",
+    "Flash": "Automático",
+    "Pilas": "2x AA",
+    "Peso": "293g"
+  },
+  "stock": 12,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 15,
+    "precioOriginal": 89.99,
+    "precioOferta": 76.49,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 19,
+  "nombre": "Cámara de Seguridad 360° Xiaomi",
+  "marca": "Xiaomi",
+  "categoria": "camaras",
+  "precio": 129.99,
+  "imagen": "/img/productos/xiaomi-cam360.webp",
+  "descripcion": "Cámara de seguridad inteligente con visión 360° y resolución 2K.",
+  "descripcionDetallada": "Monitorea tu hogar desde cualquier lugar con esta cámara inteligente de Xiaomi. Resolución 2K, rotación 360°, visión nocturna a color y detección de movimiento con alertas en tiempo real.",
+  "caracteristicas": [
+    "Resolución 2K (2304x1296)",
+    "Rotación 360° horizontal y 96° vertical",
+    "Visión nocturna a color",
+    "Detección de movimiento con IA",
+    "Compatible con Google Home y Alexa",
+    "Almacenamiento en nube y microSD"
+  ],
+  "especificaciones": {
+    "Resolución": "2K 2304x1296",
+    "Ángulo": "360° horizontal",
+    "Visión nocturna": "Hasta 10m a color",
+    "Conectividad": "WiFi 2.4GHz",
+    "Peso": "185g"
+  },
+  "stock": 9,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 129.99,
+    "precioOferta": 129.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+}
   ]
 }
