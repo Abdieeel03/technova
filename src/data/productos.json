@@ -581,6 +581,117 @@
     "fechaFin": null,
     "etiqueta": null
   }
+},
+{
+  "id": 20,
+  "nombre": "Alfombrilla Gaming XXL Redragon",
+  "marca": "Redragon",
+  "categoria": "accesorios",
+  "precio": 29.99,
+  "masVendido": false,
+  "imagen": "/img/productos/alfombrilla-xxl.webp",
+  "descripcion": "Alfombrilla de escritorio XXL antideslizante para gaming y oficina.",
+  "descripcionDetallada": "Cubre todo tu escritorio con esta alfombrilla XXL de Redragon. Superficie optimizada para mouse gaming, base antideslizante de goma y bordes cosidos para mayor durabilidad.",
+  "caracteristicas": [
+    "Dimensiones 900x400mm",
+    "Base antideslizante de goma natural",
+    "Bordes cosidos resistentes al desgaste",
+    "Superficie optimizada para mouse óptico y láser",
+    "Fácil de limpiar",
+    "Grosor de 3mm"
+  ],
+  "especificaciones": {
+    "Dimensiones": "900x400x3mm",
+    "Material": "Tela + goma natural",
+    "Bordes": "Cosidos reforzados",
+    "Superficie": "Textura suave de control",
+    "Peso": "400g"
+  },
+  "stock": 25,
+  "garantia": "6 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 20,
+    "precioOriginal": 29.99,
+    "precioOferta": 23.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 21,
+  "nombre": "Soporte de Monitor Doble Brazo",
+  "marca": "Ergotron",
+  "categoria": "accesorios",
+  "precio": 89.99,
+  "masVendido": false,
+  "imagen": "/img/productos/soporte-monitor-doble.webp",
+  "descripcion": "Soporte articulado de doble brazo para dos monitores hasta 27 pulgadas.",
+  "descripcionDetallada": "Optimiza tu espacio de trabajo con este soporte de doble brazo Ergotron. Compatible con monitores de hasta 27 pulgadas, permite ajustar altura, ángulo e inclinación con total libertad.",
+  "caracteristicas": [
+    "Compatible con monitores hasta 27 pulgadas",
+    "Soporte para 2 monitores simultáneos",
+    "Rotación 360° por brazo",
+    "Ajuste de altura, ángulo e inclinación",
+    "Instalación en borde de escritorio",
+    "Gestión de cables integrada"
+  ],
+  "especificaciones": {
+    "Compatibilidad": "Monitores hasta 27\"",
+    "Carga máxima": "9kg por brazo",
+    "Montaje": "Abrazadera de escritorio",
+    "Ajuste": "360° rotación",
+    "Peso": "3.2kg"
+  },
+  "stock": 10,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 89.99,
+    "precioOferta": 89.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 22,
+  "nombre": "Webcam Full HD Logitech C920",
+  "marca": "Logitech",
+  "categoria": "accesorios",
+  "precio": 79.99,
+  "masVendido": true,
+  "imagen": "/img/productos/logitech-c920.webp",
+  "descripcion": "Webcam Full HD 1080p con micrófono estéreo para videollamadas profesionales.",
+  "descripcionDetallada": "La Logitech C920 ofrece video Full HD 1080p fluido y audio estéreo nítido para tus videollamadas. Compatible con Zoom, Teams y Meet, con corrección automática de luz y enfoque automático.",
+  "caracteristicas": [
+    "Video Full HD 1080p a 30fps",
+    "Micrófono estéreo integrado",
+    "Corrección automática de luz",
+    "Enfoque automático",
+    "Compatible con Zoom, Teams y Meet",
+    "Clip universal para monitor o laptop"
+  ],
+  "especificaciones": {
+    "Resolución": "1080p 30fps",
+    "Ángulo": "78°",
+    "Micrófono": "Estéreo dual",
+    "Conexión": "USB-A",
+    "Peso": "162g"
+  },
+  "stock": 14,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 79.99,
+    "precioOferta": 79.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
 }
   ]
 }
