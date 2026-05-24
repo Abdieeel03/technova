@@ -5,7 +5,7 @@
       "nombre": "Audífonos Bluetooth X15",
       "marca": "TechSound",
       "categoria": "audio",
-      "precio": 90.00,
+      "precio": 90.0,
       "imagen": "/img/productos/Audifonos.webp",
       "descripcion": "Audífonos inalámbricos con cancelación de ruido y batería de larga duración.",
       "descripcionDetallada": "Los audífonos Bluetooth X15 ofrecen una experiencia de audio premium con cancelación activa de ruido, perfectos para música y llamadas. Con tecnología de última generación, estos audífonos proporcionan un sonido cristalino y graves profundos.",
@@ -375,6 +375,88 @@
         "Peso": "540g"
       },
       "stock": 16,
+      "garantia": "12 meses"
+    },
+    {
+      "id": 13,
+      "nombre": "Monitor Gaming 27\" 144Hz",
+      "marca": "AOC",
+      "categoria": "pantallas",
+      "precio": 799.99,
+      "masVendido": false,
+      "imagen": "/img/productos/monitor-aoc.webp",
+      "descripcion": "Monitor gaming Full HD con 144Hz y 1ms de respuesta.",
+      "caracteristicas": ["144Hz", "1ms", "Full HD 1080p", "FreeSync"],
+      "especificaciones": {
+        "Resolución": "1920x1080",
+        "Panel": "IPS",
+        "Peso": "4.5kg"
+      },
+      "stock": 10,
+      "garantia": "24 meses"
+    },
+    {
+      "id": 14,
+      "nombre": "Monitor 4K UHD 32\"",
+      "marca": "LG",
+      "categoria": "pantallas",
+      "precio": 1299.99,
+      "masVendido": false,
+      "imagen": "/img/productos/monitor-lg.webp",
+      "descripcion": "Monitor 4K profesional para diseño y productividad.",
+      "caracteristicas": ["4K UHD", "HDR10", "USB-C", "Panel IPS"],
+      "especificaciones": {
+        "Resolución": "3840x2160",
+        "Panel": "IPS",
+        "Peso": "6.2kg"
+      },
+      "stock": 6,
+      "garantia": "24 meses"
+    },
+    {
+      "id": 15,
+      "nombre": "Mouse Óptico Silencioso",
+      "marca": "Logitech",
+      "categoria": "mouse",
+      "precio": 49.99,
+      "masVendido": false,
+      "imagen": "/img/productos/mouse-silencioso.webp",
+      "descripcion": "Mouse inalámbrico silencioso para oficina y trabajo.",
+      "caracteristicas": [
+        "Silencioso",
+        "Inalámbrico",
+        "1000 DPI",
+        "Batería 18 meses"
+      ],
+      "especificaciones": {
+        "DPI": "1000",
+        "Conexión": "USB nano",
+        "Peso": "99g"
+      },
+      "stock": 20,
+      "garantia": "12 meses"
+    },
+    {
+      "id": 16,
+      "nombre": "Mouse Vertical Ergonómico",
+      "marca": "Anker",
+      "categoria": "mouse",
+      "precio": 79.99,
+      "masVendido": false,
+      "imagen": "/img/productos/mouse-vertical.webp",
+      "descripcion": "Mouse vertical para reducir fatiga y dolor de muñeca.",
+      "caracteristicas": [
+        "Diseño vertical",
+        "800/1200/1600 DPI",
+        "5 botones",
+        "Cable USB"
+      ],
+      "especificaciones": {
+        "DPI": "1600 máximo",
+        "Botones": "5",
+        "Peso": "118g"
+      },
+      "stock": 15,
       "garantia": "12 meses"
     }
   ]
