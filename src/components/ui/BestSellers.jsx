@@ -1,5 +1,5 @@
 import data from "../../data/productos.json";
-import ProductCard from "./ProductCard";
+import ProductCard from "../products/ProductCard";
 import styles from "../../css_components/BestSellers.module.css";
 
 export default function BestSellers() {
