@@ -5,6 +5,7 @@
       "nombre": "Audífonos Bluetooth X15",
       "marca": "TechSound",
       "categoria": "audio",
+      "tipo": "audífonos",
       "precio": 90.0,
       "imagen": "/img/productos/Audifonos.webp",
       "descripcion": "Audífonos inalámbricos con cancelación de ruido y batería de larga duración.",
@@ -41,6 +42,7 @@
       "nombre": "Audífonos Orejas de Gato",
       "marca": "CuteTech",
       "categoria": "audio",
+      "tipo": "audífonos",
       "precio": 45.99,
       "imagen": "/img/productos/Audifonos2.webp",
       "descripcion": "Adorables audífonos con diseño de orejas de gato y luces LED.",
@@ -355,6 +357,7 @@
       "nombre": "Altavoz Inteligente Smart Home",
       "marca": "SmartTech",
       "categoria": "audio",
+      "tipo": "altavoz",
       "precio": 79.99,
       "imagen": "/img/productos/altavoz-inteligente.webp",
       "descripcion": "Altavoz inteligente con asistente de voz y control del hogar.",
@@ -381,10 +384,11 @@
       "id": 13,
       "nombre": "Monitor Gaming 27\" 144Hz",
       "marca": "AOC",
-      "categoria": "pantallas",
+      "categoria": "gaming",
+      "tipo": "pantalla",
       "precio": 799.99,
       "masVendido": false,
-      "imagen": "/img/productos/monitor-aoc.webp",
+      "imagen": "/img/productos/monitor-aoc.png",
       "descripcion": "Monitor gaming Full HD con 144Hz y 1ms de respuesta.",
       "caracteristicas": ["144Hz", "1ms", "Full HD 1080p", "FreeSync"],
       "especificaciones": {
@@ -399,10 +403,11 @@
       "id": 14,
       "nombre": "Monitor 4K UHD 32\"",
       "marca": "LG",
-      "categoria": "pantallas",
+      "categoria": "gaming",
+      "tipo": "pantalla",
       "precio": 1299.99,
       "masVendido": false,
-      "imagen": "/img/productos/monitor-lg.webp",
+      "imagen": "/img/productos/monitor-lg.png",
       "descripcion": "Monitor 4K profesional para diseño y productividad.",
       "caracteristicas": ["4K UHD", "HDR10", "USB-C", "Panel IPS"],
       "especificaciones": {
@@ -415,49 +420,53 @@
     },
     {
       "id": 15,
-      "nombre": "Mouse Óptico Silencioso",
+      "nombre": "Mouse Logitech G502 Hero",
       "marca": "Logitech",
-      "categoria": "mouse",
-      "precio": 49.99,
+      "categoria": "gaming",
+      "tipo": "mouse",
+      "precio": 119.99,
       "masVendido": false,
-      "imagen": "/img/productos/mouse-silencioso.webp",
-      "descripcion": "Mouse inalámbrico silencioso para oficina y trabajo.",
+      "imagen": "/img/productos/mouse-logitech.png",
+      "descripcion": "Mouse gaming con sensor HERO 25K y pesas ajustables.",
       "caracteristicas": [
-        "Silencioso",
-        "Inalámbrico",
-        "1000 DPI",
-        "Batería 18 meses"
+        "Sensor HERO 25K DPI",
+        "11 botones programables",
+        "Pesas ajustables",
+        "RGB LIGHTSYNC"
       ],
       "especificaciones": {
-        "DPI": "1000",
-        "Conexión": "USB nano",
-        "Peso": "99g"
+        "DPI": "100 - 25.600",
+        "Botones": "11 programables",
+        "Conexión": "USB",
+        "Peso": "121g"
       },
       "stock": 20,
-      "garantia": "12 meses"
+      "garantia": "24 meses"
     },
     {
       "id": 16,
-      "nombre": "Mouse Vertical Ergonómico",
-      "marca": "Anker",
-      "categoria": "mouse",
-      "precio": 79.99,
+      "nombre": "Mouse Razer DeathAdder V3",
+      "marca": "Razer",
+      "categoria": "gaming",
+      "tipo": "mouse",
+      "precio": 149.99,
       "masVendido": false,
-      "imagen": "/img/productos/mouse-vertical.webp",
-      "descripcion": "Mouse vertical para reducir fatiga y dolor de muñeca.",
+      "imagen": "/img/productos/mouse-razer.png",
+      "descripcion": "Mouse gaming ergonómico ultraligero con sensor Focus Pro 30K.",
       "caracteristicas": [
-        "Diseño vertical",
-        "800/1200/1600 DPI",
-        "5 botones",
-        "Cable USB"
+        "Sensor Focus Pro 30K DPI",
+        "Ultraligero 59g",
+        "6 botones programables",
+        "Chroma RGB"
       ],
       "especificaciones": {
-        "DPI": "1600 máximo",
-        "Botones": "5",
-        "Peso": "118g"
+        "DPI": "100 - 30.000",
+        "Botones": "6 programables",
+        "Conexión": "USB",
+        "Peso": "59g"
       },
       "stock": 15,
-      "garantia": "12 meses"
+      "garantia": "24 meses"
     }
   ]
 }
