@@ -1,0 +1,135 @@
+.section {
+  padding: 2.5rem 1rem;
+  background: #fff;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a2e;
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 40px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition:
+    filter 0.2s,
+    opacity 0.2s;
+}
+
+.card:hover .logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.arrow {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+  flex-shrink: 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  line-height: 1;
+}
+
+.arrow:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 1.25rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+
+.dot:hover {
+  background: #9ca3af;
+}
+
+.dotActive {
+  background: #1a1a2e;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

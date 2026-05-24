@@ -5,7 +5,8 @@
       "nombre": "Audífonos Bluetooth X15",
       "marca": "TechSound",
       "categoria": "audio",
-      "precio": 90.00,
+      "tipo": "audífonos",
+      "precio": 90.0,
       "imagen": "/img/productos/Audifonos.webp",
       "descripcion": "Audífonos inalámbricos con cancelación de ruido y batería de larga duración.",
       "descripcionDetallada": "Los audífonos Bluetooth X15 ofrecen una experiencia de audio premium con cancelación activa de ruido, perfectos para música y llamadas. Con tecnología de última generación, estos audífonos proporcionan un sonido cristalino y graves profundos.",
@@ -41,6 +42,7 @@
       "nombre": "Audífonos Orejas de Gato",
       "marca": "CuteTech",
       "categoria": "audio",
+      "tipo": "audífonos",
       "precio": 45.99,
       "imagen": "/img/productos/Audifonos2.webp",
       "descripcion": "Adorables audífonos con diseño de orejas de gato y luces LED.",
@@ -104,6 +106,7 @@
       "marca": "Xiaomi",
       "categoria": "accesorios",
       "precio": 35.99,
+      "masVendido": true,
       "imagen": "/img/productos/cargador-portatil.webp",
       "descripcion": "Batería portátil de carga rápida para todos tus dispositivos móviles.",
       "descripcionDetallada": "Power Bank compacto de Xiaomi con capacidad de 10.000mAh. Ideal para mantener tus dispositivos cargados durante todo el día. Compatible con carga rápida y múltiples protecciones de seguridad.",
@@ -202,6 +205,8 @@
       "nombre": "Mouse Gaming Wireless Pro",
       "marca": "GameTech",
       "categoria": "gaming",
+      "tipo": "mouse",
+      "masVendido": true,
       "precio": 89.99,
       "imagen": "/img/productos/mouse-gamer.webp",
       "descripcion": "Mouse inalámbrico para gaming con alta precisión y batería duradera.",
@@ -230,6 +235,7 @@
       "marca": "ConnectPro",
       "categoria": "accesorios",
       "precio": 59.99,
+      "masVendido": true,
       "imagen": "/img/productos/hub.webp",
       "descripcion": "Hub multipuerto con HDMI 4K y múltiples conexiones.",
       "descripcionDetallada": "Expande las capacidades de tu laptop con este hub 7 en 1. Incluye salida HDMI 4K, puertos USB 3.0, lector de tarjetas SD/TF y puerto de carga USB-C para mantener tu dispositivo alimentado.",
@@ -284,6 +290,8 @@
       "marca": "GameSound",
       "categoria": "gaming",
       "precio": 149.99,
+      "tipo": "audífonos",
+      "masVendido": true,
       "imagen": "/img/productos/auriculares-gamer.webp",
       "descripcion": "Auriculares gaming con sonido surround y micrófono profesional.",
       "descripcionDetallada": "Auriculares gaming profesionales con sonido surround 7.1 virtual. Diseñados para gamers competitivos, ofrecen audio posicional preciso y un micrófono con cancelación de ruido para comunicación cristalina.",
@@ -355,6 +363,7 @@
       "nombre": "Altavoz Inteligente Smart Home",
       "marca": "SmartTech",
       "categoria": "audio",
+      "tipo": "altavoz",
       "precio": 79.99,
       "imagen": "/img/productos/altavoz-inteligente.webp",
       "descripcion": "Altavoz inteligente con asistente de voz y control del hogar.",
@@ -376,6 +385,94 @@
       },
       "stock": 16,
       "garantia": "12 meses"
+    },
+    {
+      "id": 13,
+      "nombre": "Monitor Gaming 27\" 144Hz",
+      "marca": "AOC",
+      "categoria": "gaming",
+      "tipo": "pantalla",
+      "precio": 799.99,
+      "masVendido": false,
+      "imagen": "/img/productos/monitor-aoc.png",
+      "descripcion": "Monitor gaming Full HD con 144Hz y 1ms de respuesta.",
+      "caracteristicas": ["144Hz", "1ms", "Full HD 1080p", "FreeSync"],
+      "especificaciones": {
+        "Resolución": "1920x1080",
+        "Panel": "IPS",
+        "Peso": "4.5kg"
+      },
+      "stock": 10,
+      "garantia": "24 meses"
+    },
+    {
+      "id": 14,
+      "nombre": "Monitor 4K UHD 32\"",
+      "marca": "LG",
+      "categoria": "gaming",
+      "tipo": "pantalla",
+      "precio": 1299.99,
+      "masVendido": false,
+      "imagen": "/img/productos/monitor-lg.png",
+      "descripcion": "Monitor 4K profesional para diseño y productividad.",
+      "caracteristicas": ["4K UHD", "HDR10", "USB-C", "Panel IPS"],
+      "especificaciones": {
+        "Resolución": "3840x2160",
+        "Panel": "IPS",
+        "Peso": "6.2kg"
+      },
+      "stock": 6,
+      "garantia": "24 meses"
+    },
+    {
+      "id": 15,
+      "nombre": "Mouse Logitech G502 Hero",
+      "marca": "Logitech",
+      "categoria": "gaming",
+      "tipo": "mouse",
+      "precio": 119.99,
+      "masVendido": false,
+      "imagen": "/img/productos/mouse-logitech.png",
+      "descripcion": "Mouse gaming con sensor HERO 25K y pesas ajustables.",
+      "caracteristicas": [
+        "Sensor HERO 25K DPI",
+        "11 botones programables",
+        "Pesas ajustables",
+        "RGB LIGHTSYNC"
+      ],
+      "especificaciones": {
+        "DPI": "100 - 25.600",
+        "Botones": "11 programables",
+        "Conexión": "USB",
+        "Peso": "121g"
+      },
+      "stock": 20,
+      "garantia": "24 meses"
+    },
+    {
+      "id": 16,
+      "nombre": "Mouse Razer DeathAdder V3",
+      "marca": "Razer",
+      "categoria": "gaming",
+      "tipo": "mouse",
+      "precio": 149.99,
+      "masVendido": false,
+      "imagen": "/img/productos/mouse-razer.png",
+      "descripcion": "Mouse gaming ergonómico ultraligero con sensor Focus Pro 30K.",
+      "caracteristicas": [
+        "Sensor Focus Pro 30K DPI",
+        "Ultraligero 59g",
+        "6 botones programables",
+        "Chroma RGB"
+      ],
+      "especificaciones": {
+        "DPI": "100 - 30.000",
+        "Botones": "6 programables",
+        "Conexión": "USB",
+        "Peso": "59g"
+      },
+      "stock": 15,
+      "garantia": "24 meses"
     }
   ]
 }
