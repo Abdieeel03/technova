@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useLocation } from "react-router";
 import { useEffect } from "react";
 import data from "../data/productos.json";
 import styles from "../css_components/DetalleProducto.module.css";
@@ -8,6 +8,8 @@ export default function DetalleProducto() {
   const { id } = useParams();
   const producto = data.productos.find((p) => p.id === Number(id));
   const { addItem } = useCarrito();
+  const location = useLocation();
+const backUrl = location.state?.from || "/productos";
 
   /* Scroll al top al entrar a la página */
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function DetalleProducto() {
       <main className={styles.page}>
         <div className={styles.backBar}>
           <div className={styles.backBarInner}>
-            <Link to="/productos" className={styles.backLink}>
+            <Link to={backUrl} className={styles.backLink}>
               <span className={styles.backIcon}>←</span> Volver a Productos
             </Link>
           </div>
@@ -32,7 +34,7 @@ export default function DetalleProducto() {
             <p className={styles.notFoundText}>
               El producto que buscas no existe o fue eliminado.
             </p>
-            <Link to="/productos" className={styles.notFoundBtn}>
+            <Link to={backUrl} className={styles.notFoundBtn}>
               ← Ver todos los productos
             </Link>
           </div>
@@ -53,7 +55,7 @@ export default function DetalleProducto() {
       {/* ── Barra de navegación / Breadcrumb ── */}
       <div className={styles.backBar}>
         <div className={styles.backBarInner}>
-          <Link to="/productos" className={styles.backLink}>
+          <Link to={backUrl} className={styles.backLink}>
             <span className={styles.backIcon}>←</span> Productos
           </Link>
           <span className={styles.breadcrumb}>

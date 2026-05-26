@@ -1,11 +1,13 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import styles from "../../css_components/CardProducto.module.css";
 
 export default function CardProducto({ producto }) {
   const tieneOferta = producto.ofertaNavideña && producto.ofertaNavideña.activa;
+const location = useLocation();
 
   return (
-    <Link to={`/productos/${producto.id}`} className={styles.card}>
+    <Link to={`/productos/${producto.id}`} state={{ from: location.pathname + location.search }} className={styles.card}>
+
       {tieneOferta && (
         <span className={styles.badge}>{producto.ofertaNavideña.etiqueta}</span>
       )}

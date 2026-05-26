@@ -692,6 +692,1768 @@
     "fechaFin": null,
     "etiqueta": null
   }
+},
+{
+  "id": 23,
+  "nombre": "Parlante Portátil JBL Flip 6",
+  "marca": "JBL",
+  "categoria": "audio",
+  "tipo": "parlante",
+  "precio": 129.99,
+  "imagen": "/img/productos/jbl-flip6.webp",
+  "descripcion": "Parlante portátil resistente al agua con sonido potente y graves profundos.",
+  "descripcionDetallada": "El JBL Flip 6 ofrece un sonido potente con bajos profundos gracias a su tweeter separado. Resistente al agua y polvo IP67, perfecto para aventuras al aire libre con hasta 12 horas de batería.",
+  "caracteristicas": [
+    "Resistencia IP67 al agua y polvo",
+    "12 horas de batería",
+    "Tweeter separado para agudos nítidos",
+    "Conexión PartyBoost con otros parlantes JBL",
+    "Bluetooth 5.1",
+    "Carga USB-C"
+  ],
+  "especificaciones": {
+    "Potencia": "30W",
+    "Batería": "4800mAh (12 horas)",
+    "Resistencia": "IP67",
+    "Conectividad": "Bluetooth 5.1",
+    "Peso": "550g"
+  },
+  "stock": 18,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 129.99,
+    "precioOferta": 129.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 24,
+  "nombre": "Barra de Sonido Samsung HW-B450",
+  "marca": "Samsung",
+  "categoria": "audio",
+  "tipo": "barra de sonido",
+  "precio": 199.99,
+  "imagen": "/img/productos/samsung-soundbar.webp",
+  "descripcion": "Barra de sonido 2.1 con subwoofer inalámbrico para cine en casa.",
+  "descripcionDetallada": "La Samsung HW-B450 transforma tu sala en un cine en casa. Con subwoofer inalámbrico incluido, tecnología Dolby Audio y modo de juego para baja latencia, es el complemento perfecto para tu TV.",
+  "caracteristicas": [
+    "Sistema 2.1 con subwoofer inalámbrico",
+    "Dolby Audio y DTS Virtual:X",
+    "Modo juego con baja latencia",
+    "Conexión Bluetooth y HDMI ARC",
+    "Ecualizador ajustable",
+    "Control desde app SmartThings"
+  ],
+  "especificaciones": {
+    "Potencia": "300W total",
+    "Canales": "2.1",
+    "Conectividad": "HDMI ARC, Bluetooth, Óptico",
+    "Dimensiones barra": "98.5 x 6.2 x 9.3 cm",
+    "Peso": "3.6kg"
+  },
+  "stock": 8,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 15,
+    "precioOriginal": 199.99,
+    "precioOferta": 169.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 25,
+  "nombre": "Auriculares Gaming HyperX Cloud II",
+  "marca": "HyperX",
+  "categoria": "audio",
+  "tipo": "auriculares",
+  "precio": 89.99,
+  "imagen": "/img/productos/hyperx-cloud2.webp",
+  "descripcion": "Auriculares gaming con sonido envolvente 7.1 y micrófono con cancelación de ruido.",
+  "descripcionDetallada": "Los HyperX Cloud II son los auriculares gaming más valorados del mercado. Sonido envolvente virtual 7.1, drivers de 53mm y micrófono desmontable con cancelación de ruido para comunicación clara en partidas.",
+  "caracteristicas": [
+    "Sonido envolvente virtual 7.1",
+    "Drivers de 53mm de gran amplitud",
+    "Micrófono desmontable con cancelación de ruido",
+    "Almohadillas de espuma viscoelástica",
+    "Compatible con PC, PS4, Xbox y móvil",
+    "Control de volumen en el cable"
+  ],
+  "especificaciones": {
+    "Drivers": "53mm",
+    "Frecuencia": "15Hz - 25000Hz",
+    "Impedancia": "60 Ohm",
+    "Micrófono": "Condensador con cancelación de ruido",
+    "Peso": "320g"
+  },
+  "stock": 12,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 89.99,
+    "precioOferta": 89.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 26,
+  "nombre": "Parlante Torre Bluetooth Sony XV500",
+  "marca": "Sony",
+  "categoria": "audio",
+  "tipo": "parlante",
+  "precio": 349.99,
+  "imagen": "/img/productos/sony-xv500.webp",
+  "descripcion": "Parlante torre con iluminación RGB y sonido omnidireccional de 360°.",
+  "descripcionDetallada": "El Sony XV500 es el centro de cualquier fiesta. Con iluminación LED RGB en 360°, sonido omnidireccional potente y micrófono incluido para karaoke, convierte cualquier lugar en una pista de baile.",
+  "caracteristicas": [
+    "Sonido omnidireccional 360°",
+    "Iluminación LED RGB personalizable",
+    "Micrófono incluido para karaoke",
+    "Bluetooth y NFC",
+    "Resistente a salpicaduras IPX4",
+    "Batería de hasta 25 horas"
+  ],
+  "especificaciones": {
+    "Potencia": "500W",
+    "Batería": "25 horas",
+    "Resistencia": "IPX4",
+    "Conectividad": "Bluetooth, NFC, USB, AUX",
+    "Peso": "15kg"
+  },
+  "stock": 5,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 20,
+    "precioOriginal": 349.99,
+    "precioOferta": 279.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Black Friday"
+  }
+},
+{
+  "id": 27,
+  "nombre": "Auriculares Inalámbricos Sony WH-1000XM5",
+  "marca": "Sony",
+  "categoria": "audio",
+  "tipo": "auriculares",
+  "precio": 299.99,
+  "imagen": "/img/productos/sony-wh1000xm5.webp",
+  "descripcion": "Auriculares premium con la mejor cancelación de ruido del mercado.",
+  "descripcionDetallada": "Los Sony WH-1000XM5 son el estándar de oro en cancelación de ruido. Con 8 micrófonos, procesador QN1, hasta 30 horas de batería y audio de alta resolución, son los auriculares definitivos para viajeros y profesionales.",
+  "caracteristicas": [
+    "Cancelación de ruido líder en la industria",
+    "8 micrófonos con procesador QN1",
+    "30 horas de batería",
+    "Audio de alta resolución",
+    "Modo ambiente adaptativo",
+    "Carga rápida: 3 min = 3 horas"
+  ],
+  "especificaciones": {
+    "Drivers": "30mm",
+    "Batería": "30 horas",
+    "Carga": "USB-C",
+    "Conectividad": "Bluetooth 5.2, NFC",
+    "Peso": "250g"
+  },
+  "stock": 7,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 299.99,
+    "precioOferta": 299.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 28,
+  "nombre": "Parlante Bluetooth Marshall Emberton II",
+  "marca": "Marshall",
+  "categoria": "audio",
+  "tipo": "parlante",
+  "precio": 149.99,
+  "imagen": "/img/productos/marshall-emberton2.webp",
+  "descripcion": "Parlante portátil con estética rockera y sonido de alta fidelidad.",
+  "descripcionDetallada": "El Marshall Emberton II combina el icónico diseño rockero de Marshall con un sonido potente y envolvente. Resistente al agua IPX7, 30 horas de batería y True Stereophonic para sonido en todas direcciones.",
+  "caracteristicas": [
+    "Diseño icónico Marshall",
+    "True Stereophonic 360°",
+    "Resistencia IPX7 al agua",
+    "30 horas de batería",
+    "Bluetooth 5.1",
+    "Carga USB-C"
+  ],
+  "especificaciones": {
+    "Potencia": "20W",
+    "Batería": "30 horas",
+    "Resistencia": "IPX7",
+    "Conectividad": "Bluetooth 5.1",
+    "Peso": "700g"
+  },
+  "stock": 10,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 149.99,
+    "precioOferta": 149.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 29,
+  "nombre": "Earbuds TWS Xiaomi Redmi Buds 4 Pro",
+  "marca": "Xiaomi",
+  "categoria": "audio",
+  "tipo": "earbuds",
+  "precio": 49.99,
+  "imagen": "/img/productos/redmi-buds4pro.webp",
+  "descripcion": "Earbuds inalámbricos con cancelación activa de ruido y hasta 36 horas de batería.",
+  "descripcionDetallada": "Los Redmi Buds 4 Pro ofrecen cancelación activa de ruido, audio de alta resolución y hasta 9 horas por carga con 36 horas totales con el estuche. La opción perfecta calidad-precio.",
+  "caracteristicas": [
+    "Cancelación activa de ruido hasta 43dB",
+    "Audio de alta resolución",
+    "9 horas por carga + 36 horas con estuche",
+    "Resistencia IP54",
+    "Modo transparencia",
+    "Carga inalámbrica"
+  ],
+  "especificaciones": {
+    "Drivers": "10mm",
+    "Batería": "9h + 36h con estuche",
+    "Resistencia": "IP54",
+    "Conectividad": "Bluetooth 5.3",
+    "Peso": "5.8g por earbud"
+  },
+  "stock": 20,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 30,
+    "precioOriginal": 49.99,
+    "precioOferta": 34.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 30,
+  "nombre": "Subwoofer Activo Logitech Z207",
+  "marca": "Logitech",
+  "categoria": "audio",
+  "tipo": "subwoofer",
+  "precio": 79.99,
+  "imagen": "/img/productos/logitech-z207.webp",
+  "descripcion": "Sistema de altavoces 2.0 con Bluetooth para escritorio.",
+  "descripcionDetallada": "El Logitech Z207 es el sistema de audio perfecto para tu escritorio. Conecta por Bluetooth o cable, con dos modos de entrada y un diseño compacto que no ocupa espacio pero llena de sonido tu habitación.",
+  "caracteristicas": [
+    "Conexión Bluetooth y cable 3.5mm",
+    "Dos altavoces satélite compactos",
+    "Control de volumen en el cable",
+    "Diseño compacto para escritorio",
+    "Fácil configuración plug and play",
+    "Compatible con PC, Mac y móviles"
+  ],
+  "especificaciones": {
+    "Potencia": "10W RMS",
+    "Conectividad": "Bluetooth, AUX 3.5mm",
+    "Canales": "2.0",
+    "Alimentación": "USB",
+    "Peso": "800g"
+  },
+  "stock": 15,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 79.99,
+    "precioOferta": 79.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 31,
+  "nombre": "Micrófono de Condensador Blue Yeti",
+  "marca": "Blue",
+  "categoria": "audio",
+  "tipo": "micrófono",
+  "precio": 129.99,
+  "imagen": "/img/productos/blue-yeti.webp",
+  "descripcion": "Micrófono USB profesional para streaming, podcasts y grabaciones.",
+  "descripcionDetallada": "El Blue Yeti es el micrófono USB más popular del mundo para creadores de contenido. Con 4 patrones polares, audio de estudio y conexión directa por USB, es la herramienta perfecta para streamers y podcasters.",
+  "caracteristicas": [
+    "4 patrones polares: cardioide, bidireccional, omnidireccional y estéreo",
+    "Resolución de 16 bits / 48kHz",
+    "Salida de auriculares sin latencia",
+    "Control de ganancia y silencio",
+    "Base ajustable de escritorio",
+    "Conexión USB plug and play"
+  ],
+  "especificaciones": {
+    "Patrón": "4 modos polares",
+    "Resolución": "16 bit / 48kHz",
+    "Conexión": "USB",
+    "Frecuencia": "20Hz - 20kHz",
+    "Peso": "1.2kg"
+  },
+  "stock": 9,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 129.99,
+    "precioOferta": 129.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 32,
+  "nombre": "Parlante Portátil Anker Soundcore 3",
+  "marca": "Anker",
+  "categoria": "audio",
+  "tipo": "parlante",
+  "precio": 59.99,
+  "imagen": "/img/productos/anker-soundcore3.webp",
+  "descripcion": "Parlante compacto con sonido 360° y resistencia IP67.",
+  "descripcionDetallada": "El Anker Soundcore 3 ofrece sonido envolvente 360° con bajos potenciados BassUp. Resistente al agua IP67, 24 horas de batería y modo party para conectar múltiples parlantes.",
+  "caracteristicas": [
+    "Sonido 360° con tecnología BassUp",
+    "Resistencia IP67 agua y polvo",
+    "24 horas de batería",
+    "Modo Party para múltiples parlantes",
+    "Bluetooth 5.0",
+    "Carga USB-C"
+  ],
+  "especificaciones": {
+    "Potencia": "16W",
+    "Batería": "24 horas",
+    "Resistencia": "IP67",
+    "Conectividad": "Bluetooth 5.0",
+    "Peso": "454g"
+  },
+  "stock": 16,
+  "garantia": "18 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 10,
+    "precioOriginal": 59.99,
+    "precioOferta": 53.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 33,
+  "nombre": "Auriculares Deportivos Jabra Elite 4 Active",
+  "marca": "Jabra",
+  "categoria": "audio",
+  "tipo": "earbuds",
+  "precio": 99.99,
+  "imagen": "/img/productos/jabra-elite4.webp",
+  "descripcion": "Earbuds deportivos con cancelación de ruido y resistencia IP57.",
+  "descripcionDetallada": "Los Jabra Elite 4 Active están diseñados para el deporte. Con ajuste seguro, cancelación activa de ruido, modo HearThrough y hasta 28 horas totales de batería, son el compañero ideal para entrenar.",
+  "caracteristicas": [
+    "Cancelación activa de ruido ajustable",
+    "Modo HearThrough para escuchar el entorno",
+    "Resistencia IP57 sudor y agua",
+    "7 horas por carga + 28 horas con estuche",
+    "Ajuste seguro ShakeGrip",
+    "Compatible con Spotify Tap"
+  ],
+  "especificaciones": {
+    "Batería": "7h + 28h con estuche",
+    "Resistencia": "IP57",
+    "Conectividad": "Bluetooth 5.2",
+    "Carga": "USB-C",
+    "Peso": "5.5g por earbud"
+  },
+  "stock": 11,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 99.99,
+    "precioOferta": 99.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 34,
+  "nombre": "Tocadiscos Bluetooth Audio-Technica AT-LP120XBT",
+  "marca": "Audio-Technica",
+  "categoria": "audio",
+  "tipo": "tocadiscos",
+  "precio": 249.99,
+  "imagen": "/img/productos/audiotechnica-lp120.webp",
+  "descripcion": "Tocadiscos profesional con conectividad Bluetooth y salida de línea.",
+  "descripcionDetallada": "El Audio-Technica AT-LP120XBT es el tocadiscos de referencia para amantes del vinilo. Con transmisión Bluetooth, motor de tracción directa y preamplificador integrado, combina lo analógico con la modernidad.",
+  "caracteristicas": [
+    "Transmisión Bluetooth integrada",
+    "Motor de tracción directa",
+    "Preamplificador fonográfico integrado",
+    "Velocidades 33/45/78 RPM",
+    "Brazo antideslizante J-shaped",
+    "Cubierta antipolvo incluida"
+  ],
+  "especificaciones": {
+    "Velocidades": "33/45/78 RPM",
+    "Conectividad": "Bluetooth, RCA, USB",
+    "Motor": "Tracción directa",
+    "Aguja": "AT-VM95E",
+    "Peso": "5.6kg"
+  },
+  "stock": 4,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 249.99,
+    "precioOferta": 249.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 35,
+  "nombre": "Teclado Gaming RGB K95",
+  "marca": "Corsair",
+  "categoria": "gaming",
+  "tipo": "teclado",
+  "precio": 189.99,
+  "imagen": "/img/productos/corsair-k95.webp",
+  "descripcion": "Teclado mecánico gaming con retroiluminación RGB por tecla y macros dedicadas.",
+  "descripcionDetallada": "El Corsair K95 RGB Platinum es el teclado gaming definitivo. Con switches Cherry MX Speed, iluminación RGB por tecla, 6 teclas macro dedicadas y reposamuñecas magnético, es la herramienta perfecta para gamers exigentes.",
+  "caracteristicas": [
+    "Switches Cherry MX Speed",
+    "Iluminación RGB por tecla",
+    "6 teclas macro dedicadas",
+    "Reposamuñecas magnético incluido",
+    "Rueda de volumen dedicada",
+    "Cable USB trenzado desmontable"
+  ],
+  "especificaciones": {
+    "Switches": "Cherry MX Speed",
+    "Retroiluminación": "RGB por tecla",
+    "Teclas macro": "6 dedicadas",
+    "Conexión": "USB-A",
+    "Peso": "1.2kg"
+  },
+  "stock": 10,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 189.99,
+    "precioOferta": 189.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 36,
+  "nombre": "Mouse Gaming Wireless Pro",
+  "marca": "Razer",
+  "categoria": "gaming",
+  "tipo": "mouse",
+  "precio": 149.99,
+  "imagen": "/img/productos/razer-wireless-pro.webp",
+  "descripcion": "Mouse gaming inalámbrico con sensor de 20000 DPI y batería de 70 horas.",
+  "descripcionDetallada": "El Razer DeathAdder V2 Pro ofrece rendimiento inalámbrico sin compromisos. Sensor Focus+ de 20000 DPI, tecnología HyperSpeed para conexión ultrarrápida y hasta 70 horas de batería para sesiones de juego sin interrupciones.",
+  "caracteristicas": [
+    "Sensor Focus+ de 20000 DPI",
+    "Conexión inalámbrica HyperSpeed 2.4GHz",
+    "70 horas de batería",
+    "Switches ópticos de 70 millones de clics",
+    "Diseño ergonómico para mano derecha",
+    "Compatible con Razer Chroma RGB"
+  ],
+  "especificaciones": {
+    "DPI": "100 - 20000",
+    "Batería": "70 horas",
+    "Conectividad": "2.4GHz / Bluetooth",
+    "Botones": "8 programables",
+    "Peso": "88g"
+  },
+  "stock": 12,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 20,
+    "precioOriginal": 149.99,
+    "precioOferta": 119.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Black Friday"
+  }
+},
+{
+  "id": 37,
+  "nombre": "Auriculares Gaming HyperX Cloud Alpha",
+  "marca": "HyperX",
+  "categoria": "gaming",
+  "tipo": "auriculares",
+  "precio": 99.99,
+  "imagen": "/img/productos/hyperx-alpha.webp",
+  "descripcion": "Auriculares gaming con doble cámara de sonido y micrófono con cancelación de ruido.",
+  "descripcionDetallada": "Los HyperX Cloud Alpha cuentan con tecnología de doble cámara de sonido que separa los graves de los medios y agudos, ofreciendo una claridad de audio excepcional para gaming competitivo.",
+  "caracteristicas": [
+    "Doble cámara de sonido patentada",
+    "Micrófono desmontable con cancelación de ruido",
+    "Almohadillas de espuma viscoelástica",
+    "Compatible con PC, PS4, Xbox y móvil",
+    "Cable trenzado resistente",
+    "Certificado Discord y TeamSpeak"
+  ],
+  "especificaciones": {
+    "Drivers": "50mm con doble cámara",
+    "Frecuencia": "13Hz - 27000Hz",
+    "Impedancia": "65 Ohm",
+    "Conexión": "3.5mm",
+    "Peso": "298g"
+  },
+  "stock": 14,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 99.99,
+    "precioOferta": 99.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 38,
+  "nombre": "Monitor Gaming 27\" 144Hz",
+  "marca": "ASUS",
+  "categoria": "gaming",
+  "tipo": "monitor",
+  "precio": 299.99,
+  "imagen": "/img/productos/asus-monitor-144hz.webp",
+  "descripcion": "Monitor gaming 27 pulgadas Full HD con 144Hz y 1ms para gaming competitivo.",
+  "descripcionDetallada": "El ASUS TUF Gaming VG27AQ ofrece panel IPS de 27 pulgadas con resolución Full HD, 144Hz de frecuencia de actualización y 1ms de tiempo de respuesta. Compatible con G-Sync y FreeSync para eliminar el tearing.",
+  "caracteristicas": [
+    "Panel IPS 27\" Full HD 1080p",
+    "144Hz de frecuencia de actualización",
+    "1ms de tiempo de respuesta",
+    "Compatible G-Sync y FreeSync",
+    "HDR10",
+    "Soporte ajustable en altura e inclinación"
+  ],
+  "especificaciones": {
+    "Tamaño": "27 pulgadas",
+    "Resolución": "1920x1080",
+    "Frecuencia": "144Hz",
+    "Tiempo respuesta": "1ms",
+    "Conectividad": "HDMI, DisplayPort, USB Hub"
+  },
+  "stock": 8,
+  "garantia": "36 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 15,
+    "precioOriginal": 299.99,
+    "precioOferta": 254.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 39,
+  "nombre": "Monitor 4K UHD 32\"",
+  "marca": "LG",
+  "categoria": "gaming",
+  "tipo": "monitor",
+  "precio": 499.99,
+  "imagen": "/img/productos/lg-monitor-4k.webp",
+  "descripcion": "Monitor 4K UHD de 32 pulgadas con panel Nano IPS y HDR600.",
+  "descripcionDetallada": "El LG 32UN880 ofrece una experiencia visual inmersiva con resolución 4K UHD, panel Nano IPS con cobertura de color DCI-P3 98% y soporte HDR600. Perfecto para gaming y trabajo creativo.",
+  "caracteristicas": [
+    "Panel Nano IPS 32\" 4K UHD",
+    "HDR600 con brillo real",
+    "DCI-P3 98% cobertura de color",
+    "FreeSync Premium",
+    "Soporte Ergo ajustable",
+    "USB-C con carga 60W"
+  ],
+  "especificaciones": {
+    "Tamaño": "32 pulgadas",
+    "Resolución": "3840x2160 4K",
+    "Panel": "Nano IPS",
+    "HDR": "HDR600",
+    "Conectividad": "HDMI 2.0, DisplayPort, USB-C"
+  },
+  "stock": 6,
+  "garantia": "36 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 499.99,
+    "precioOferta": 499.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 40,
+  "nombre": "Mouse Logitech G502 Hero",
+  "marca": "Logitech",
+  "categoria": "gaming",
+  "tipo": "mouse",
+  "precio": 79.99,
+  "imagen": "/img/productos/logitech-g502.webp",
+  "descripcion": "Mouse gaming con sensor HERO 25K y pesos ajustables.",
+  "descripcionDetallada": "El Logitech G502 Hero es uno de los mouse gaming más precisos del mercado. Sensor HERO 25K con precisión de 1:1, 11 botones programables y sistema de pesos ajustables para personalizar la sensación de uso.",
+  "caracteristicas": [
+    "Sensor HERO 25K de alta precisión",
+    "11 botones programables",
+    "Sistema de pesos ajustables",
+    "Iluminación RGB LIGHTSYNC",
+    "Cable trenzado resistente",
+    "Compatible con G HUB"
+  ],
+  "especificaciones": {
+    "DPI": "100 - 25600",
+    "Botones": "11 programables",
+    "Sensor": "HERO 25K",
+    "Conexión": "USB-A",
+    "Peso": "121g (sin pesos)"
+  },
+  "stock": 20,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 10,
+    "precioOriginal": 79.99,
+    "precioOferta": 71.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 41,
+  "nombre": "Mouse Razer DeathAdder V3",
+  "marca": "Razer",
+  "categoria": "gaming",
+  "tipo": "mouse",
+  "precio": 89.99,
+  "imagen": "/img/productos/razer-deathadder-v3.webp",
+  "descripcion": "Mouse gaming ultraligero con sensor Focus Pro 30K y diseño ergonómico.",
+  "descripcionDetallada": "El Razer DeathAdder V3 redefine el gaming ergonómico. Con tan solo 59g, sensor Focus Pro 30K y switches ópticos de segunda generación, ofrece precisión y velocidad sin igual para gaming competitivo.",
+  "caracteristicas": [
+    "Sensor Focus Pro 30K",
+    "Peso ultraligero de 59g",
+    "Switches ópticos Gen-2",
+    "Diseño ergonómico para mano derecha",
+    "Cable SpeedFlex ultraflexible",
+    "Sin iluminación para menor peso"
+  ],
+  "especificaciones": {
+    "DPI": "100 - 30000",
+    "Sensor": "Focus Pro 30K",
+    "Peso": "59g",
+    "Botones": "6 programables",
+    "Conexión": "USB-A"
+  },
+  "stock": 15,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 89.99,
+    "precioOferta": 89.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 42,
+  "nombre": "PC Gamer Intel Core i7 RTX 4070",
+  "marca": "ASUS ROG",
+  "categoria": "gaming",
+  "tipo": "computadora",
+  "precio": 1899.99,
+  "imagen": "/img/productos/asus-rog-pc.webp",
+  "descripcion": "PC gamer de alto rendimiento con Intel Core i7 de 13a generación y RTX 4070.",
+  "descripcionDetallada": "La ASUS ROG G16 es una bestia del gaming. Procesador Intel Core i7-13700KF, GPU RTX 4070 12GB, 32GB DDR5 y SSD NVMe de 1TB para cargas ultrarrápidas. Lista para jugar en 4K y hacer streaming simultáneamente.",
+  "caracteristicas": [
+    "Procesador Intel Core i7-13700KF",
+    "GPU NVIDIA RTX 4070 12GB GDDR6X",
+    "32GB RAM DDR5 5600MHz",
+    "SSD NVMe 1TB PCIe 4.0",
+    "Refrigeración líquida 240mm",
+    "Chasis ROG con iluminación ARGB"
+  ],
+  "especificaciones": {
+    "CPU": "Intel Core i7-13700KF",
+    "GPU": "RTX 4070 12GB",
+    "RAM": "32GB DDR5",
+    "Almacenamiento": "1TB NVMe SSD",
+    "SO": "Windows 11 Home"
+  },
+  "stock": 4,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 10,
+    "precioOriginal": 1899.99,
+    "precioOferta": 1709.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Black Friday"
+  }
+},
+{
+  "id": 43,
+  "nombre": "Silla Gaming Secretlab Titan Evo",
+  "marca": "Secretlab",
+  "categoria": "gaming",
+  "tipo": "silla",
+  "precio": 449.99,
+  "imagen": "/img/productos/secretlab-titan.webp",
+  "descripcion": "Silla gaming ergonómica premium con soporte lumbar magnético y reposabrazos 4D.",
+  "descripcionDetallada": "La Secretlab Titan Evo es la silla gaming de referencia mundial. Con soporte lumbar magnético integrado, reposabrazos 4D totalmente ajustables, tapizado Neo Hybrid Leatherette y mecanismo de reclinación hasta 165°.",
+  "caracteristicas": [
+    "Soporte lumbar magnético ajustable",
+    "Reposabrazos 4D (altura, rotación, profundidad, anchura)",
+    "Tapizado Neo Hybrid Leatherette",
+    "Reclinación hasta 165°",
+    "Base de aluminio pulido",
+    "Cojín de cabeza memory foam incluido"
+  ],
+  "especificaciones": {
+    "Peso máximo": "180kg",
+    "Reclinación": "85° - 165°",
+    "Reposabrazos": "4D ajustables",
+    "Material": "Neo Hybrid Leatherette",
+    "Garantía": "5 años"
+  },
+  "stock": 6,
+  "garantia": "60 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 449.99,
+    "precioOferta": 449.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+  {
+    "id": 44,
+    "nombre": "Cámara Sony ZV-E10",
+    "marca": "Sony",
+    "categoria": "camaras",
+    "precio": 699.99,
+    "imagen": "/img/productos/sony-zve10.webp",
+    "descripcion": "Cámara mirrorless para vlogging con enfoque automático en tiempo real y micrófono integrado.",
+    "descripcionDetallada": "Diseñada para creadores de contenido y vloggers, la Sony ZV-E10 ofrece un sensor APS-C de 24.2 MP, enfoque automático con seguimiento de ojos y un micrófono direccional integrado que reduce el ruido ambiente.",
+    "caracteristicas": [
+      "Sensor APS-C 24.2 MP",
+      "Grabación 4K sin crop",
+      "Micrófono direccional integrado",
+      "Pantalla lateral abatible",
+      "Modo de desenfoque de fondo",
+      "Product showcase (enfoque rápido a objetos)"
+    ],
+    "especificaciones": {
+      "Resolución": "24.2 MP",
+      "Video": "4K 30fps, Full HD 120fps",
+      "Conexión": "USB-C, micro HDMI",
+      "Batería": "440 disparos",
+      "Peso": "343g"
+    },
+    "stock": 7,
+    "garantia": "24 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 20,
+      "precioOriginal": 699.99,
+      "precioOferta": 559.99,
+      "fechaInicio": "2025-12-01",
+      "fechaFin": "2025-12-31",
+      "etiqueta": "Oferta Navideña"
+    }
+  },
+  {
+    "id": 45,
+    "nombre": "GoPro HERO12 Black",
+    "marca": "GoPro",
+    "categoria": "camaras",
+    "precio": 399.99,
+    "imagen": "/img/productos/gopro-hero12.webp",
+    "descripcion": "Cámara de acción con estabilización HyperSmooth 6.0 y grabación HDR 5.3K.",
+    "descripcionDetallada": "La GoPro HERO12 Black eleva el estándar de las cámaras de acción con video HDR 5.3K a 60fps, fotos de 27MP y una batería de larga duración. Resistente al agua hasta 10 metros sin carcasa.",
+    "caracteristicas": [
+      "Video HDR 5.3K 60fps",
+      "Fotos de 27MP",
+      "HyperSmooth 6.0",
+      "Resistente al agua 10m",
+      "Grabación de fotogramas clave",
+      "Webcam por USB"
+    ],
+    "especificaciones": {
+      "Video máximo": "5.3K 60fps",
+      "Foto": "27MP",
+      "Estabilización": "HyperSmooth 6.0",
+      "Batería": "1720mAh Enduro",
+      "Peso": "154g"
+    },
+    "stock": 15,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 399.99,
+      "precioOferta": 399.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 46,
+    "nombre": "Canon EOS R50",
+    "marca": "Canon",
+    "categoria": "camaras",
+    "precio": 749.99,
+    "imagen": "/img/productos/canon-r50.webp",
+    "descripcion": "Cámara mirrorless para principiantes con enfoque automático de doble píxel y video 4K.",
+    "descripcionDetallada": "La Canon EOS R50 combina un sensor CMOS APS-C de 24.2 MP con el procesador DIGIC X. Ideal para quienes empiezan en fotografía y video, con autofocus que detecta personas, animales y vehículos.",
+    "caracteristicas": [
+      "Sensor 24.2 MP APS-C",
+      "Video 4K 30fps sin recorte",
+      "Enfoque automático de doble píxel",
+      "Disparo continuo 15 fps",
+      "Pantalla táctil abatible",
+      "Guía de funciones avanzadas"
+    ],
+    "especificaciones": {
+      "Sensor": "APS-C CMOS 24.2MP",
+      "Procesador": "DIGIC X",
+      "ISO": "100-32000",
+      "Batería": "440 disparos",
+      "Peso": "375g"
+    },
+    "stock": 6,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 10,
+      "precioOriginal": 749.99,
+      "precioOferta": 674.99,
+      "fechaInicio": "2025-12-15",
+      "fechaFin": "2025-12-31",
+      "etiqueta": "Navidad"
+    }
+  },
+  {
+    "id": 47,
+    "nombre": "DJI Osmo Pocket 3",
+    "marca": "DJI",
+    "categoria": "camaras",
+    "precio": 519.99,
+    "imagen": "/img/productos/dji-osmo-pocket3.webp",
+    "descripcion": "Cámara de bolsillo con gimbal estabilizador de 3 ejes y sensor de 1 pulgada.",
+    "descripcionDetallada": "La DJI Osmo Pocket 3 revoluciona la grabación móvil con su sensor de 1 pulgada, rotación rápida del gimbal y pantalla táctil de 2 pulgadas. Grabación vertical automática para redes sociales.",
+    "caracteristicas": [
+      "Sensor de 1 pulgada 20MP",
+      "Video 4K 120fps",
+      "Estabilización de 3 ejes",
+      "Seguimiento ActiveTrack 6.0",
+      "Grabación vertical nativa",
+      "Micrófono inalámbrico DJI incluido"
+    ],
+    "especificaciones": {
+      "Sensor": "1 pulgada 20MP",
+      "Video": "4K 120fps",
+      "Estabilización": "Gimbal 3 ejes",
+      "Batería": "166 min",
+      "Peso": "179g"
+    },
+    "stock": 4,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 519.99,
+      "precioOferta": 519.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 48,
+    "nombre": "Cámara Web Elgato Facecam MK.2",
+    "marca": "Elgato",
+    "categoria": "camaras",
+    "precio": 199.99,
+    "imagen": "/img/productos/elgato-facecam.webp",
+    "descripcion": "Webcam premium para streaming con sensor Sony Starvis y control profesional.",
+    "descripcionDetallada": "La Elgato Facecam MK.2 ofrece video Full HD 1080p a 60fps con un sensor Sony Starvis de baja luz. Permite control manual de exposición, zoom digital y campo de visión ajustable mediante software.",
+    "caracteristicas": [
+      "Sensor Sony Starvis",
+      "1080p 60fps nativo",
+      "Lente de cristal f/2.4",
+      "Campo de visión 82°",
+      "Control manual vía software",
+      "Flash interno para baja luz"
+    ],
+    "especificaciones": {
+      "Resolución": "1080p a 60fps",
+      "Sensor": "Sony Starvis",
+      "Conexión": "USB 3.0",
+      "Compatibilidad": "Windows/Mac",
+      "Peso": "150g"
+    },
+    "stock": 10,
+    "garantia": "24 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 15,
+      "precioOriginal": 199.99,
+      "precioOferta": 169.99,
+      "fechaInicio": "2025-12-01",
+      "fechaFin": "2025-12-25",
+      "etiqueta": "Black Friday"
+    }
+  },
+  {
+    "id": 49,
+    "nombre": "Cámara Olympus OM-D E-M10 Mark IV",
+    "marca": "Olympus",
+    "categoria": "camaras",
+    "precio": 799.99,
+    "imagen": "/img/productos/olympus-em10.webp",
+    "descripcion": "Cámara mirrorless Micro Cuatro Tercios con estabilización de 5 ejes.",
+    "descripcionDetallada": "La Olympus OM-D E-M10 Mark IV combina un diseño retro compacto con un sensor de 20 MP y estabilización de 5 ejes. Ideal para viajes y fotografía callejera gracias a su peso ligero y lentes intercambiables.",
+    "caracteristicas": [
+      "Sensor Live MOS 20MP",
+      "Estabilización 5 ejes",
+      "Pantalla abatible para selfies",
+      "Disparo continuo 15 fps",
+      "Resistente a salpicaduras",
+      "WiFi y Bluetooth"
+    ],
+    "especificaciones": {
+      "Sensor": "Micro Cuatro Tercios 20MP",
+      "Estabilización": "5 ejes",
+      "Video": "4K 30fps",
+      "Batería": "360 disparos",
+      "Peso": "383g"
+    },
+    "stock": 3,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 799.99,
+      "precioOferta": 799.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 50,
+    "nombre": "Cámara de Caza Tactacam Reveal X",
+    "marca": "Tactacam",
+    "categoria": "camaras",
+    "precio": 149.99,
+    "imagen": "/img/productos/tactacam-reveal.webp",
+    "descripcion": "Cámara de rastreo celular con transmisión de fotos HD a tu móvil.",
+    "descripcionDetallada": "La Tactacam Reveal X envía fotos directamente a tu teléfono a través de red celular. Sensor de 16 MP con flash de largo alcance de 100 pies y modo time-lapse para observación de fauna.",
+    "caracteristicas": [
+      "Sensor 16MP",
+      "Flash de 100 pies",
+      "Envía fotos por LTE",
+      "Modo time-lapse",
+      "Batería recargable incluida",
+      "Resistente al agua IP66"
+    ],
+    "especificaciones": {
+      "Megapíxeles": "16MP",
+      "Alcance flash": "30 metros",
+      "Tarjeta microSD": "Sí",
+      "Frecuencia": "4G LTE",
+      "Peso": "450g"
+    },
+    "stock": 8,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 25,
+      "precioOriginal": 149.99,
+      "precioOferta": 112.49,
+      "fechaInicio": "2025-12-01",
+      "fechaFin": "2025-12-31",
+      "etiqueta": "Especial Caza"
+    }
+  },
+  {
+    "id": 51,
+    "nombre": "Cámara Réflex Nikon D7500",
+    "marca": "Nikon",
+    "categoria": "camaras",
+    "precio": 1099.99,
+    "imagen": "/img/productos/nikon-d7500.webp",
+    "descripcion": "Cámara DSLR avanzada con sensor 20.9 MP y grabación 4K UHD.",
+    "descripcionDetallada": "La Nikon D7500 es ideal para fotógrafos entusiastas que buscan rendimiento. Sensor CMOS DX de 20.9 MP, procesador EXPEED 5 y rango ISO de 100 a 51200 para excelente calidad en poca luz.",
+    "caracteristicas": [
+      "Sensor 20.9 MP DX",
+      "Video 4K UHD",
+      "Disparo continuo 8 fps",
+      "ISO hasta 1.64M",
+      "Pantalla táctil abatible",
+      "Conectividad SnapBridge"
+    ],
+    "especificaciones": {
+      "Sensor": "DX CMOS 20.9MP",
+      "Procesador": "EXPEED 5",
+      "Enfoque": "51 puntos",
+      "Batería": "950 disparos",
+      "Peso": "720g"
+    },
+    "stock": 2,
+    "garantia": "18 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 1099.99,
+      "precioOferta": 1099.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 52,
+    "nombre": "Cámara 360° Insta360 X3",
+    "marca": "Insta360",
+    "categoria": "camaras",
+    "precio": 449.99,
+    "imagen": "/img/productos/insta360-x3.webp",
+    "descripcion": "Cámara de 360 grados con estabilización FlowState y grabación HDR.",
+    "descripcionDetallada": "La Insta360 X3 captura todo a tu alrededor en 5.7K con la posibilidad de reencuadrar en postproducción. Resistente al agua hasta 10 metros y con estabilización FlowState que elimina vibraciones.",
+    "caracteristicas": [
+      "Video 360° 5.7K",
+      "Estabilización FlowState",
+      "Resistente al agua 10m",
+      "Edición con IA en app",
+      "Modo de seguimiento automático",
+      "Graba vertical sin perder calidad"
+    ],
+    "especificaciones": {
+      "Resolución": "5.7K a 30fps",
+      "Fotos": "72MP",
+      "Batería": "81 min",
+      "Almacenamiento": "microSD",
+      "Peso": "180g"
+    },
+    "stock": 9,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 30,
+      "precioOriginal": 449.99,
+      "precioOferta": 315.00,
+      "fechaInicio": "2025-12-10",
+      "fechaFin": "2025-12-26",
+      "etiqueta": "Cyber Week"
+    }
+  },
+  {
+    "id": 53,
+    "nombre": "Cámara Bridge Panasonic Lumix FZ80",
+    "marca": "Panasonic",
+    "categoria": "camaras",
+    "precio": 349.99,
+    "imagen": "/img/productos/panasonic-fz80.webp",
+    "descripcion": "Cámara bridge con zoom óptico de 60x y grabación 4K.",
+    "descripcionDetallada": "La Panasonic Lumix FZ80 ofrece un increíble zoom óptico de 60x (equivalente a 20-1200mm) y sensor de 18.1 MP. Ideal para deportes, naturaleza y viajes sin necesidad de cambiar lentes.",
+    "caracteristicas": [
+      "Zoom óptico 60x",
+      "Sensor 18.1 MP",
+      "Video 4K y foto 4K",
+      "Estabilización Power OIS",
+      "Visor electrónico 0.39'",
+      "Carga por USB"
+    ],
+    "especificaciones": {
+      "Zoom": "60x óptico",
+      "Sensor": "1/2.3' 18.1MP",
+      "Lente": "20-1200mm f/2.8-5.9",
+      "Video": "4K 30fps",
+      "Peso": "616g"
+    },
+    "stock": 5,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 349.99,
+      "precioOferta": 349.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 54,
+    "nombre": "Cámara IP Reolink Argus 3 Pro",
+    "marca": "Reolink",
+    "categoria": "camaras",
+    "precio": 129.99,
+    "imagen": "/img/productos/reolink-argus3.webp",
+    "descripcion": "Cámara de seguridad inalámbrica con batería, visión nocturna color y detección por IA.",
+    "descripcionDetallada": "La Reolink Argus 3 Pro funciona con batería recargable y se conecta por WiFi. Detecta personas, vehículos y mascotas mediante IA, alertas en tiempo real y visión nocturna color de alta calidad.",
+    "caracteristicas": [
+      "Sin cables (batería)",
+      "Visión nocturna color",
+      "Detección inteligente IA",
+      "Alerta sónica y luminosa",
+      "Almacenamiento en microSD o nube",
+      "Resistente a la lluvia IP65"
+    ],
+    "especificaciones": {
+      "Resolución": "2K 4MP",
+      "Visión nocturna": "30 metros",
+      "Campo visión": "122°",
+      "Batería": "2-3 meses",
+      "Conexión": "2.4GHz WiFi"
+    },
+    "stock": 20,
+    "garantia": "24 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 20,
+      "precioOriginal": 129.99,
+      "precioOferta": 103.99,
+      "fechaInicio": "2025-12-15",
+      "fechaFin": "2026-01-05",
+      "etiqueta": "Seguridad Navidad"
+    }
+  },
+  {
+    "id": 55,
+    "nombre": "Cámara Acuática Sealife Micro 3.0",
+    "marca": "Sealife",
+    "categoria": "camaras",
+    "precio": 549.99,
+    "imagen": "/img/productos/sealife-micro3.webp",
+    "descripcion": "Cámara subacuática 16MP con profundidad de 60 metros y corrección de color.",
+    "descripcionDetallada": "Diseñada para buceo y snorkel, la Sealife Micro 3.0 no requiere carcasa adicional. Pantalla táctil, estabilización electrónica y modos de color para aguas profundas o turbias.",
+    "caracteristicas": [
+      "Resistente a 60m",
+      "Corrección automática de color",
+      "Video 4K",
+      "Pantalla táctil 2.4'",
+      "Doble flash LED",
+      "Flotador incluido"
+    ],
+    "especificaciones": {
+      "Profundidad": "60 metros",
+      "Sensor": "16MP",
+      "Video": "4K 30fps",
+      "Batería": "370 disparos",
+      "Peso bajo agua": "10g"
+    },
+    "stock": 2,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 549.99,
+      "precioOferta": 549.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 56,
+    "nombre": "Cámara Lomo'Instant Automat",
+    "marca": "Lomography",
+    "categoria": "camaras",
+    "precio": 149.99,
+    "imagen": "/img/productos/lomo-instant.webp",
+    "descripcion": "Cámara instantánea creativa con tres lentes intercambiables y modo bulb.",
+    "descripcionDetallada": "La Lomo'Instant Automat te permite exposiciones largas, múltiples exposiciones y filtros de color. Compatible con película Fujifilm Instax Mini y completamente manual.",
+    "caracteristicas": [
+      "Tres lentes intercambiables",
+      "Modo bulb",
+      "Exposiciones múltiples",
+      "Anillo de color para filtros",
+      "Temporizador automático",
+      "Funciona con pilas AAA"
+    ],
+    "especificaciones": {
+      "Película": "Instax Mini",
+      "Lente": "27mm f/8",
+      "Enfoque": "0.6m a infinito",
+      "Flash": "Automático",
+      "Peso": "300g"
+    },
+    "stock": 6,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 20,
+      "precioOriginal": 149.99,
+      "precioOferta": 119.99,
+      "fechaInicio": "2025-12-01",
+      "fechaFin": "2025-12-30",
+      "etiqueta": "Creativa"
+    }
+  },
+  {
+    "id": 57,
+    "nombre": "Cámara Refurbished Sony RX100 VII",
+    "marca": "Sony",
+    "categoria": "camaras",
+    "precio": 999.99,
+    "imagen": "/img/productos/sony-rx100vii.webp",
+    "descripcion": "Cámara compacta avanzada con lente zoom 24-200mm y ráfaga de 20 fps.",
+    "descripcionDetallada": "Reacondicionada de fábrica, la Sony RX100 VII ofrece calidad profesional en bolsillo. Sensor de 20.1 MP, fase AF en 0.02 seg y seguimiento de ojos en video.",
+    "caracteristicas": [
+      "Sensor 1' 20.1MP",
+      "Zoom 24-200mm f/2.8-4.5",
+      "Ráfaga 20 fps sin blackout",
+      "Video 4K HDR",
+      "Visor emergente",
+      "Micrófono externo"
+    ],
+    "especificaciones": {
+      "Sensor": "1' Exmor RS CMOS",
+      "Zoom": "8x óptico",
+      "Enfoque": "357 puntos (fase)",
+      "Video": "4K 30fps",
+      "Peso": "302g"
+    },
+    "stock": 1,
+    "garantia": "6 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 999.99,
+      "precioOferta": 999.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+    "id": 58,
+    "nombre": "Cámara de Vídeo Profesional Blackmagic Pocket Cinema 4K",
+    "marca": "Blackmagic",
+    "categoria": "camaras",
+    "precio": 1295.00,
+    "imagen": "/img/productos/blackmagic-pocket4k.webp",
+    "descripcion": "Cámara de cine digital con sensor 4/3, grabación RAW y dual ISO.",
+    "descripcionDetallada": "La Blackmagic Pocket Cinema 4K está diseñada para filmmakers. Sensor de 4/3, resolución 4096x2160, grabación en Blackmagic RAW y ProRes. Cuenta con conector mini XLR y pantalla táctil de 5 pulgadas.",
+    "caracteristicas": [
+      "Sensor 4/3 4K",
+      "Grabación RAW y ProRes",
+      "Dual ISO 100/3200",
+      "Pantalla táctil 5'",
+      "Entrada mini XLR",
+      "Soporta CFast y SD"
+    ],
+    "especificaciones": {
+      "Resolución": "4K DCI 4096x2160",
+      "Sensor": "4/3 CMOS",
+      "Montura lente": "Micro Cuatro Tercios",
+      "Almacenamiento": "CFast 2.0, SD UHS-II",
+      "Peso": "900g"
+    },
+    "stock": 1,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": true,
+      "descuento": 10,
+      "precioOriginal": 1295.00,
+      "precioOferta": 1165.50,
+      "fechaInicio": "2025-12-20",
+      "fechaFin": "2025-12-31",
+      "etiqueta": "Pro"
+    }
+  },
+  {
+    "id": 59,
+    "nombre": "Cámara Leica Q3 (Reacondicionada)",
+    "marca": "Leica",
+    "categoria": "camaras",
+    "precio": 4999.99,
+    "imagen": "/img/productos/leica-q3.webp",
+    "descripcion": "Cámara full frame de lujo con lente fijo Summilux 28mm f/1.7.",
+    "descripcionDetallada": "Edición limitada reacondicionada por Leica. La Q3 ofrece sensor de 60 MP de fotograma completo, lente integrado de altísima calidad, estabilización y video 8K. Perfecta para puristas de la fotografía.",
+    "caracteristicas": [
+      "Sensor full frame 60MP",
+      "Lente Summilux 28mm f/1.7",
+      "Video 8K",
+      "Estabilización óptica",
+      "Visor OLED 5.76M puntos",
+      "Resistente a salpicaduras"
+    ],
+    "especificaciones": {
+      "Sensor": "Full frame CMOS 60MP",
+      "Lente": "28mm f/1.7",
+      "Enfoque": "Hybrid AF",
+      "ISO": "50-100000",
+      "Peso": "743g"
+    },
+    "stock": 1,
+    "garantia": "12 meses",
+    "ofertaNavideña": {
+      "activa": false,
+      "descuento": 0,
+      "precioOriginal": 4999.99,
+      "precioOferta": 4999.99,
+      "fechaInicio": null,
+      "fechaFin": null,
+      "etiqueta": null
+    }
+  },
+  {
+  "id": 60,
+  "nombre": "Base Refrigeradora para Laptop 6 Ventiladores",
+  "marca": "CoolerMaster",
+  "categoria": "accesorios",
+  "precio": 49.99,
+  "masVendido": true,
+  "imagen": "/img/productos/base-refrigeradora.webp",
+  "descripcion": "Base enfriadora con 6 ventiladores RGB y altura ajustable para laptops de hasta 17 pulgadas.",
+  "descripcionDetallada": "Mantén tu laptop fresca durante largas sesiones de gaming o trabajo con esta base refrigeradora. 6 ventiladores de alta velocidad, control de velocidad ajustable y diseño ergonómico para mejorar tu postura.",
+  "caracteristicas": [
+    "6 ventiladores RGB de 70mm",
+    "Altura ajustable en 6 niveles",
+    "Compatible con laptops de 14 a 17 pulgadas",
+    "Control de velocidad de ventiladores",
+    "Puertos USB adicionales",
+    "Superficie antideslizante"
+  ],
+  "especificaciones": {
+    "Ventiladores": "6 x 70mm",
+    "Velocidad": "1200-2000 RPM",
+    "Dimensiones": "400 x 280 x 45mm",
+    "Material": "Plástico ABS + metal",
+    "Peso": "850g"
+  },
+  "stock": 18,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 15,
+    "precioOriginal": 49.99,
+    "precioOferta": 42.49,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 61,
+  "nombre": "Kit de Limpieza para Electrónicos",
+  "marca": "CleanTech",
+  "categoria": "accesorios",
+  "precio": 19.99,
+  "masVendido": false,
+  "imagen": "/img/productos/kit-limpieza.webp",
+  "descripcion": "Kit completo de limpieza para laptop, celular, teclado y pantallas.",
+  "descripcionDetallada": "Mantén tus dispositivos impecables con este kit profesional. Incluye aire comprimido, pinceles antiestáticos, paños de microfibra y solución limpiadora segura para pantallas.",
+  "caracteristicas": [
+    "Aire comprimido de 300ml",
+    "3 paños de microfibra",
+    "Pincel antiestático",
+    "Solución limpiadora sin alcohol",
+    "Espátulas para apertura de dispositivos",
+    "Estuche organizador incluido"
+  ],
+  "especificaciones": {
+    "Contenido": "12 piezas",
+    "Aire comprimido": "300ml",
+    "Paños": "3 unidades 15x15cm",
+    "Material": "Microfibra + plástico",
+    "Peso": "320g"
+  },
+  "stock": 35,
+  "garantia": "6 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 19.99,
+    "precioOferta": 19.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 62,
+  "nombre": "Cable USB-C a USB-C 100W 2m",
+  "marca": "ChargePro",
+  "categoria": "accesorios",
+  "precio": 15.99,
+  "masVendido": true,
+  "imagen": "/img/productos/cable-usbc.webp",
+  "descripcion": "Cable trenzado USB-C de 2 metros con carga rápida de 100W y transferencia de datos 10Gbps.",
+  "descripcionDetallada": "Cable premium trenzado en nylon compatible con carga rápida Power Delivery. Ideal para laptops MacBook, iPad Pro, y dispositivos Android. Transferencia de datos ultrarrápida hasta 10Gbps.",
+  "caracteristicas": [
+    "Potencia máxima 100W (5A/20V)",
+    "Transferencia de datos 10Gbps (USB 3.2)",
+    "Longitud 2 metros",
+    "Trenzado en nylon resistente",
+    "Conectores reforzados",
+    "Compatible con todos los USB-C"
+  ],
+  "especificaciones": {
+    "Longitud": "2 metros",
+    "Potencia": "100W (20V/5A)",
+    "Velocidad": "10Gbps",
+    "Material": "Nylon trenzado + aluminio",
+    "Peso": "55g"
+  },
+  "stock": 50,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 10,
+    "precioOriginal": 15.99,
+    "precioOferta": 14.39,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 63,
+  "nombre": "Adaptador HDMI a VGA con Audio",
+  "marca": "ConnectPlus",
+  "categoria": "accesorios",
+  "precio": 12.99,
+  "masVendido": false,
+  "imagen": "/img/productos/adaptador-hdmi-vga.webp",
+  "descripcion": "Adaptador HDMI a VGA con salida de audio para conectar laptops a monitores antiguos.",
+  "descripcionDetallada": "Conecta tu laptop o PC moderna a monitores o proyectores VGA antiguos. Incluye salida de audio Jack 3.5mm para conectar parlantes externos. Plug and play sin necesidad de drivers.",
+  "caracteristicas": [
+    "Convierte HDMI a VGA",
+    "Salida de audio Jack 3.5mm",
+    "Soporta resoluciones hasta 1080p",
+    "Cable integrado de 20cm",
+    "No requiere alimentación externa",
+    "Compatible con Windows, Mac, Linux"
+  ],
+  "especificaciones": {
+    "Entrada": "HDMI macho",
+    "Salida": "VGA hembra + Jack 3.5mm",
+    "Resolución": "1920x1080 60Hz",
+    "Longitud cable": "20cm",
+    "Peso": "40g"
+  },
+  "stock": 28,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 12.99,
+    "precioOferta": 12.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 64,
+  "nombre": "Cargador Inalámbrico 3 en 1",
+  "marca": "MagSafe",
+  "categoria": "accesorios",
+  "precio": 59.99,
+  "masVendido": true,
+  "imagen": "/img/productos/cargador-inalambrico-3en1.webp",
+  "descripcion": "Estación de carga simultánea para iPhone, Apple Watch y AirPods.",
+  "descripcionDetallada": "Carga tus 3 dispositivos Apple al mismo tiempo sin cables. Compatible con MagSafe, carga rápida de 15W para iPhone, y modo noche para Apple Watch. Diseño plegable ideal para viajes.",
+  "caracteristicas": [
+    "Carga 3 dispositivos simultáneamente",
+    "15W para iPhone MagSafe",
+    "5W para Apple Watch",
+    "5W para AirPods",
+    "Diseño plegable y portátil",
+    "Protección contra sobrecarga"
+  ],
+  "especificaciones": {
+    "Potencia total": "25W",
+    "Entrada": "USB-C 9V/2.7A",
+    "Compatibilidad": "iPhone 12+, Watch, AirPods",
+    "Dimensiones plegado": "70x70x25mm",
+    "Peso": "180g"
+  },
+  "stock": 12,
+  "garantia": "18 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 25,
+    "precioOriginal": 59.99,
+    "precioOferta": 44.99,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Black Friday"
+  }
+},
+{
+  "id": 65,
+  "nombre": "Protector de Pantalla Templado para Monitor 24\"",
+  "marca": "ScreenGuard",
+  "categoria": "accesorios",
+  "precio": 34.99,
+  "masVendido": false,
+  "imagen": "/img/productos/protector-pantalla.webp",
+  "descripcion": "Filtro de privacidad y protección antirreflejos para monitores de 24 pulgadas.",
+  "descripcionDetallada": "Protege la pantalla de tu monitor contra rayones, polvo y miradas indiscretas. Ángulo de visión reducido a 60°, ideal para oficinas y espacios públicos. Reduce el reflejo de luz ambiental.",
+  "caracteristicas": [
+    "Filtro de privacidad 60°",
+    "Protección antirreflejos",
+    "Dureza 9H resistente a rayones",
+    "Fácil instalación adhesiva",
+    "Compatible con monitores 16:9",
+    "Limpia y previene huellas"
+  ],
+  "especificaciones": {
+    "Tamaño": "24 pulgadas (532x299mm)",
+    "Dureza": "9H",
+    "Material": "Vidrio templado",
+    "Ángulo privacidad": "60°",
+    "Grosor": "0.33mm"
+  },
+  "stock": 8,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 34.99,
+    "precioOferta": 34.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 66,
+  "nombre": "Organizador de Cables Adhesivo",
+  "marca": "CableFix",
+  "categoria": "accesorios",
+  "precio": 8.99,
+  "masVendido": false,
+  "imagen": "/img/productos/organizador-cables.webp",
+  "descripcion": "Pack de 20 organizadores adhesivos para gestionar cables en escritorio.",
+  "descripcionDetallada": "Mantén tu escritorio ordenado con estos organizadores de silicona autoadhesivos. Incluye clips para cables individuales y colectores para múltiples cables. Fáciles de instalar y reutilizables.",
+  "caracteristicas": [
+    "Pack de 20 piezas",
+    "Adhesivo 3M reutilizable",
+    "Silicona suave y flexible",
+    "Para cables de hasta 7mm",
+    "Incluye 5 tamaños diferentes",
+    "No daña superficies"
+  ],
+  "especificaciones": {
+    "Cantidad": "20 piezas",
+    "Material": "Silicona + adhesivo 3M",
+    "Tamaños": "S, M, L, XL",
+    "Capacidad": "1-5 cables por clip",
+    "Peso": "50g"
+  },
+  "stock": 60,
+  "garantia": "6 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 20,
+    "precioOriginal": 8.99,
+    "precioOferta": 7.19,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 67,
+  "nombre": "Soporte Vertical para Laptop",
+  "marca": "SpaceSaver",
+  "categoria": "accesorios",
+  "precio": 24.99,
+  "masVendido": true,
+  "imagen": "/img/productos/soporte-vertical-laptop.webp",
+  "descripcion": "Base vertical ajustable para guardar laptop cerrada y ahorrar espacio.",
+  "descripcionDetallada": "Perfecto para escritorios pequeños o estaciones de trabajo con monitor externo. Ajustable en ancho para laptops de 13 a 17 pulgadas. Base antideslizante y diseño ventilado.",
+  "caracteristicas": [
+    "Ajustable para laptops 13-17 pulgadas",
+    "Base de aluminio macizo",
+    "Silicona protectora antirayones",
+    "Diseño ventilado para disipación",
+    "Ranuras para cables",
+    "Acabado elegante plata/negro"
+  ],
+  "especificaciones": {
+    "Material": "Aluminio + silicona",
+    "Ancho ajustable": "25-40mm",
+    "Capacidad": "Hasta 5kg",
+    "Dimensiones": "120x100x55mm",
+    "Peso": "280g"
+  },
+  "stock": 22,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 24.99,
+    "precioOferta": 24.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 68,
+  "nombre": "Mochila Impermeable para Laptop 17.3\"",
+  "marca": "TravelTech",
+  "categoria": "accesorios",
+  "precio": 69.99,
+  "masVendido": true,
+  "imagen": "/img/productos/mochila-laptop.webp",
+  "descripcion": "Mochila resistente al agua con compartimento acolchado para laptop de hasta 17.3 pulgadas.",
+  "descripcionDetallada": "Mochila ideal para viajes de negocios o universidad. Compartimento acolchado para laptop, puerto USB externo para cargar dispositivos, múltiples bolsillos y material impermeable 1680D.",
+  "caracteristicas": [
+    "Compartimento para laptop 17.3\"",
+    "Material impermeable 1680D",
+    "Puerto USB externo con cable integrado",
+    "Bolsillo antirobo en la espalda",
+    "Correas acolchadas ergonómicas",
+    "Capacidad de 30 litros"
+  ],
+  "especificaciones": {
+    "Capacidad": "30 litros",
+    "Material": "Nailon 1680D impermeable",
+    "Dimensiones": "45x32x18cm",
+    "Compartimento laptop": "17.3 pulgadas",
+    "Peso": "950g"
+  },
+  "stock": 15,
+  "garantia": "24 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 15,
+    "precioOriginal": 69.99,
+    "precioOferta": 59.49,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
+},
+{
+  "id": 69,
+  "nombre": "Lápiz Digital Stylus Universal",
+  "marca": "PenTech",
+  "categoria": "accesorios",
+  "precio": 29.99,
+  "masVendido": false,
+  "imagen": "/img/productos/lapiz-digital.webp",
+  "descripcion": "Lápiz táctil con punta fina para dibujo y escritura en tablets y celulares.",
+  "descripcionDetallada": "Punta de 1.5mm que ofrece precisión para dibujo, toma de notas y edición. Compatible con iPad, Android y pantallas táctiles. Carga USB-C y batería de 10 horas continuas.",
+  "caracteristicas": [
+    "Punta fina de 1.5mm",
+    "10 horas de batería continua",
+    "Carga USB-C en 90 minutos",
+    "Rechazo de palma integrado",
+    "Compatible con todos los dispositivos táctiles",
+    "Incluye 3 puntas de repuesto"
+  ],
+  "especificaciones": {
+    "Batería": "10 horas",
+    "Carga": "USB-C, 90min",
+    "Punta": "1.5mm POM",
+    "Compatibilidad": "iOS, Android, Windows",
+    "Peso": "15g"
+  },
+  "stock": 25,
+  "garantia": "12 meses",
+  "ofertaNavideña": {
+    "activa": false,
+    "descuento": 0,
+    "precioOriginal": 29.99,
+    "precioOferta": 29.99,
+    "fechaInicio": null,
+    "fechaFin": null,
+    "etiqueta": null
+  }
+},
+{
+  "id": 70,
+  "nombre": "Ventilador USB para Escritorio",
+  "marca": "Breeze",
+  "categoria": "accesorios",
+  "precio": 18.99,
+  "masVendido": false,
+  "imagen": "/img/productos/ventilador-usb.webp",
+  "descripcion": "Ventilador portátil silencioso con conexión USB y velocidad ajustable.",
+  "descripcionDetallada": "Perfecto para mantenerte fresco en la oficina o en casa. Aspas de 6 pulgadas con protección, inclinación ajustable, 3 velocidades y funcionamiento silencioso de solo 25dB. Alimentación por USB.",
+  "caracteristicas": [
+    "3 velocidades ajustables",
+    "Nivel de ruido 25-40dB",
+    "Diámetro 6 pulgadas (150mm)",
+    "Inclinación 360°",
+    "Rejilla protectora",
+    "Cable USB de 1.5m"
+  ],
+  "especificaciones": {
+    "Potencia": "5W",
+    "Velocidades": "3 niveles",
+    "Ruido": "25-40dB",
+    "Alimentación": "USB 5V",
+    "Peso": "320g"
+  },
+  "stock": 30,
+  "garantia": "6 meses",
+  "ofertaNavideña": {
+    "activa": true,
+    "descuento": 10,
+    "precioOriginal": 18.99,
+    "precioOferta": 17.09,
+    "fechaInicio": "2025-12-01",
+    "fechaFin": "2025-12-31",
+    "etiqueta": "Oferta"
+  }
 }
-  ]
+]
 }
+
+
