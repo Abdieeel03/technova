@@ -9,7 +9,18 @@ export default function DetalleProducto() {
   const producto = data.productos.find((p) => p.id === Number(id));
   const { addItem } = useCarrito();
   const location = useLocation();
-const backUrl = location.state?.from || "/productos";
+  const backUrl = location.state?.from || "/productos";
+  const categoriaLabel = (() => {
+    const params = new URLSearchParams(backUrl.split("?")[1]);
+    const cat = params.get("categoria");
+    const labels = {
+      audio: "Audio",
+      gaming: "Gaming",
+      accesorios: "Accesorios",
+      camaras: "Cámaras"
+  };
+  return cat ? labels[cat] : "Productos";
+})();
 
   /* Scroll al top al entrar a la página */
   useEffect(() => {
@@ -23,7 +34,7 @@ const backUrl = location.state?.from || "/productos";
         <div className={styles.backBar}>
           <div className={styles.backBarInner}>
             <Link to={backUrl} className={styles.backLink}>
-              <span className={styles.backIcon}>←</span> Volver a Productos
+              <span className={styles.backIcon}>←</span> {categoriaLabel}
             </Link>
           </div>
         </div>
@@ -56,7 +67,7 @@ const backUrl = location.state?.from || "/productos";
       <div className={styles.backBar}>
         <div className={styles.backBarInner}>
           <Link to={backUrl} className={styles.backLink}>
-            <span className={styles.backIcon}>←</span> Productos
+            <span className={styles.backIcon}>←</span> {categoriaLabel}
           </Link>
           <span className={styles.breadcrumb}>
             / <span>{producto.nombre}</span>
