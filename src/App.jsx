@@ -1,5 +1,5 @@
-import Header from "./components/ui/Header";
-import Footer from "./components/ui/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
@@ -7,6 +7,7 @@ import DetalleProducto from "./pages/DetalleProducto";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import InfoPage from "./pages/InfoPage";
+import MisCompras from "./pages/MisCompras";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Productos />} />
+          <Route path="/mis-compras" element={<MisCompras />} />
           <Route path="/productos/:id" element={<DetalleProducto />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />

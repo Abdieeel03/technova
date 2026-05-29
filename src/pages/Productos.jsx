@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import data from "../data/productos.json";
-import CardProducto from "../components/CardProducto";
+import CardProducto from "../components/products/CardProducto";
 import styles from "../css_components/Productos.module.css";
 
 const CATEGORIAS = [
@@ -15,7 +16,16 @@ const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
   const { productos } = data;
-  const [categoriaActiva, setCategoriaActiva] = useState("todos");
+  const [searchParams, setSearchParams] = useSearchParams();
+const categoriaActiva = searchParams.get("categoria") || "todos";
+
+const setCategoriaActiva = (key) => {
+  if (key === "todos") {
+    setSearchParams({});
+  } else {
+    setSearchParams({ categoria: key });
+  }
+};
 
   /* Restaurar posición de scroll al volver */
   useEffect(() => {
@@ -97,4 +107,3 @@ export default function Productos() {
     </main>
   );
 }
-
