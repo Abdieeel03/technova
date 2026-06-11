@@ -9,6 +9,7 @@ import Contacto from "./pages/Contacto";
 import InfoPage from "./pages/InfoPage";
 import MisCompras from "./pages/MisCompras";
 import NotFound from "./pages/NotFound";
+import AccessibilityWidget from "./components/layout/accessibility/AccessibilityWidget";
 
 function App() {
   return (
@@ -56,7 +57,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
+      <AccessibilityWidget>
+        {/* Aqui colocar sus componentes */}
+      </AccessibilityWidget>
       <Footer />
     </>
   );
