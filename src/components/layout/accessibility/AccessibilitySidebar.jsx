@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "../../../css_components/AccessibilitySidebar.module.css";
+import Perfiles from "./accessibilityWidgets/Perfiles";
+import styles from "../../../css_components/accessibility/AccessibilitySidebar.module.css";
 
 export default function AccessibilitySidebar({ isOpen, onClose, children }) {
   return (
@@ -29,7 +29,8 @@ export default function AccessibilitySidebar({ isOpen, onClose, children }) {
 
         <div className={styles.content}>
           {/* Espacio para hacer los Idiomas y Perfiles */}
-
+          {/* <Lenguague /> */}
+          <Perfiles />
           {/* Componentes que se traigan se renderizan aqui */}
           <div className={styles.gridContainer}>{children}</div>
         </div>
