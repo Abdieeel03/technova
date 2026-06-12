@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import AccessibilityButton from "./AccessibilityButton";
 import AccessibilitySidebar from "./AccessibilitySidebar";
 

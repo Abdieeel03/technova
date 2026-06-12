@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "../../../css_components/AccessibilityButton.module.css";
+import styles from "../../../css_components/accessibility/AccessibilityButton.module.css";
+import { useState } from 'react';
 
 export default function AccessibilityButton({ onClick }) {
   const [isHovered, setIsHovered] = useState(false);
