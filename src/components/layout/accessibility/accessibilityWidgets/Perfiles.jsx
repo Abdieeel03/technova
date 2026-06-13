@@ -10,6 +10,86 @@ import {
   faCircleHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 
+// Función para despachar las características de un perfil
+function dispatchProfileFeatures(caracteristicas, activate) {
+  caracteristicas.forEach((caract) => {
+    const key = Object.keys(caract)[0];
+    const value = caract[key];
+
+    switch (key) {
+      case "TextSize":
+        window.dispatchEvent(
+          new CustomEvent("set-text-size", {
+            detail: { level: activate ? value : 1 },
+          })
+        );
+        break;
+      case "CursorSize":
+        window.dispatchEvent(
+          new CustomEvent("set-cursor-size", {
+            detail: { large: activate ? value >= 2 : false },
+          })
+        );
+        break;
+      case "Dislexia":
+        window.dispatchEvent(
+          new CustomEvent("set-dyslexia", {
+            detail: { active: activate },
+          })
+        );
+        break;
+      case "TextSpacing":
+        window.dispatchEvent(
+          new CustomEvent("set-text-spacing", {
+            detail: { active: activate },
+          })
+        );
+        break;
+      case "FocusMode":
+        window.dispatchEvent(
+          new CustomEvent("toggle-lecture-mask", {
+            detail: { active: activate },
+          })
+        );
+        break;
+      case "Daltonismo":
+        window.dispatchEvent(
+          new CustomEvent("set-daltonismo", {
+            detail: { active: activate },
+          })
+        );
+        break;
+      default:
+        break;
+    }
+  });
+}
+
+// Resetear todos los widgets a su estado por defecto
+function resetAllWidgets() {
+  window.dispatchEvent(
+    new CustomEvent("set-text-size", { detail: { level: 1 } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("set-cursor-size", { detail: { large: false } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("set-dyslexia", { detail: { active: false } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("set-text-spacing", { detail: { active: false } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("toggle-lecture-mask", { detail: { active: false } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("set-daltonismo", { detail: { active: false } })
+  );
+  window.dispatchEvent(
+    new CustomEvent("set-tts", { detail: { active: false } })
+  );
+}
+
 export default function Perfiles() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPerfil, setSelectedPerfil] = useState("");
@@ -68,33 +148,35 @@ export default function Perfiles() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleSelect = (id, name) => {
-    let nextSelectedPerfil = "";
-    let nextPerfilName = "";
-    let nextActive = false;
+    const perfil = perfiles.find((p) => p.id === id);
 
     if (selectedPerfil === id && isActive) {
-      // Si ya está seleccionado, se desactiva
-      nextSelectedPerfil = "";
-      nextPerfilName = "";
-      nextActive = false;
+      // Desactivar el perfil actual
+      if (perfil) {
+        dispatchProfileFeatures(perfil.caracteristicas, false);
+      }
+      setSelectedPerfil("");
+      setPerfilName("");
+      setIsActive(false);
     } else {
-      // Si es diferente, se activa
-      nextSelectedPerfil = id;
-      nextPerfilName = name;
-      nextActive = true;
+      // Si hay un perfil activo, primero reseteamos todo
+      if (isActive && selectedPerfil !== "") {
+        resetAllWidgets();
+      }
+
+      // Activar el nuevo perfil
+      setSelectedPerfil(id);
+      setPerfilName(name);
+      setIsActive(true);
+
+      if (perfil) {
+        // Pequeño delay para que los resets se apliquen primero
+        setTimeout(() => {
+          dispatchProfileFeatures(perfil.caracteristicas, true);
+        }, 50);
+      }
     }
-
-    setSelectedPerfil(nextSelectedPerfil);
-    setPerfilName(nextPerfilName);
-    setIsActive(nextActive);
-
-    // Si el perfil de TDHA (id: 3) está activo, activamos la máscara de lectura
-    const isTdhaActive = nextActive && nextSelectedPerfil === 3;
-    window.dispatchEvent(
-      new CustomEvent("toggle-lecture-mask", { detail: { active: isTdhaActive } })
-    );
   };
-
 
   return (
     <section className={styles.dropdownContainer}>
@@ -142,3 +224,4 @@ export default function Perfiles() {
     </section>
   );
 }
+
