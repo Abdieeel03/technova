@@ -13,6 +13,7 @@ export default function AccessibilitySidebar({ isOpen, onClose, children }) {
         role="dialog"
         aria-label="Menú de accesibilidad"
         aria-hidden={!isOpen}
+        data-no-spacing="true"
       >
         <div className={styles.header}>
           <div className={styles.headerTitle}>
