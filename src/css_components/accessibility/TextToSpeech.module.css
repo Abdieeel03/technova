@@ -1,0 +1,173 @@
+/* Widget Button Card */
+.widgetButton {
+    background-color: var(--color-white);
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    width: 100%;
+    height: 105px;
+    transition: all var(--transition-fast);
+}
+
+.widgetButton:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.activeButton {
+    border: 2px solid #1a73e8;
+    background-color: #f1f7fe;
+}
+
+/* Icono SVG */
+.iconSvg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Label */
+.label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* Toggle Switch */
+.toggleTrack {
+    width: 44px;
+    height: 6px;
+    background-color: #e5e7eb;
+    border-radius: 999px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2px;
+    transition: background-color var(--transition-fast);
+}
+
+.activeButton .toggleTrack {
+    background-color: #d2e3fc;
+}
+
+.toggleHandle {
+    width: 22px;
+    height: 100%;
+    background-color: #5f6770;
+    border-radius: 999px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color var(--transition-fast);
+}
+
+.toggleHandle.activeHandle {
+    left: 22px;
+    background-color: #1a73e8;
+}
+
+/* ===== Botón flotante de control de reproducción ===== */
+.floatingControl {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #1a73e8, #1558b0);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px 10px 16px;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(26, 115, 232, 0.4);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    animation: floatIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floatingControl:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 28px rgba(26, 115, 232, 0.5);
+}
+
+.floatingControl:active {
+    transform: translateY(0) scale(0.98);
+}
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Indicador de ondas de sonido animadas */
+.soundWaves {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 18px;
+}
+
+.soundWaves span {
+    display: block;
+    width: 3px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.9);
+    animation: wave 0.8s ease-in-out infinite;
+}
+
+.soundWaves span:nth-child(1) {
+    height: 6px;
+    animation-delay: 0s;
+}
+
+.soundWaves span:nth-child(2) {
+    height: 12px;
+    animation-delay: 0.15s;
+}
+
+.soundWaves span:nth-child(3) {
+    height: 18px;
+    animation-delay: 0.3s;
+}
+
+.soundWaves span:nth-child(4) {
+    height: 12px;
+    animation-delay: 0.45s;
+}
+
+.soundWaves span:nth-child(5) {
+    height: 6px;
+    animation-delay: 0.6s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scaleY(0.4);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+.stopLabel {
+    white-space: nowrap;
+}

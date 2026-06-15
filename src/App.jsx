@@ -9,6 +9,14 @@ import Contacto from "./pages/Contacto";
 import InfoPage from "./pages/InfoPage";
 import MisCompras from "./pages/MisCompras";
 import NotFound from "./pages/NotFound";
+import AccessibilityWidget from "./components/layout/accessibility/AccessibilityWidget";
+import LectureMask from "./components/layout/accessibility/accessibilityWidgets/LectureMask";
+import TextSize from "./components/layout/accessibility/accessibilityWidgets/TextSize";
+import CursorSize from "./components/layout/accessibility/accessibilityWidgets/CursorSize";
+import DyslexiaFriendly from "./components/layout/accessibility/accessibilityWidgets/DyslexiaFriendly";
+import TextSpacing from "./components/layout/accessibility/accessibilityWidgets/TextSpacing";
+import Daltonismo from "./components/layout/accessibility/accessibilityWidgets/Daltonismo";
+import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets/TextToSpeech";
 
 function App() {
   return (
@@ -56,7 +64,16 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-
+      <AccessibilityWidget>
+        {/* Aqui colocar sus componentes */}
+        <TextSize />
+        <Daltonismo />
+        <CursorSize />
+        <LectureMask />
+        <DyslexiaFriendly />
+        <TextSpacing />
+        <TextToSpeech />
+      </AccessibilityWidget>
       <Footer />
     </>
   );

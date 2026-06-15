@@ -161,3 +161,51 @@ a {
     font-size: var(--text-base);
   }
 }
+
+/* ===== ACCESIBILIDAD: Reglas globales basadas en data-* ===== */
+
+/* --- Cursor grande (nivel 2) --- */
+body[data-cursor-size="large"],
+body[data-cursor-size="large"] * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8l4.78-4.78h7.01L5.5 3.21z" fill="white" stroke="black" stroke-width="1.5"/></svg>') 0 0, auto !important;
+}
+
+/* --- Dislexia amigable (solo espaciado de letras, misma fuente) --- */
+body[data-dyslexia="true"] *:not([data-no-spacing] *) {
+  letter-spacing: 0.7px !important;
+}
+
+/* --- Interlineado nivel 2 (line-height: 2rem) --- */
+body[data-text-spacing="2"] p:not([data-no-spacing] *),
+body[data-text-spacing="2"] li:not([data-no-spacing] *),
+body[data-text-spacing="2"] h2:not([data-no-spacing] *),
+body[data-text-spacing="2"] h3:not([data-no-spacing] *),
+body[data-text-spacing="2"] h4:not([data-no-spacing] *),
+body[data-text-spacing="2"] h5:not([data-no-spacing] *),
+body[data-text-spacing="2"] h6:not([data-no-spacing] *),
+body[data-text-spacing="2"] span:not([data-no-spacing] *),
+body[data-text-spacing="2"] a:not([data-no-spacing] *),
+body[data-text-spacing="2"] label:not([data-no-spacing] *),
+body[data-text-spacing="2"] button:not([data-no-spacing] *) {
+  line-height: 2rem !important;
+}
+
+/* --- Interlineado nivel 3 (line-height: 3rem) --- */
+body[data-text-spacing="3"] p:not([data-no-spacing] *),
+body[data-text-spacing="3"] li:not([data-no-spacing] *),
+body[data-text-spacing="3"] h2:not([data-no-spacing] *),
+body[data-text-spacing="3"] h3:not([data-no-spacing] *),
+body[data-text-spacing="3"] h4:not([data-no-spacing] *),
+body[data-text-spacing="3"] h5:not([data-no-spacing] *),
+body[data-text-spacing="3"] h6:not([data-no-spacing] *),
+body[data-text-spacing="3"] span:not([data-no-spacing] *),
+body[data-text-spacing="3"] a:not([data-no-spacing] *),
+body[data-text-spacing="3"] label:not([data-no-spacing] *),
+body[data-text-spacing="3"] button:not([data-no-spacing] *) {
+  line-height: 3rem !important;
+}
+
+/* --- Daltonismo / Contraste alto --- */
+body[data-daltonismo="true"] {
+  filter: contrast(1.4) saturate(0.3);
+}
