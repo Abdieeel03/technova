@@ -127,7 +127,7 @@
 /* ── Grid de 4 columnas ── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
@@ -216,5 +216,137 @@
   .filtroBtn {
     padding: 7px 16px;
     font-size: 0.75rem;
+  }
+}
+/* ── Layout con sidebar ── */
+.layout {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 24px;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 80px;
+}
+
+.sidebarTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1.2rem;
+}
+
+.filterGroup {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.2rem;
+}
+
+.filterLabel {
+  font-family: var(--font-base);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.8rem;
+}
+
+.sidebarBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-family: var(--font-base);
+  font-size: 0.85rem;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2px;
+}
+
+.sidebarBtn:hover {
+  background: #f5f5f5;
+  color: var(--color-primary);
+}
+
+.sidebarBtnActivo {
+  background: rgba(79, 159, 186, 0.1);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-base);
+  font-size: 0.85rem;
+  color: #444;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.checkLabel input {
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--color-primary);
+  margin: 0.5rem 0;
+}
+
+.precioRange {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.limpiarBtn {
+  width: 100%;
+  padding: 8px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  background: none;
+  font-family: var(--font-base);
+  font-size: 0.82rem;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.limpiarBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ── Responsive sidebar ── */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    position: static;
   }
 }
