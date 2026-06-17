@@ -144,11 +144,10 @@
 /* ── Precios ── */
 .precioWrapper {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  flex-direction: column;
+  gap: 2px;
   margin-top: 8px;
-  padding-top: 0;
-  min-height: 2rem;
+  min-height: 3.2rem;
 }
 
 .precio {
