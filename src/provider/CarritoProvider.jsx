@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useMemo, useReducer, useState } from "react";
 import CarritoContext from "../context/CarritoContext";
 import { cartReducer, initialState } from "../reducers/carritoReducer";
 import { loadCarrito, saveCarrito } from "../services/carritoStorage";
@@ -7,13 +7,14 @@ export default function CarritoProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState, (baseState) =>
     loadCarrito(baseState),
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     saveCarrito(state);
   }, [state]);
 
   const { totalItems, totalPrice } = useMemo(() => {
-    const totals = state.items.reduce(
+    return state.items.reduce(
       (acc, item) => {
         acc.totalItems += item.cantidad;
         acc.totalPrice += item.precioUnitario * item.cantidad;
@@ -21,8 +22,6 @@ export default function CarritoProvider({ children }) {
       },
       { totalItems: 0, totalPrice: 0 },
     );
-
-    return totals;
   }, [state.items]);
 
   const value = useMemo(
@@ -31,6 +30,9 @@ export default function CarritoProvider({ children }) {
       meta: state.meta,
       totalItems,
       totalPrice,
+      isModalOpen,
+      openModal: () => setIsModalOpen(true),
+      closeModal: () => setIsModalOpen(false),
       addItem: (producto, cantidad = 1) =>
         dispatch({ type: "ADD_ITEM", payload: { producto, cantidad } }),
       updateItemQty: (id, cantidad) =>
@@ -40,7 +42,7 @@ export default function CarritoProvider({ children }) {
       setCartOwner: (userId) =>
         dispatch({ type: "SET_OWNER", payload: userId }),
     }),
-    [state.items, state.meta, totalItems, totalPrice],
+    [state.items, state.meta, totalItems, totalPrice, isModalOpen],
   );
 
   return (

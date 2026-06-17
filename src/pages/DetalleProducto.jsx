@@ -7,7 +7,7 @@ import useCarrito from "../hooks/useCarrito";
 export default function DetalleProducto() {
   const { id } = useParams();
   const producto = data.productos.find((p) => p.id === Number(id));
-  const { addItem } = useCarrito();
+  const { addItem, openModal } = useCarrito();
   const location = useLocation();
   const backUrl = location.state?.from || "/productos";
   const categoriaLabel = (() => {
@@ -136,7 +136,7 @@ export default function DetalleProducto() {
               <button
                 type="button"
                 className={styles.addToCartButton}
-                onClick={() => addItem(producto, 1)}
+                onClick={() => { addItem(producto, 1); openModal(); }}
               >
                 Agregar al carrito
               </button>
