@@ -1,10 +1,9 @@
 /* ── Productos Page ── */
-
 .page {
   min-height: auto;
 }
 
-/* ── Hero banner ── */
+/* ── Hero ── */
 .hero {
   background: linear-gradient(135deg, #22313d 0%, #304554 52%, #4f9fba 140%);
   padding: 3.5rem 2rem 3rem;
@@ -50,8 +49,6 @@
 .heroSubtitle {
   font-family: var(--font-base);
   font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
   position: relative;
@@ -74,68 +71,275 @@
   z-index: 1;
 }
 
-/* ── Filtros de categoría ── */
-.filtros {
+/* ── Layout ── */
+.layout {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 2rem 2rem 0;
+  align-items: flex-start;
   max-width: 1320px;
   margin: 0 auto;
-}
-
-.filtroBtn {
-  padding: 8px 22px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 30px;
-  background: #fff;
-  font-family: var(--font-base);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #555;
-  cursor: pointer;
-  transition:
-    all 0.25s ease;
-}
-
-.filtroBtn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-  box-shadow: 0 2px 12px rgba(79, 159, 186, 0.15);
-}
-
-.filtroBtnActivo {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 16px rgba(79, 159, 186, 0.28);
-}
-
-.filtroBtnActivo:hover {
-  color: #fff;
-  box-shadow: 0 6px 20px rgba(79, 159, 186, 0.34);
-}
-
-/* ── Contenedor del grid ── */
-.container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 2rem 2rem 2.25rem;
-}
-
-/* ── Grid de 4 columnas ── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  padding: 2rem;
   gap: 24px;
 }
 
-/* ── Animación de entrada ── */
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 1.4rem;
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+.sidebarTitle {
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sidebarTitleIcon {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.filterGroup {
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1.2rem;
+}
+
+.filterLabel {
+  font-family: var(--font-base);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 0.7rem;
+}
+
+/* ── Categorías ── */
+.sidebarBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  border-radius: 2px;
+  font-family: var(--font-base);
+  font-size: 0.84rem;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 2px;
+}
+
+.sidebarBtn:hover {
+  background: rgba(79, 159, 186, 0.08);
+  color: #1a6fa8;
+}
+
+.sidebarBtnActivo {
+  background: #1a6fa8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.sidebarBtnActivo:hover {
+  background: #155d8f;
+  color: #fff;
+}
+
+/* ── Marcas ── */
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-base);
+  font-size: 0.84rem;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.checkLabel input {
+  accent-color: #1a6fa8;
+  cursor: pointer;
+}
+
+.verMasBtn {
+  background: none;
+  border: none;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 2px 0;
+  margin-top: 2px;
+}
+
+.verMasBtn:hover {
+  text-decoration: underline;
+}
+
+/* ── Precio rangos ── */
+.rangoBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 5px 8px;
+  border: none;
+  background: none;
+  border-radius: 2px;
+  font-family: var(--font-base);
+  font-size: 0.82rem;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 2px;
+}
+
+.rangoBtn:hover {
+  background: rgba(79, 159, 186, 0.08);
+  color: #1a6fa8;
+}
+
+.rangoBtnActivo {
+  background: #1a6fa8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.rangoBtnActivo:hover {
+  background: #155d8f;
+  color: #fff;
+}
+
+/* ── Precio inputs ── */
+.precioInputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.precioInput {
+  width: 100%;
+  flex: 1;
+  padding: 5px 7px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  color: #333;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.precioInput:focus {
+  border-color: #1a6fa8;
+}
+
+.precioInput::placeholder {
+  color: #bbb;
+}
+
+/* quita las flechas del input number */
+.precioInput::-webkit-outer-spin-button,
+.precioInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.precioSep {
+  font-size: 0.8rem;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.aplicarBtn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px;
+  background: #1a6fa8;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.aplicarBtn:hover {
+  background: #155d8f;
+}
+
+/* ── Limpiar ── */
+.limpiarBtn {
+  width: 100%;
+  padding: 7px;
+  border: 1.5px solid #ddd;
+  border-radius: 2px;
+  background: none;
+  font-family: var(--font-base);
+  font-size: 0.82rem;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-top: 4px;
+}
+
+.limpiarBtn:hover {
+  border-color: #1a6fa8;
+  color: #1a6fa8;
+}
+
+/* ── Container grid ── */
+.container {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+}
+
+/* ── Info resultados ── */
+.resultInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding: 0 0 0.8rem;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: var(--font-base);
+  font-size: 0.82rem;
+  color: #888;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ── Animación ── */
 .cardWrapper {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 0.5s ease forwards;
+  transform: translateY(20px);
+  animation: fadeUp 0.4s ease forwards;
 }
 
 @keyframes fadeUp {
@@ -171,15 +375,86 @@
   margin: 0;
 }
 
+/* ── Paginación ── */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2.5rem;
+  padding-bottom: 1rem;
+}
+
+.pgBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1.5px solid #e0e0e0;
+  background: #fff;
+  font-family: var(--font-base);
+  font-size: 0.88rem;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pgBtn:hover:not(:disabled) {
+  border-color: #1a6fa8;
+  color: #1a6fa8;
+}
+
+.pgBtn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pgBtnActivo {
+  background: #1a6fa8;
+  border-color: #1a6fa8;
+  color: #fff;
+  font-weight: 600;
+}
+
+.pgBtnActivo:hover {
+  background: #155d8f;
+  color: #fff;
+}
+
+.pgDots {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1200px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
 }
 
 @media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    padding: 1.2rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    position: static;
+    max-height: unset;
+    overflow-y: visible;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
@@ -202,151 +477,5 @@
 
   .heroTitle {
     font-size: 1.6rem;
-  }
-
-  .container {
-    padding: 1.5rem 1rem 3rem;
-  }
-
-  .filtros {
-    padding: 1.5rem 1rem 0;
-    gap: 8px;
-  }
-
-  .filtroBtn {
-    padding: 7px 16px;
-    font-size: 0.75rem;
-  }
-}
-/* ── Layout con sidebar ── */
-.layout {
-  display: flex;
-  align-items: flex-start;
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 2rem;
-  gap: 24px;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  width: 220px;
-  min-width: 220px;
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 12px;
-  padding: 1.5rem;
-  position: sticky;
-  top: 80px;
-}
-
-.sidebarTitle {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 1.2rem;
-}
-
-.filterGroup {
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 1.2rem;
-}
-
-.filterLabel {
-  font-family: var(--font-base);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0 0 0.8rem;
-}
-
-.sidebarBtn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 7px 10px;
-  border: none;
-  background: none;
-  border-radius: 6px;
-  font-family: var(--font-base);
-  font-size: 0.85rem;
-  color: #444;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-bottom: 2px;
-}
-
-.sidebarBtn:hover {
-  background: #f5f5f5;
-  color: var(--color-primary);
-}
-
-.sidebarBtnActivo {
-  background: rgba(79, 159, 186, 0.1);
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.checkLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-base);
-  font-size: 0.85rem;
-  color: #444;
-  cursor: pointer;
-  margin-bottom: 6px;
-}
-
-.checkLabel input {
-  accent-color: var(--color-primary);
-  cursor: pointer;
-}
-
-.slider {
-  width: 100%;
-  accent-color: var(--color-primary);
-  margin: 0.5rem 0;
-}
-
-.precioRange {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: #888;
-}
-
-.limpiarBtn {
-  width: 100%;
-  padding: 8px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
-  background: none;
-  font-family: var(--font-base);
-  font-size: 0.82rem;
-  color: #888;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.limpiarBtn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-/* ── Responsive sidebar ── */
-@media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    min-width: unset;
-    position: static;
   }
 }
