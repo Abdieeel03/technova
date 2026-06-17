@@ -3,31 +3,33 @@ import { useSearchParams } from "react-router";
 import data from "../data/productos.json";
 import CardProducto from "../components/products/CardProducto";
 import styles from "../css_components/Productos.module.css";
-
-const CATEGORIAS = [
-  { key: "todos", label: "Todos" },
-  { key: "audio", label: "Audio" },
-  { key: "gaming", label: "Gaming" },
-  { key: "accesorios", label: "Accesorios" },
-  { key: "camaras", label: "Cámaras" },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
   const { productos } = data;
   const [searchParams, setSearchParams] = useSearchParams();
-const categoriaActiva = searchParams.get("categoria") || "todos";
+  const { t } = useLanguage();
 
-const setCategoriaActiva = (key) => {
-  if (key === "todos") {
-    setSearchParams({});
-  } else {
-    setSearchParams({ categoria: key });
-  }
-};
+  const categoriaActiva = searchParams.get("categoria") || "todos";
 
-  /* Restaurar posición de scroll al volver */
+  const setCategoriaActiva = (key) => {
+    if (key === "todos") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ categoria: key });
+    }
+  };
+
+  const CATEGORIAS = [
+    { key: "todos", label: t.productos.categorias.todos },
+    { key: "audio", label: t.productos.categorias.audio },
+    { key: "gaming", label: t.productos.categorias.gaming },
+    { key: "accesorios", label: t.productos.categorias.accesorios },
+    { key: "camaras", label: t.productos.categorias.camaras },
+  ];
+
   useEffect(() => {
     const saved = sessionStorage.getItem(SCROLL_KEY);
     if (saved) {
@@ -36,7 +38,6 @@ const setCategoriaActiva = (key) => {
     }
   }, []);
 
-  /* Guardar posición de scroll al salir */
   useEffect(() => {
     const handleScroll = () => {
       sessionStorage.setItem(SCROLL_KEY, String(window.scrollY));
@@ -52,18 +53,14 @@ const setCategoriaActiva = (key) => {
 
   return (
     <main className={styles.page}>
-      {/* ── Hero banner ── */}
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>Nuestros Productos</h1>
-        <p className={styles.heroSubtitle}>
-          Descubre la mejor tecnología al mejor precio
-        </p>
+        <h1 className={styles.heroTitle}>{t.productos.titulo}</h1>
+        <p className={styles.heroSubtitle}>{t.productos.subtitulo}</p>
         <span className={styles.totalProductos}>
-          {productos.length} productos disponibles
+          {productos.length} {t.productos.disponibles}
         </span>
       </section>
 
-      {/* ── Filtros ── */}
       <div className={styles.filtros}>
         {CATEGORIAS.map((cat) => (
           <button
@@ -78,7 +75,6 @@ const setCategoriaActiva = (key) => {
         ))}
       </div>
 
-      {/* ── Grid de productos ── */}
       <section className={styles.container}>
         <div className={styles.grid}>
           {productosFiltrados.length > 0 ? (
@@ -95,11 +91,9 @@ const setCategoriaActiva = (key) => {
             <div className={styles.noResults}>
               <div className={styles.noResultsIcon}>🔍</div>
               <h3 className={styles.noResultsTitle}>
-                No se encontraron productos
+                {t.productos.noResultados}
               </h3>
-              <p className={styles.noResultsText}>
-                Intenta con otra categoría
-              </p>
+              <p className={styles.noResultsText}>{t.productos.otraCat}</p>
             </div>
           )}
         </div>

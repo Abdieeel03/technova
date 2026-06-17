@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import styles from "../../css_components/CarritoModal.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -17,22 +18,20 @@ export default function CarritoModal({
   onClear,
   onCheckout,
 }) {
+  const { t } = useLanguage();
+
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
 
   useEffect(() => {
-    if (!isOpen) {
-      return undefined;
-    }
+    if (!isOpen) return undefined;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        handleClose();
-      }
+      if (event.key === "Escape") handleClose();
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -43,14 +42,10 @@ export default function CarritoModal({
     };
   }, [handleClose, isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      handleClose();
-    }
+    if (event.target === event.currentTarget) handleClose();
   };
 
   return (
@@ -70,18 +65,16 @@ export default function CarritoModal({
           type="button"
           className={styles.closeButton}
           onClick={handleClose}
-          aria-label="Cerrar carrito"
+          aria-label={t.carrito.cerrar}
         >
           x
         </button>
 
         <header className={styles.header}>
           <h2 id="modal-carrito-title" className={styles.title}>
-            Tu carrito
+            {t.carrito.titulo}
           </h2>
-          <p className={styles.subtitle}>
-            Revisa tus productos antes de continuar
-          </p>
+          <p className={styles.subtitle}>{t.carrito.subtitulo}</p>
         </header>
 
         {notice ? (
@@ -98,9 +91,7 @@ export default function CarritoModal({
         {items.length === 0 ? (
           <div className={styles.empty}>
             <div className={styles.emptyIcon}>🛍️</div>
-            <p className={styles.emptyText}>
-              Tu carrito esta vacio. Agrega productos para comenzar.
-            </p>
+            <p className={styles.emptyText}>{t.carrito.vacio}</p>
           </div>
         ) : (
           <>
@@ -131,7 +122,6 @@ export default function CarritoModal({
                           onClick={() =>
                             onUpdateQty(item.id, item.cantidad - 1)
                           }
-                          aria-label={`Quitar una unidad de ${item.nombre}`}
                         >
                           -
                         </button>
@@ -142,7 +132,6 @@ export default function CarritoModal({
                           onClick={() =>
                             onUpdateQty(item.id, item.cantidad + 1)
                           }
-                          aria-label={`Agregar una unidad de ${item.nombre}`}
                         >
                           +
                         </button>
@@ -152,7 +141,7 @@ export default function CarritoModal({
                         className={styles.removeButton}
                         onClick={() => onRemoveItem(item.id)}
                       >
-                        Quitar
+                        {t.carrito.quitar}
                       </button>
                     </div>
                   </div>
@@ -162,7 +151,7 @@ export default function CarritoModal({
 
             <div className={styles.summary}>
               <div className={styles.totalRow}>
-                <span>Total</span>
+                <span>{t.carrito.total}</span>
                 <span>{formatCurrency(totalPrice)}</span>
               </div>
               <div className={styles.summaryActions}>
@@ -171,14 +160,14 @@ export default function CarritoModal({
                   className={styles.clearButton}
                   onClick={onClear}
                 >
-                  Vaciar carrito
+                  {t.carrito.vaciar}
                 </button>
                 <button
                   type="button"
                   className={styles.checkoutButton}
                   onClick={onCheckout}
                 >
-                  Continuar compra
+                  {t.carrito.continuar}
                 </button>
               </div>
             </div>

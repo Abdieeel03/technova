@@ -2,12 +2,14 @@ import { useState } from "react";
 import data from "../../data/productos.json";
 import ProductCard from "../products/ProductCard";
 import styles from "../../css_components/FeaturedProducts.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function FeaturedProducts() {
   const { productos } = data;
   const [page, setPage] = useState(0);
+  const { t } = useLanguage();
 
   const totalPages = Math.ceil(productos.length / ITEMS_PER_PAGE);
   const start = page * ITEMS_PER_PAGE;
@@ -19,7 +21,7 @@ export default function FeaturedProducts() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.titulo}>¡Lo mejor de TechNova!</h2>
+        <h2 className={styles.titulo}>{t.home.loMejor}</h2>
         <div className={styles.carouselWrapper}>
           <button className={styles.arrow} onClick={prev} disabled={page === 0}>
             &#8249;

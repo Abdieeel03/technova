@@ -1,7 +1,11 @@
 import Perfiles from "./accessibilityWidgets/Perfiles";
+import Lenguague from "./accessibilityWidgets/Lenguague";
 import styles from "../../../css_components/accessibility/AccessibilitySidebar.module.css";
+import { useLanguage } from "../../../context/LanguageContext";
 
 export default function AccessibilitySidebar({ isOpen, onClose, children }) {
+  const { t } = useLanguage();
+
   return (
     <>
       {isOpen && (
@@ -11,28 +15,26 @@ export default function AccessibilitySidebar({ isOpen, onClose, children }) {
       <aside
         className={`${styles.sidebar} ${isOpen ? styles.open : ""}`}
         role="dialog"
-        aria-label="Menú de accesibilidad"
+        aria-label={t.accesibilidad.titulo}
         aria-hidden={!isOpen}
         data-no-spacing="true"
       >
         <div className={styles.header}>
           <div className={styles.headerTitle}>
-            <span>Menú de accesibilidad</span>
+            <span>{t.accesibilidad.titulo}</span>
           </div>
           <button
             className={styles.closeButton}
             onClick={onClose}
-            aria-label="Cerrar menú"
+            aria-label={t.accesibilidad.cerrar}
           >
             ✕
           </button>
         </div>
 
         <div className={styles.content}>
-          {/* Espacio para hacer los Idiomas y Perfiles */}
-          {/* <Lenguague /> */}
+          <Lenguague />
           <Perfiles />
-          {/* Componentes que se traigan se renderizan aqui */}
           <div className={styles.gridContainer}>{children}</div>
         </div>
       </aside>

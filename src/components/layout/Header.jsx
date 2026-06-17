@@ -8,12 +8,14 @@ import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 import useAuth from "../../auth/hooks/useAuth";
 import { createOrder } from "../../services/ordersStorage";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const {
     items,
     totalItems,
@@ -80,7 +82,7 @@ export default function Header() {
     if (!user) {
       setCheckoutNotice({
         type: "error",
-        text: "Debes iniciar sesion para continuar con la compra.",
+        text: t.login.iniciarSub,
       });
       setIsCarritoOpen(false);
       openLogin();
@@ -98,7 +100,7 @@ export default function Header() {
     clearCart();
     setCheckoutNotice({
       type: "success",
-      text: "Compra registrada. Revisa tu historial en tu perfil.",
+      text: t.misCompras.subtitulo,
     });
   };
 
@@ -126,7 +128,7 @@ export default function Header() {
         <Link
           className={styles.headerLink}
           to="/"
-          aria-label="Ir al inicio de TechNova"
+          aria-label={t.nav.ariaInicio}
         >
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
@@ -137,7 +139,7 @@ export default function Header() {
             <Link
               to="/mis-compras"
               className={`${styles.login} ${styles.loginLogged}`}
-              aria-label="Ver mis compras"
+              aria-label={t.nav.ariaMisCompras}
             >
               <div className={styles.svgIcon} aria-hidden="true">
                 <svg
@@ -150,7 +152,6 @@ export default function Header() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-user"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -158,16 +159,16 @@ export default function Header() {
                 </svg>
               </div>
               <div className={styles.loginText}>
-                <span className={styles.loginLabel}>BIENVENIDO</span>
+                <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
                 <span className={styles.loginValue}>{user.name}</span>
               </div>
               <button
                 type="button"
                 className={styles.logoutButton}
                 onClick={handleLogout}
-                aria-label="Cerrar sesión"
+                aria-label={t.nav.ariaCerrarSesion}
               >
-                Salir
+                {t.nav.salir}
               </button>
             </Link>
           ) : (
@@ -189,7 +190,6 @@ export default function Header() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-user"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -197,14 +197,14 @@ export default function Header() {
                 </svg>
               </div>
               <div className={styles.loginText}>
-                <span className={styles.loginLabel}>BIENVENIDO</span>
-                <span className={styles.loginAction}>Inicia sesion</span>
+                <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
+                <span className={styles.loginAction}>{t.nav.iniciaSesion}</span>
               </div>
             </button>
           )}
         </div>
       </header>
-      <nav className={styles.nav} aria-label="Navegacion principal">
+      <nav className={styles.nav} aria-label={t.nav.ariaNav}>
         <ul>
           <li>
             <NavLink
@@ -213,9 +213,8 @@ export default function Header() {
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
               end
-              aria-label="Ir a Inicio"
             >
-              Inicio
+              {t.nav.inicio}
             </NavLink>
           </li>
           <li>
@@ -224,9 +223,8 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Productos"
             >
-              Productos
+              {t.nav.productos}
             </NavLink>
           </li>
           <li>
@@ -235,9 +233,8 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Nosotros"
             >
-              Nosotros
+              {t.nav.nosotros}
             </NavLink>
           </li>
           <li>
@@ -246,9 +243,8 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Contacto"
             >
-              Contacto
+              {t.nav.contacto}
             </NavLink>
           </li>
         </ul>

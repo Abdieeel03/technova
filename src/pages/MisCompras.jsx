@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router";
 import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
+import { useLanguage } from "../context/LanguageContext";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -10,10 +11,7 @@ const formatCurrency = (value) => {
 };
 
 const formatDate = (value) => {
-  if (!value) {
-    return "-";
-  }
-
+  if (!value) return "-";
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString();
 };
@@ -21,13 +19,13 @@ const formatDate = (value) => {
 export default function MisCompras() {
   const { user } = useAuth();
   const [orders, setOrders] = useState([]);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (!user?.id) {
       setOrders([]);
       return;
     }
-
     setOrders(getOrdersByUser(user.id));
   }, [user?.id]);
 
@@ -44,14 +42,13 @@ export default function MisCompras() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div>
-          <h1>Mis compras</h1>
-          <p>
-            Revisa tu historial y el detalle de cada orden registrada en
-            TechNova.
-          </p>
+          <h1>{t.misCompras.titulo}</h1>
+          <p>{t.misCompras.subtitulo}</p>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>Total gastado</span>
+          <span className={styles.summaryLabel}>
+            {t.misCompras.totalGastado}
+          </span>
           <strong className={styles.summaryValue}>
             {formatCurrency(totalCompras)}
           </strong>
@@ -61,12 +58,10 @@ export default function MisCompras() {
       {orders.length === 0 ? (
         <section className={styles.empty}>
           <div className={styles.emptyIcon}>🧾</div>
-          <h2>Aun no tienes compras</h2>
-          <p>
-            Cuando completes una compra, aparecera aqui con todos los detalles.
-          </p>
+          <h2>{t.misCompras.sinCompras}</h2>
+          <p>{t.misCompras.sinComprasDesc}</p>
           <Link to="/productos" className={styles.cta}>
-            Ver productos
+            {t.misCompras.verProductos}
           </Link>
         </section>
       ) : (
@@ -75,8 +70,13 @@ export default function MisCompras() {
             <article key={order.id} className={styles.card}>
               <header className={styles.cardHeader}>
                 <div>
-                  <p className={styles.orderLabel}>Orden #{order.id}</p>
-                  <p className={styles.orderDate}>{formatDate(order.createdAt)}</p>
+                  <p className={styles.orderLabel}>
+                    {t.misCompras.orden}
+                    {order.id}
+                  </p>
+                  <p className={styles.orderDate}>
+                    {formatDate(order.createdAt)}
+                  </p>
                 </div>
                 <div className={styles.orderTotal}>
                   {formatCurrency(order.total)}

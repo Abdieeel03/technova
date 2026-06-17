@@ -2,16 +2,13 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faCheck } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../../../css_components/accessibility/Lenguague.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function Lenguague() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("es");
+  const { lang, setLang, t } = useLanguage();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  {
-    /* Aun no se implementara la traduccion */
-  }
 
   const languages = [
     {
@@ -22,23 +19,33 @@ export default function Lenguague() {
     },
     {
       code: "en",
-      name: "Inglés",
+      name: "English",
       flag: "https://flagcdn.com/w40/us.png",
-      alt: "Bandera de USA",
+      alt: "USA Flag",
+    },
+    {
+      code: "qu",
+      name: "Quechua",
+      flag: "https://flagcdn.com/w40/pe.png",
+      alt: "Bandera de Perú (Quechua)",
+      nativeName: "Runasimi",
     },
   ];
 
   const handleSelect = (code) => {
-    setSelectedLanguage(code);
+    setLang(code);
     setIsOpen(false);
   };
 
-  const currentLang = languages.find((l) => l.code === selectedLanguage);
+  const currentLang = languages.find((l) => l.code === lang);
 
   return (
     <div className={styles.dropdownContainer}>
       <button onClick={toggleMenu} className={styles.dropdownButton}>
-        <span>Idioma: {currentLang.name}</span>
+        <span className={styles.buttonLabel}>
+          <span className={styles.labelBold}>{t.accesibilidad.idioma}:</span>
+          <span className={styles.labelValue}>{currentLang.name}</span>
+        </span>
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`${styles.chevronIcon} ${isOpen ? styles.open : ""}`}
@@ -47,21 +54,28 @@ export default function Lenguague() {
 
       <div className={`${styles.dropdownMenu} ${isOpen ? styles.open : ""}`}>
         <ul className={styles.languageList}>
-          {languages.map((lang) => (
+          {languages.map((language) => (
             <li
-              key={lang.code}
-              className={`${styles.languageItem} ${selectedLanguage === lang.code ? styles.active : ""}`}
-              onClick={() => handleSelect(lang.code)}
+              key={language.code}
+              className={`${styles.languageItem} ${lang === language.code ? styles.active : ""}`}
+              onClick={() => handleSelect(language.code)}
             >
               <div className={styles.languageInfo}>
                 <img
-                  src={lang.flag}
-                  alt={lang.alt}
+                  src={language.flag}
+                  alt={language.alt}
                   className={styles.flagIcon}
                 />
-                <span>{lang.name}</span>
+                <div className={styles.languageNames}>
+                  <span>{language.name}</span>
+                  {language.nativeName && (
+                    <span className={styles.nativeName}>
+                      {language.nativeName}
+                    </span>
+                  )}
+                </div>
               </div>
-              {selectedLanguage === lang.code && (
+              {lang === language.code && (
                 <FontAwesomeIcon icon={faCheck} className={styles.checkIcon} />
               )}
             </li>

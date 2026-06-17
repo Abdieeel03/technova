@@ -2,12 +2,14 @@ import { useState } from "react";
 import data from "../../data/productos.json";
 import ProductCard from "../products/ProductCard";
 import styles from "../../css_components/BestSellers.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function BestSellers() {
   const [masVendidos] = useState(data.productos.filter((p) => p.masVendido));
   const [currentPage, setCurrentPage] = useState(0);
+  const { t } = useLanguage();
 
   const totalPages = Math.ceil(masVendidos.length / ITEMS_PER_PAGE);
   const start = currentPage * ITEMS_PER_PAGE;
@@ -19,7 +21,7 @@ export default function BestSellers() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.titulo}>🔥 Más Vendidos</h2>
+        <h2 className={styles.titulo}>{t.home.masVendidos}</h2>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
