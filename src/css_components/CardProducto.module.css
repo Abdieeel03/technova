@@ -116,6 +116,7 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 2.57rem;
 }
 
 .marca {
@@ -137,15 +138,16 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  height: 2.34rem;
 }
 
 /* ── Precios ── */
 .precioWrapper {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-top: auto;
-  padding-top: 10px;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  min-height: 3.2rem;
 }
 
 .precio {
@@ -164,7 +166,7 @@
 
 .precioOriginal {
   font-family: var(--font-base);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: #b0b0b0;
   text-decoration: line-through;
@@ -172,7 +174,7 @@
 
 .descuento {
   font-family: var(--font-base);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #fff;
   background: #ee5a24;
