@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import data from "../data/productos.json";
 import CardProducto from "../components/products/CardProducto";
+import { fetchProductos } from "../services/productosApi";
 import styles from "../css_components/Productos.module.css";
 
 const CATEGORIAS = [
@@ -15,17 +15,41 @@ const CATEGORIAS = [
 const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
-  const { productos } = data;
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-const categoriaActiva = searchParams.get("categoria") || "todos";
+  const categoriaActiva = searchParams.get("categoria") || "todos";
 
-const setCategoriaActiva = (key) => {
-  if (key === "todos") {
-    setSearchParams({});
-  } else {
-    setSearchParams({ categoria: key });
-  }
-};
+  const setCategoriaActiva = (key) => {
+    if (key === "todos") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ categoria: key });
+    }
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetchProductos(undefined, controller.signal)
+      .then((productosData) => {
+        setProductos(productosData);
+        setError(null);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudieron cargar los productos.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
 
   /* Restaurar posición de scroll al volver */
   useEffect(() => {
@@ -81,7 +105,16 @@ const setCategoriaActiva = (key) => {
       {/* ── Grid de productos ── */}
       <section className={styles.container}>
         <div className={styles.grid}>
-          {productosFiltrados.length > 0 ? (
+          {isLoading ? (
+            <div className={styles.noResults}>
+              <h3 className={styles.noResultsTitle}>Cargando productos...</h3>
+            </div>
+          ) : error ? (
+            <div className={styles.noResults}>
+              <h3 className={styles.noResultsTitle}>{error}</h3>
+              <p className={styles.noResultsText}>Intenta nuevamente en unos minutos</p>
+            </div>
+          ) : productosFiltrados.length > 0 ? (
             productosFiltrados.map((producto, index) => (
               <div
                 key={producto.id}
