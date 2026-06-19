@@ -11,18 +11,20 @@ import { createOrder } from "../../services/ordersStorage";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const {
-    items,
-    totalItems,
-    totalPrice,
-    updateItemQty,
-    removeItem,
-    clearCart,
-    setCartOwner,
-  } = useCarrito();
+const {
+  items,
+  totalItems,
+  totalPrice,
+  updateItemQty,
+  removeItem,
+  clearCart,
+  setCartOwner,
+  isModalOpen: isCarritoOpen,
+  openModal: openCarrito,
+  closeModal: closeCarrito,
+} = useCarrito();
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
@@ -53,14 +55,6 @@ export default function Header() {
   const closeLogin = () => {
     setIsLoginOpen(false);
     clearLoginModalQuery();
-  };
-
-  const openCarrito = () => {
-    setIsCarritoOpen(true);
-  };
-
-  const closeCarrito = () => {
-    setIsCarritoOpen(false);
   };
 
   const handleLogout = () => {

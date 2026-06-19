@@ -184,7 +184,7 @@ export default function DetalleProducto() {
               <button
                 type="button"
                 className={styles.addToCartButton}
-                onClick={() => addItem(producto, 1)}
+                onClick={() => { addItem(producto, 1); openModal(); }}
               >
                 Agregar al carrito
               </button>
