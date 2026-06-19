@@ -28,21 +28,19 @@ const location = useLocation();
         <p className={styles.descripcion}>{producto.descripcion}</p>
 
         <div className={styles.precioWrapper}>
-         {tieneOferta ? (
-  <>
-    <span className={styles.precioOriginal}>
-      S/. {producto.ofertaNavideña.precioOriginal.toFixed(2)}
-    </span>
-    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-      <span className={styles.precioOferta}>
-        S/. {producto.ofertaNavideña.precioOferta.toFixed(2)}
-      </span>
-      <span className={styles.descuento}>
-        -{producto.ofertaNavideña.descuento}%
-      </span>
-    </div>
-  </>
-) : (
+          {tieneOferta ? (
+            <>
+              <span className={styles.precioOferta}>
+                S/. {producto.ofertaNavideña.precioOferta.toFixed(2)}
+              </span>
+              <span className={styles.precioOriginal}>
+                S/. {producto.ofertaNavideña.precioOriginal.toFixed(2)}
+              </span>
+              <span className={styles.descuento}>
+                -{producto.ofertaNavideña.descuento}%
+              </span>
+            </>
+          ) : (
             <span className={styles.precio}>
               S/. {producto.precio.toFixed(2)}
             </span>
