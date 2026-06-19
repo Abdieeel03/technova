@@ -1,12 +1,14 @@
-import { useState } from "react";
-import data from "../../data/productos.json";
+import { useEffect, useState } from "react";
 import ProductCard from "../products/ProductCard";
+import { fetchProductos } from "../../services/productosApi";
 import styles from "../../css_components/FeaturedProducts.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function FeaturedProducts() {
-  const { productos } = data;
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [page, setPage] = useState(0);
 
   const totalPages = Math.ceil(productos.length / ITEMS_PER_PAGE);
@@ -16,23 +18,55 @@ export default function FeaturedProducts() {
   const prev = () => setPage((p) => Math.max(p - 1, 0));
   const next = () => setPage((p) => Math.min(p + 1, totalPages - 1));
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetchProductos({ limit: 12 }, controller.signal)
+      .then((productosData) => {
+        setProductos(productosData);
+        setError(null);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudieron cargar los productos destacados.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
         <h2 className={styles.titulo}>¡Lo mejor de TechNova!</h2>
         <div className={styles.carouselWrapper}>
-          <button className={styles.arrow} onClick={prev} disabled={page === 0}>
+          <button
+            className={styles.arrow}
+            onClick={prev}
+            disabled={page === 0 || isLoading}
+          >
             &#8249;
           </button>
           <div className={styles.grid}>
-            {visibles.map((producto) => (
-              <ProductCard key={producto.id} producto={producto} />
-            ))}
+            {isLoading ? (
+              <p>Cargando productos...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              visibles.map((producto) => (
+                <ProductCard key={producto.id} producto={producto} />
+              ))
+            )}
           </div>
           <button
             className={styles.arrow}
             onClick={next}
-            disabled={page === totalPages - 1}
+            disabled={isLoading || totalPages <= 1 || page === totalPages - 1}
           >
             &#8250;
           </button>

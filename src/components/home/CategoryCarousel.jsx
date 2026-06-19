@@ -1,12 +1,14 @@
-import { useState } from "react";
-import data from "../../data/productos.json";
+import { useEffect, useState } from "react";
 import ProductCard from "../products/ProductCard";
+import { fetchProductos } from "../../services/productosApi";
 import styles from "../../css_components/CategoryCarousel.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
 export default function CategoryCarousel({ tipo, titulo }) {
-  const [visibles] = useState(data.productos.filter((p) => p.tipo === tipo));
+  const [visibles, setVisibles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
 
   const totalPages = Math.ceil(visibles.length / ITEMS_PER_PAGE);
@@ -16,6 +18,31 @@ export default function CategoryCarousel({ tipo, titulo }) {
   const prev = () => setCurrentPage((p) => Math.max(p - 1, 0));
   const next = () => setCurrentPage((p) => Math.min(p + 1, totalPages - 1));
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setCurrentPage(0);
+    setIsLoading(true);
+    setError(null);
+
+    fetchProductos({ tipo }, controller.signal)
+      .then((productosData) => {
+        setVisibles(productosData);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudieron cargar estos productos.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, [tipo]);
+
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
@@ -24,19 +51,25 @@ export default function CategoryCarousel({ tipo, titulo }) {
           <button
             className={styles.arrow}
             onClick={prev}
-            disabled={currentPage === 0}
+            disabled={currentPage === 0 || isLoading}
           >
             &#8249;
           </button>
           <div className={styles.grid}>
-            {paginados.map((producto) => (
-              <ProductCard key={producto.id} producto={producto} />
-            ))}
+            {isLoading ? (
+              <p>Cargando productos...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              paginados.map((producto) => (
+                <ProductCard key={producto.id} producto={producto} />
+              ))
+            )}
           </div>
           <button
             className={styles.arrow}
             onClick={next}
-            disabled={currentPage === totalPages - 1}
+            disabled={isLoading || totalPages <= 1 || currentPage === totalPages - 1}
           >
             &#8250;
           </button>
