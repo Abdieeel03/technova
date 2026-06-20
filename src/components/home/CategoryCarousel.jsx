@@ -5,7 +5,14 @@ import styles from "../../css_components/CategoryCarousel.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function CategoryCarousel({ tipo, titulo, productos, isLoading: isLoadingProp, error: errorProp }) {
+export default function CategoryCarousel({
+  tipo,
+  icono,
+  titulo,
+  productos,
+  isLoading: isLoadingProp,
+  error: errorProp,
+}) {
   const [visiblesFallback, setVisiblesFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -51,12 +58,19 @@ export default function CategoryCarousel({ tipo, titulo, productos, isLoading: i
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.titulo}>{titulo}</h2>
+        <div className={styles.header}>
+          <span className={styles.iconBubble}>{icono}</span>
+          <div>
+            <span className={styles.kicker}>Por categoría</span>
+            <h2 className={styles.titulo}>{titulo}</h2>
+          </div>
+        </div>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
             onClick={prev}
             disabled={currentPage === 0 || isLoading}
+            aria-label="Anterior"
           >
             &#8249;
           </button>
@@ -74,7 +88,10 @@ export default function CategoryCarousel({ tipo, titulo, productos, isLoading: i
           <button
             className={styles.arrow}
             onClick={next}
-            disabled={isLoading || totalPages <= 1 || currentPage === totalPages - 1}
+            disabled={
+              isLoading || totalPages <= 1 || currentPage === totalPages - 1
+            }
+            aria-label="Siguiente"
           >
             &#8250;
           </button>

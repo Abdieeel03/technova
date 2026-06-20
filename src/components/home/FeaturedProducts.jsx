@@ -5,7 +5,11 @@ import styles from "../../css_components/FeaturedProducts.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function FeaturedProducts({ productos: productosProp, isLoading: isLoadingProp, error: errorProp }) {
+export default function FeaturedProducts({
+  productos: productosProp,
+  isLoading: isLoadingProp,
+  error: errorProp,
+}) {
   const [productosFallback, setProductosFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -51,12 +55,19 @@ export default function FeaturedProducts({ productos: productosProp, isLoading: 
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.titulo}>¡Lo mejor de TechNova!</h2>
+        <div className={styles.header}>
+          <span className={styles.kicker}>Selección TechNova</span>
+          <h2 className={styles.titulo}>Lo mejor para tu setup</h2>
+          <p className={styles.subtitulo}>
+            Equipos elegidos por su calidad, rendimiento y respaldo de marca.
+          </p>
+        </div>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
             onClick={prev}
             disabled={page === 0 || isLoading}
+            aria-label="Anterior"
           >
             &#8249;
           </button>
@@ -75,6 +86,7 @@ export default function FeaturedProducts({ productos: productosProp, isLoading: 
             className={styles.arrow}
             onClick={next}
             disabled={isLoading || totalPages <= 1 || page === totalPages - 1}
+            aria-label="Siguiente"
           >
             &#8250;
           </button>
