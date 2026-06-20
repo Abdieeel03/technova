@@ -11,12 +11,14 @@ const initialFormState = {
 export default function ModalLogin({ isOpen, onClose }) {
   const [formData, setFormData] = useState(initialFormState);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [mode, setMode] = useState("login");
   const { login, register } = useAuth();
 
   const handleClose = useCallback(() => {
     setFormData(initialFormState);
     setErrorMessage("");
+    setIsSubmitting(false);
     setMode("login");
     onClose();
   }, [onClose]);
@@ -59,8 +61,12 @@ export default function ModalLogin({ isOpen, onClose }) {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
 
     const trimmedName = formData.name.trim();
     const trimmedEmail = formData.email.trim();
@@ -82,7 +88,9 @@ export default function ModalLogin({ isOpen, onClose }) {
     }
 
     if (mode === "login") {
-      const result = login({ email: trimmedEmail, password: trimmedPassword });
+      setIsSubmitting(true);
+      const result = await login({ email: trimmedEmail, password: trimmedPassword });
+      setIsSubmitting(false);
       if (!result.ok) {
         setErrorMessage(result.error);
         return;
@@ -91,11 +99,13 @@ export default function ModalLogin({ isOpen, onClose }) {
       return;
     }
 
-    const result = register({
+    setIsSubmitting(true);
+    const result = await register({
       name: trimmedName,
       email: trimmedEmail,
       password: trimmedPassword,
     });
+    setIsSubmitting(false);
 
     if (!result.ok) {
       setErrorMessage(result.error);
@@ -209,7 +219,7 @@ export default function ModalLogin({ isOpen, onClose }) {
 
           <div className={styles.actions}>
             <button type="submit" className={styles.submitButton}>
-              {mode === "login" ? "Entrar" : "Registrar"}
+              {isSubmitting ? "Procesando..." : mode === "login" ? "Entrar" : "Registrar"}
             </button>
             <p className={styles.accountPrompt}>
               {mode === "login" ? "No tienes cuenta?" : "Ya tienes cuenta?"}
