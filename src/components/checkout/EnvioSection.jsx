@@ -17,11 +17,11 @@ import styles from "../../css_components/Checkout.module.css";
  * 4. Puedes crear tus propios endpoints en api/envios/ para calcular costos.
  * 5. NO modificar: procesar-pago.js, FormularioPago.jsx, checkoutApi.js
  */
-export default function EnvioSection({ onEnvioChange, items, userId }) {
+export default function EnvioSection({ onEnvioChange }) {
   useEffect(() => {
     // Default: envío estándar gratuito
     onEnvioChange({ metodo: "standard", costoEnvio: 0, direccion: null });
-  }, []);
+  }, [onEnvioChange]);
 
   return (
     <section className={styles.envioSection}>

@@ -10,19 +10,20 @@ const initialForm = {
 
 export default function Contacto() {
   const [formData, setFormData] = useState(initialForm);
-  const [showToast, setShowToast] = useState(false);
+  const [toast, setToast] = useState(null);
+  const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
-    if (!showToast) {
+    if (!toast) {
       return undefined;
     }
 
     const timeoutId = setTimeout(() => {
-      setShowToast(false);
-    }, 2500);
+      setToast(null);
+    }, 4200);
 
     return () => clearTimeout(timeoutId);
-  }, [showToast]);
+  }, [toast]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,6 +35,10 @@ export default function Contacto() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (isSending) {
+      return;
+    }
 
     // Private Keys obtenidas desde las variables de entorno de Vite
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
@@ -48,27 +53,58 @@ export default function Contacto() {
       message: formData.mensaje,
     };
 
+    setIsSending(true);
+    setToast(null);
+
     emailjs
       .send(serviceId, templateId, templateParams, {
         publicKey: publicKey,
       })
       .then(
         () => {
-          alert("SUCCESS!");
           setFormData(initialForm);
-          setShowToast(true);
+          setToast({
+            type: "success",
+            title: "Mensaje enviado",
+            message: "Gracias por contactarnos. Te responderemos lo antes posible.",
+          });
         },
         (error) => {
-          alert("FAILED... " + error.text);
+          setToast({
+            type: "error",
+            title: "No se pudo enviar",
+            message: error?.text || "Inténtalo nuevamente en unos minutos.",
+          });
         },
-      );
+      )
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
     <main className={styles.contactoMain}>
-      {showToast && (
-        <div className={styles.toast} role="status" aria-live="polite">
-          Mensaje enviado
+      {toast && (
+        <div
+          className={`${styles.toast} ${styles[toast.type]}`}
+          role={toast.type === "error" ? "alert" : "status"}
+          aria-live={toast.type === "error" ? "assertive" : "polite"}
+        >
+          <span className={styles.toastIcon} aria-hidden="true">
+            {toast.type === "error" ? "!" : "✓"}
+          </span>
+          <div className={styles.toastContent}>
+            <strong>{toast.title}</strong>
+            <p>{toast.message}</p>
+          </div>
+          <button
+            type="button"
+            className={styles.toastClose}
+            onClick={() => setToast(null)}
+            aria-label="Cerrar notificación"
+          >
+            ×
+          </button>
         </div>
       )}
 
@@ -140,7 +176,9 @@ export default function Contacto() {
             />
           </label>
 
-          <button type="submit">Enviar mensaje</button>
+          <button type="submit" disabled={isSending}>
+            {isSending ? "Enviando..." : "Enviar mensaje"}
+          </button>
         </form>
       </section>
     </main>

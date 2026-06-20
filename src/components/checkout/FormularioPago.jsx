@@ -190,8 +190,6 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
     });
   };
 
-  const formatCurrency = (value) => `S/. ${Number(value || 0).toFixed(2)}`;
-
   return (
     <section className={styles.pagoSection}>
       <h3 className={styles.sectionTitle}>

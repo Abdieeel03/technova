@@ -5,11 +5,15 @@ import styles from "../../css_components/BestSellers.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function BestSellers() {
-  const [masVendidos, setMasVendidos] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function BestSellers({ productos, isLoading: isLoadingProp, error: errorProp }) {
+  const [masVendidosFallback, setMasVendidosFallback] = useState([]);
+  const [isLoadingFallback, setIsLoadingFallback] = useState(true);
+  const [errorFallback, setErrorFallback] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const isControlled = productos !== undefined;
+  const masVendidos = isControlled ? productos : masVendidosFallback;
+  const isLoading = isControlled ? Boolean(isLoadingProp) : isLoadingFallback;
+  const error = isControlled ? errorProp : errorFallback;
 
   const totalPages = Math.ceil(masVendidos.length / ITEMS_PER_PAGE);
   const start = currentPage * ITEMS_PER_PAGE;
@@ -19,26 +23,30 @@ export default function BestSellers() {
   const next = () => setCurrentPage((p) => Math.min(p + 1, totalPages - 1));
 
   useEffect(() => {
+    if (isControlled) {
+      return undefined;
+    }
+
     const controller = new AbortController();
 
     fetchProductos({ masVendido: true }, controller.signal)
       .then((productosData) => {
-        setMasVendidos(productosData);
-        setError(null);
+        setMasVendidosFallback(productosData);
+        setErrorFallback(null);
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setError("No se pudieron cargar los más vendidos.");
+          setErrorFallback("No se pudieron cargar los más vendidos.");
         }
       })
       .finally(() => {
         if (!controller.signal.aborted) {
-          setIsLoading(false);
+          setIsLoadingFallback(false);
         }
       });
 
     return () => controller.abort();
-  }, []);
+  }, [isControlled]);
 
   return (
     <section className={styles.section}>

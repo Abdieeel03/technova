@@ -23,11 +23,10 @@ export default function CheckoutExito() {
   const orderId = searchParams.get("orderId");
 
   const [orden, setOrden] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(Boolean(orderId && user?.id));
 
   useEffect(() => {
     if (!orderId || !user?.id) {
-      setLoading(false);
       return;
     }
 

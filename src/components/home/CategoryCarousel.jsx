@@ -5,11 +5,15 @@ import styles from "../../css_components/CategoryCarousel.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function CategoryCarousel({ tipo, titulo }) {
-  const [visibles, setVisibles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function CategoryCarousel({ tipo, titulo, productos, isLoading: isLoadingProp, error: errorProp }) {
+  const [visiblesFallback, setVisiblesFallback] = useState([]);
+  const [isLoadingFallback, setIsLoadingFallback] = useState(true);
+  const [errorFallback, setErrorFallback] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const isControlled = productos !== undefined;
+  const visibles = isControlled ? productos : visiblesFallback;
+  const isLoading = isControlled ? Boolean(isLoadingProp) : isLoadingFallback;
+  const error = isControlled ? errorProp : errorFallback;
 
   const totalPages = Math.ceil(visibles.length / ITEMS_PER_PAGE);
   const start = currentPage * ITEMS_PER_PAGE;
@@ -19,29 +23,30 @@ export default function CategoryCarousel({ tipo, titulo }) {
   const next = () => setCurrentPage((p) => Math.min(p + 1, totalPages - 1));
 
   useEffect(() => {
-    const controller = new AbortController();
+    if (isControlled) {
+      return undefined;
+    }
 
-    setCurrentPage(0);
-    setIsLoading(true);
-    setError(null);
+    const controller = new AbortController();
 
     fetchProductos({ tipo }, controller.signal)
       .then((productosData) => {
-        setVisibles(productosData);
+        setVisiblesFallback(productosData);
+        setErrorFallback(null);
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setError("No se pudieron cargar estos productos.");
+          setErrorFallback("No se pudieron cargar estos productos.");
         }
       })
       .finally(() => {
         if (!controller.signal.aborted) {
-          setIsLoading(false);
+          setIsLoadingFallback(false);
         }
       });
 
     return () => controller.abort();
-  }, [tipo]);
+  }, [isControlled, tipo]);
 
   return (
     <section className={styles.section}>

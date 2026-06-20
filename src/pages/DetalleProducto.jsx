@@ -32,10 +32,6 @@ export default function DetalleProducto() {
   useEffect(() => {
     const controller = new AbortController();
 
-    setIsLoading(true);
-    setError(null);
-    setProducto(null);
-
     fetchProductoById(id, controller.signal)
       .then((productoData) => {
         setProducto(productoData);

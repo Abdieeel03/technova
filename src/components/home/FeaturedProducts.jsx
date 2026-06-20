@@ -5,11 +5,15 @@ import styles from "../../css_components/FeaturedProducts.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function FeaturedProducts() {
-  const [productos, setProductos] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function FeaturedProducts({ productos: productosProp, isLoading: isLoadingProp, error: errorProp }) {
+  const [productosFallback, setProductosFallback] = useState([]);
+  const [isLoadingFallback, setIsLoadingFallback] = useState(true);
+  const [errorFallback, setErrorFallback] = useState(null);
   const [page, setPage] = useState(0);
+  const isControlled = productosProp !== undefined;
+  const productos = isControlled ? productosProp : productosFallback;
+  const isLoading = isControlled ? Boolean(isLoadingProp) : isLoadingFallback;
+  const error = isControlled ? errorProp : errorFallback;
 
   const totalPages = Math.ceil(productos.length / ITEMS_PER_PAGE);
   const start = page * ITEMS_PER_PAGE;
@@ -19,26 +23,30 @@ export default function FeaturedProducts() {
   const next = () => setPage((p) => Math.min(p + 1, totalPages - 1));
 
   useEffect(() => {
+    if (isControlled) {
+      return undefined;
+    }
+
     const controller = new AbortController();
 
     fetchProductos({ limit: 12 }, controller.signal)
       .then((productosData) => {
-        setProductos(productosData);
-        setError(null);
+        setProductosFallback(productosData);
+        setErrorFallback(null);
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setError("No se pudieron cargar los productos destacados.");
+          setErrorFallback("No se pudieron cargar los productos destacados.");
         }
       })
       .finally(() => {
         if (!controller.signal.aborted) {
-          setIsLoading(false);
+          setIsLoadingFallback(false);
         }
       });
 
     return () => controller.abort();
-  }, []);
+  }, [isControlled]);
 
   return (
     <section className={styles.section}>

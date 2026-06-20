@@ -25,7 +25,7 @@ export default function TextToSpeech() {
   useEffect(() => {
     if (!active) {
       window.speechSynthesis.cancel();
-      setIsSpeaking(false);
+      window.setTimeout(() => setIsSpeaking(false), 0);
     }
   }, [active]);
 
