@@ -1,6 +1,7 @@
 import { getProductosCollection } from "../_mongo.js";
 
-const PRODUCTO_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+const PRODUCTO_CACHE_CONTROL =
+  "public, s-maxage=300, stale-while-revalidate=86400";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
