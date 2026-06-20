@@ -1,8 +1,4 @@
-import bcrypt from "bcryptjs";
-
-const USERS_KEY = "technovaUsers";
 const SESSION_KEY = "technovaSession";
-const SALT_ROUNDS = 10;
 
 const safeParse = (value, fallback) => {
   if (!value) {
@@ -16,34 +12,28 @@ const safeParse = (value, fallback) => {
   }
 };
 
-const getUsers = () => {
-  const raw = localStorage.getItem(USERS_KEY);
-  const parsed = safeParse(raw, []);
-  return Array.isArray(parsed) ? parsed : [];
-};
-
-const saveUsers = (users) => {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-};
-
-const buildUser = ({ name, email, password }) => {
-  const passwordHash = bcrypt.hashSync(password, SALT_ROUNDS);
-
-  return {
-    id: crypto.randomUUID(),
-    name: name.trim(),
-    email: email.trim().toLowerCase(),
-    passwordHash,
-    createdAt: new Date().toISOString(),
-  };
-};
-
-const buildSession = (userId) => ({
-  userId,
+const buildSession = (user) => ({
+  userId: user.id,
+  user,
   loggedAt: new Date().toISOString(),
 });
 
-export const registerUser = ({ name, email, password }) => {
+const requestJson = async (url, options) => {
+  const response = await fetch(url, {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || `Request failed with status ${response.status}`);
+  }
+
+  return data;
+};
+
+export const registerUser = async ({ name, email, password }) => {
   const trimmedName = name?.trim();
   const trimmedEmail = email?.trim().toLowerCase();
   const trimmedPassword = password?.trim();
@@ -59,29 +49,25 @@ export const registerUser = ({ name, email, password }) => {
     };
   }
 
-  const users = getUsers();
-  const exists = users.some((user) => user.email === trimmedEmail);
+  try {
+    const data = await requestJson("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        name: trimmedName,
+        email: trimmedEmail,
+        password: trimmedPassword,
+      }),
+    });
 
-  if (exists) {
-    return { ok: false, error: "Ya existe una cuenta con ese correo." };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(data.user)));
+
+    return { ok: true, user: data.user };
+  } catch (error) {
+    return { ok: false, error: error.message };
   }
-
-  const newUser = buildUser({
-    name: trimmedName,
-    email: trimmedEmail,
-    password: trimmedPassword,
-  });
-
-  saveUsers([...users, newUser]);
-  localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(newUser.id)));
-
-  return {
-    ok: true,
-    user: { id: newUser.id, name: newUser.name, email: newUser.email },
-  };
 };
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = async ({ email, password }) => {
   const trimmedEmail = email?.trim().toLowerCase();
   const trimmedPassword = password?.trim();
 
@@ -89,19 +75,18 @@ export const loginUser = ({ email, password }) => {
     return { ok: false, error: "Completa correo y contrasena para continuar." };
   }
 
-  const users = getUsers();
-  const user = users.find((entry) => entry.email === trimmedEmail);
+  try {
+    const data = await requestJson("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }),
+    });
 
-  if (!user || !bcrypt.compareSync(trimmedPassword, user.passwordHash)) {
-    return { ok: false, error: "Correo o contrasena invalidos." };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(data.user)));
+
+    return { ok: true, user: data.user };
+  } catch (error) {
+    return { ok: false, error: error.message };
   }
-
-  localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(user.id)));
-
-  return {
-    ok: true,
-    user: { id: user.id, name: user.name, email: user.email },
-  };
 };
 
 export const logoutUser = () => {
@@ -112,18 +97,11 @@ export const getCurrentUser = () => {
   const raw = localStorage.getItem(SESSION_KEY);
   const session = safeParse(raw, null);
 
-  if (!session?.userId) {
+  if (!session?.user?.id) {
     return null;
   }
 
-  const users = getUsers();
-  const user = users.find((entry) => entry.id === session.userId);
-
-  if (!user) {
-    return null;
-  }
-
-  return { id: user.id, name: user.name, email: user.email };
+  return session.user;
 };
 
 export const getSession = () => {

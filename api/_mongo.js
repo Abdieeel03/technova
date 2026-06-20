@@ -25,3 +25,13 @@ export async function getProductosCollection() {
   const client = await clientPromise;
   return client.db(dbName).collection("productos");
 }
+
+export async function getUsuariosCollection() {
+  const client = await clientPromise;
+  return client.db(dbName).collection("usuarios");
+}
+
+export async function getOrdenesCollection() {
+  const client = await clientPromise;
+  return client.db(dbName).collection("ordenes");
+}

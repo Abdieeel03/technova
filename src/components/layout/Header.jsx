@@ -28,6 +28,7 @@ const {
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const openLogin = () => {
     setIsLoginOpen(true);
@@ -70,7 +71,11 @@ const {
     setCartOwner(user?.id ?? null);
   }, [setCartOwner, user?.id]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    if (isCheckingOut) {
+      return;
+    }
+
     if (!user) {
       setCheckoutNotice({
         type: "error",
@@ -80,11 +85,15 @@ const {
       openLogin();
       return;
     }
-    const result = createOrder({
+
+    setIsCheckingOut(true);
+    const result = await createOrder({
       userId: user.id,
       items,
       total: totalPrice,
     });
+    setIsCheckingOut(false);
+
     if (!result.ok) {
       setCheckoutNotice({ type: "error", text: result.error });
       return;

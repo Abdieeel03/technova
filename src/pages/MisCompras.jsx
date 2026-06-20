@@ -24,11 +24,26 @@ export default function MisCompras() {
 
   useEffect(() => {
     if (!user?.id) {
-      setOrders([]);
       return;
     }
 
-    setOrders(getOrdersByUser(user.id));
+    let isMounted = true;
+
+    getOrdersByUser(user.id)
+      .then((userOrders) => {
+        if (isMounted) {
+          setOrders(userOrders);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setOrders([]);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [user?.id]);
 
   const totalCompras = useMemo(
