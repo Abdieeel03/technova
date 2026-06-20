@@ -13,7 +13,7 @@ const requestJson = async (url, options) => {
   return data;
 };
 
-export const createOrder = async ({ userId, items, total }) => {
+export const procesarPago = async ({ userId, items, subtotal, pago, envio }) => {
   if (!userId) {
     return { ok: false, error: "Debes iniciar sesion para comprar." };
   }
@@ -23,29 +23,35 @@ export const createOrder = async ({ userId, items, total }) => {
     return { ok: false, error: "No hay productos en el carrito." };
   }
 
-  const amount = Number(total);
+  const amount = Number(subtotal);
   if (!Number.isFinite(amount) || amount <= 0) {
-    return { ok: false, error: "Total invalido." };
+    return { ok: false, error: "Subtotal invalido." };
   }
 
   try {
-    const data = await requestJson("/api/ordenes", {
+    const data = await requestJson("/api/checkout/procesar-pago", {
       method: "POST",
-      body: JSON.stringify({ userId, items: safeItems, total: amount }),
+      body: JSON.stringify({
+        userId,
+        items: safeItems,
+        subtotal: amount,
+        pago,
+        envio: envio || {},
+      }),
     });
 
-    return { ok: true, order: data.orden };
+    return { ok: true, orden: data.orden };
   } catch (error) {
     return { ok: false, error: error.message };
   }
 };
 
-export const getOrdersByUser = async (userId) => {
-  if (!userId) {
-    return [];
+export const obtenerOrden = async (orderId, userId) => {
+  if (!orderId || !userId) {
+    return null;
   }
 
-  const searchParams = new URLSearchParams({ userId });
-  const data = await requestJson(`/api/ordenes?${searchParams.toString()}`);
-  return data.ordenes || [];
+  const params = new URLSearchParams({ orderId, userId });
+  const data = await requestJson(`/api/checkout/obtener-orden?${params.toString()}`);
+  return data.orden || null;
 };

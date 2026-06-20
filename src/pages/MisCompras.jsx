@@ -3,7 +3,6 @@ import { Link, Navigate } from "react-router";
 import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
-import { useLanguage } from "../context/LanguageContext";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -11,26 +10,44 @@ const formatCurrency = (value) => {
 };
 
 const formatDate = (value) => {
-  if (!value) return "-";
+  if (!value) {
+    return "-";
+  }
+
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString();
 };
 
 export default function MisCompras() {
   const { user } = useAuth();
-  const [orders, setOrders] = useState([]);
-  const { t } = useLanguage();
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
     if (!user?.id) {
-      setOrders([]);
       return;
     }
-    setOrders(getOrdersByUser(user.id));
+
+    let isMounted = true;
+
+    getOrdersByUser(user.id)
+      .then((userOrders) => {
+        if (isMounted) {
+          setOrders(userOrders);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setOrders([]);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [user?.id]);
 
   const totalCompras = useMemo(
-    () => orders.reduce((acc, order) => acc + Number(order.total || 0), 0),
+    () => (orders || []).reduce((acc, order) => acc + Number(order.total || 0), 0),
     [orders],
   );
 
@@ -42,26 +59,37 @@ export default function MisCompras() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div>
-          <h1>{t.misCompras.titulo}</h1>
-          <p>{t.misCompras.subtitulo}</p>
+          <h1>Mis compras</h1>
+          <p>
+            Revisa tu historial y el detalle de cada orden registrada en
+            TechNova.
+          </p>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>
-            {t.misCompras.totalGastado}
-          </span>
+          <span className={styles.summaryLabel}>Total gastado</span>
           <strong className={styles.summaryValue}>
             {formatCurrency(totalCompras)}
           </strong>
         </div>
       </section>
 
-      {orders.length === 0 ? (
+      {orders === null ? (
+        <section className={styles.loading} aria-live="polite" aria-busy="true">
+          <div className={styles.spinner} />
+          <div>
+            <h2>Cargando tus compras...</h2>
+            <p>Estamos consultando tu historial actualizado.</p>
+          </div>
+        </section>
+      ) : orders.length === 0 ? (
         <section className={styles.empty}>
           <div className={styles.emptyIcon}>🧾</div>
-          <h2>{t.misCompras.sinCompras}</h2>
-          <p>{t.misCompras.sinComprasDesc}</p>
+          <h2>Aun no tienes compras</h2>
+          <p>
+            Cuando completes una compra, aparecera aqui con todos los detalles.
+          </p>
           <Link to="/productos" className={styles.cta}>
-            {t.misCompras.verProductos}
+            Ver productos
           </Link>
         </section>
       ) : (
@@ -70,13 +98,8 @@ export default function MisCompras() {
             <article key={order.id} className={styles.card}>
               <header className={styles.cardHeader}>
                 <div>
-                  <p className={styles.orderLabel}>
-                    {t.misCompras.orden}
-                    {order.id}
-                  </p>
-                  <p className={styles.orderDate}>
-                    {formatDate(order.createdAt)}
-                  </p>
+                  <p className={styles.orderLabel}>Orden #{order.id}</p>
+                  <p className={styles.orderDate}>{formatDate(order.createdAt)}</p>
                 </div>
                 <div className={styles.orderTotal}>
                   {formatCurrency(order.total)}

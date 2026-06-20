@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import data from "../data/productos.json";
 import CardProducto from "../components/products/CardProducto";
+import { fetchProductos } from "../services/productosApi";
 import styles from "../css_components/Productos.module.css";
 
 const CATEGORIAS = [
@@ -25,7 +25,9 @@ const MARCAS_VISIBLES = 4;
 const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
-  const { productos } = data;
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoriaActiva = searchParams.get("categoria") || "todos";
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
@@ -56,7 +58,7 @@ export default function Productos() {
   const toggleMarca = (marca) => {
     setPaginaActual(1);
     setMarcasSeleccionadas((prev) =>
-      prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca],
+      prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca]
     );
   };
 
@@ -90,7 +92,7 @@ export default function Productos() {
     .filter(
       (p) =>
         marcasSeleccionadas.length === 0 ||
-        marcasSeleccionadas.includes(p.marca),
+        marcasSeleccionadas.includes(p.marca)
     )
     .filter((p) => {
       const min = precioMin === "" ? 0 : Number(precioMin);
@@ -99,12 +101,13 @@ export default function Productos() {
     });
 
   const totalPaginas = Math.ceil(
-    productosFiltrados.length / PRODUCTOS_POR_PAGINA,
+    productosFiltrados.length / PRODUCTOS_POR_PAGINA
   );
-  const inicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+  const paginaSegura = totalPaginas > 0 ? Math.min(paginaActual, totalPaginas) : 1;
+  const inicio = (paginaSegura - 1) * PRODUCTOS_POR_PAGINA;
   const productosPagina = productosFiltrados.slice(
     inicio,
-    inicio + PRODUCTOS_POR_PAGINA,
+    inicio + PRODUCTOS_POR_PAGINA
   );
 
   const irAPagina = (n) => {
@@ -116,35 +119,37 @@ export default function Productos() {
     if (totalPaginas <= 7)
       return Array.from({ length: totalPaginas }, (_, i) => i + 1);
     const pages = [];
-    if (paginaActual <= 4) {
+    if (paginaSegura <= 4) {
       pages.push(1, 2, 3, 4, 5, "...", totalPaginas);
-    } else if (paginaActual >= totalPaginas - 3) {
-      pages.push(
-        1,
-        "...",
-        totalPaginas - 4,
-        totalPaginas - 3,
-        totalPaginas - 2,
-        totalPaginas - 1,
-        totalPaginas,
-      );
+    } else if (paginaSegura >= totalPaginas - 3) {
+      pages.push(1, "...", totalPaginas - 4, totalPaginas - 3, totalPaginas - 2, totalPaginas - 1, totalPaginas);
     } else {
-      pages.push(
-        1,
-        "...",
-        paginaActual - 1,
-        paginaActual,
-        paginaActual + 1,
-        "...",
-        totalPaginas,
-      );
+      pages.push(1, "...", paginaSegura - 1, paginaSegura, paginaSegura + 1, "...", totalPaginas);
     }
     return pages;
   };
 
   useEffect(() => {
-    if (paginaActual > totalPaginas && totalPaginas > 0) setPaginaActual(1);
-  }, [productosFiltrados.length]);
+    const controller = new AbortController();
+
+    fetchProductos(undefined, controller.signal)
+      .then((productosData) => {
+        setProductos(productosData);
+        setError(null);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudieron cargar los productos.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(SCROLL_KEY);
@@ -164,10 +169,12 @@ export default function Productos() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>{t.productos.titulo}</h1>
-        <p className={styles.heroSubtitle}>{t.productos.subtitulo}</p>
+        <h1 className={styles.heroTitle}>Nuestros Productos</h1>
+        <p className={styles.heroSubtitle}>
+          Descubre la mejor tecnología al mejor precio
+        </p>
         <span className={styles.totalProductos}>
-          {productos.length} {t.productos.disponibles}
+          {productos.length} productos disponibles
         </span>
       </section>
 
@@ -197,10 +204,7 @@ export default function Productos() {
           <div className={styles.filterGroup}>
             <p className={styles.filterLabel}>Marca</p>
             {marcasDisponibles
-              .slice(
-                0,
-                verMasMarcas ? marcasDisponibles.length : MARCAS_VISIBLES,
-              )
+              .slice(0, verMasMarcas ? marcasDisponibles.length : MARCAS_VISIBLES)
               .map((marca) => (
                 <label key={marca} className={styles.checkLabel}>
                   <input
@@ -228,9 +232,7 @@ export default function Productos() {
               <button
                 key={rango.label}
                 className={`${styles.rangoBtn} ${
-                  rangoActivo?.label === rango.label
-                    ? styles.rangoBtnActivo
-                    : ""
+                  rangoActivo?.label === rango.label ? styles.rangoBtnActivo : ""
                 }`}
                 onClick={() => aplicarRango(rango)}
               >
@@ -243,10 +245,7 @@ export default function Productos() {
                 className={styles.precioInput}
                 placeholder="Mínimo"
                 value={inputMin}
-                onChange={(e) => {
-                  setInputMin(e.target.value);
-                  setRangoActivo(null);
-                }}
+                onChange={(e) => { setInputMin(e.target.value); setRangoActivo(null); }}
               />
               <span className={styles.precioSep}>–</span>
               <input
@@ -254,10 +253,7 @@ export default function Productos() {
                 className={styles.precioInput}
                 placeholder="Máximo"
                 value={inputMax}
-                onChange={(e) => {
-                  setInputMax(e.target.value);
-                  setRangoActivo(null);
-                }}
+                onChange={(e) => { setInputMax(e.target.value); setRangoActivo(null); }}
               />
             </div>
             <button className={styles.aplicarBtn} onClick={aplicarInputs}>
@@ -291,14 +287,21 @@ export default function Productos() {
               {productosFiltrados.length !== 1 ? "s" : ""}
             </span>
             {totalPaginas > 1 && (
-              <span>
-                Página {paginaActual} de {totalPaginas}
-              </span>
+              <span>Página {paginaSegura} de {totalPaginas}</span>
             )}
           </div>
 
           <div className={styles.grid}>
-            {productosPagina.length > 0 ? (
+            {isLoading ? (
+              <div className={styles.noResults}>
+                <h3 className={styles.noResultsTitle}>Cargando productos...</h3>
+              </div>
+            ) : error ? (
+              <div className={styles.noResults}>
+                <h3 className={styles.noResultsTitle}>{error}</h3>
+                <p className={styles.noResultsText}>Intenta nuevamente en unos minutos</p>
+              </div>
+            ) : productosPagina.length > 0 ? (
               productosPagina.map((producto, index) => (
                 <div
                   key={producto.id}
@@ -311,12 +314,8 @@ export default function Productos() {
             ) : (
               <div className={styles.noResults}>
                 <div className={styles.noResultsIcon}>🔍</div>
-                <h3 className={styles.noResultsTitle}>
-                  No se encontraron productos
-                </h3>
-                <p className={styles.noResultsText}>
-                  Intenta con otra categoría o filtro
-                </p>
+                <h3 className={styles.noResultsTitle}>No se encontraron productos</h3>
+                <p className={styles.noResultsText}>Intenta con otra categoría o filtro</p>
               </div>
             )}
           </div>
@@ -325,31 +324,29 @@ export default function Productos() {
             <div className={styles.paginacion}>
               <button
                 className={styles.pgBtn}
-                onClick={() => irAPagina(paginaActual - 1)}
-                disabled={paginaActual === 1}
+                onClick={() => irAPagina(paginaSegura - 1)}
+                disabled={paginaSegura === 1}
                 aria-label="Página anterior"
               >
                 ‹
               </button>
               {getPaginas().map((p, i) =>
                 p === "..." ? (
-                  <span key={`dots-${i}`} className={styles.pgDots}>
-                    …
-                  </span>
+                  <span key={`dots-${i}`} className={styles.pgDots}>…</span>
                 ) : (
                   <button
                     key={p}
-                    className={`${styles.pgBtn} ${paginaActual === p ? styles.pgBtnActivo : ""}`}
+                    className={`${styles.pgBtn} ${paginaSegura === p ? styles.pgBtnActivo : ""}`}
                     onClick={() => irAPagina(p)}
                   >
                     {p}
                   </button>
-                ),
+                )
               )}
               <button
                 className={styles.pgBtn}
-                onClick={() => irAPagina(paginaActual + 1)}
-                disabled={paginaActual === totalPaginas}
+                onClick={() => irAPagina(paginaSegura + 1)}
+                disabled={paginaSegura === totalPaginas}
                 aria-label="Página siguiente"
               >
                 ›

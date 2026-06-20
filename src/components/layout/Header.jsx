@@ -7,24 +7,23 @@ import CarritoButton from "../cart/CarritoButton";
 import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 import useAuth from "../../auth/hooks/useAuth";
-import { createOrder } from "../../services/ordersStorage";
-import { useLanguage } from "../../context/LanguageContext";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useLanguage();
-  const {
-    items,
-    totalItems,
-    totalPrice,
-    updateItemQty,
-    removeItem,
-    clearCart,
-    setCartOwner,
-  } = useCarrito();
+const {
+  items,
+  totalItems,
+  totalPrice,
+  updateItemQty,
+  removeItem,
+  clearCart,
+  setCartOwner,
+  isModalOpen: isCarritoOpen,
+  openModal: openCarrito,
+  closeModal: closeCarrito,
+} = useCarrito();
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
@@ -57,14 +56,6 @@ export default function Header() {
     clearLoginModalQuery();
   };
 
-  const openCarrito = () => {
-    setIsCarritoOpen(true);
-  };
-
-  const closeCarrito = () => {
-    setIsCarritoOpen(false);
-  };
-
   const handleLogout = () => {
     logout();
     clearCart();
@@ -82,26 +73,15 @@ export default function Header() {
     if (!user) {
       setCheckoutNotice({
         type: "error",
-        text: t.login.iniciarSub,
+        text: "Debes iniciar sesion para continuar con la compra.",
       });
-      setIsCarritoOpen(false);
+      closeCarrito();
       openLogin();
       return;
     }
-    const result = createOrder({
-      userId: user.id,
-      items,
-      total: totalPrice,
-    });
-    if (!result.ok) {
-      setCheckoutNotice({ type: "error", text: result.error });
-      return;
-    }
-    clearCart();
-    setCheckoutNotice({
-      type: "success",
-      text: t.misCompras.subtitulo,
-    });
+
+    closeCarrito();
+    navigate("/checkout");
   };
 
   useEffect(() => {
@@ -128,7 +108,7 @@ export default function Header() {
         <Link
           className={styles.headerLink}
           to="/"
-          aria-label={t.nav.ariaInicio}
+          aria-label="Ir al inicio de TechNova"
         >
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
@@ -139,7 +119,7 @@ export default function Header() {
             <Link
               to="/mis-compras"
               className={`${styles.login} ${styles.loginLogged}`}
-              aria-label={t.nav.ariaMisCompras}
+              aria-label="Ver mis compras"
             >
               <div className={styles.svgIcon} aria-hidden="true">
                 <svg
@@ -152,6 +132,7 @@ export default function Header() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-user"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -159,16 +140,16 @@ export default function Header() {
                 </svg>
               </div>
               <div className={styles.loginText}>
-                <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
+                <span className={styles.loginLabel}>BIENVENIDO</span>
                 <span className={styles.loginValue}>{user.name}</span>
               </div>
               <button
                 type="button"
                 className={styles.logoutButton}
                 onClick={handleLogout}
-                aria-label={t.nav.ariaCerrarSesion}
+                aria-label="Cerrar sesión"
               >
-                {t.nav.salir}
+                Salir
               </button>
             </Link>
           ) : (
@@ -190,6 +171,7 @@ export default function Header() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-user"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -197,14 +179,14 @@ export default function Header() {
                 </svg>
               </div>
               <div className={styles.loginText}>
-                <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
-                <span className={styles.loginAction}>{t.nav.iniciaSesion}</span>
+                <span className={styles.loginLabel}>BIENVENIDO</span>
+                <span className={styles.loginAction}>Inicia sesion</span>
               </div>
             </button>
           )}
         </div>
       </header>
-      <nav className={styles.nav} aria-label={t.nav.ariaNav}>
+      <nav className={styles.nav} aria-label="Navegacion principal">
         <ul>
           <li>
             <NavLink
@@ -213,8 +195,9 @@ export default function Header() {
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
               end
+              aria-label="Ir a Inicio"
             >
-              {t.nav.inicio}
+              Inicio
             </NavLink>
           </li>
           <li>
@@ -223,8 +206,9 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Productos"
             >
-              {t.nav.productos}
+              Productos
             </NavLink>
           </li>
           <li>
@@ -233,8 +217,9 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Nosotros"
             >
-              {t.nav.nosotros}
+              Nosotros
             </NavLink>
           </li>
           <li>
@@ -243,8 +228,9 @@ export default function Header() {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
+              aria-label="Ir a Contacto"
             >
-              {t.nav.contacto}
+              Contacto
             </NavLink>
           </li>
         </ul>

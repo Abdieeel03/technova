@@ -1,5 +1,7 @@
 import { getProductosCollection } from "../_mongo.js";
 
+const PRODUCTO_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -23,6 +25,7 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: "Product not found" });
     }
 
+    res.setHeader("Cache-Control", PRODUCTO_CACHE_CONTROL);
     return res.status(200).json({ producto });
   } catch (error) {
     console.error("Error fetching producto", error);
