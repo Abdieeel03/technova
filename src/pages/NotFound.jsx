@@ -1,22 +1,22 @@
 import { Link } from "react-router";
 import styles from "../css_components/InfoPage.module.css";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function NotFound() {
+  const { t } = useLanguage();
+
   return (
     <section className={styles.wrapper} aria-labelledby="not-found-title">
       <div className={styles.card}>
-        <p className={styles.tag}>Error 404</p>
-        <h2 id="not-found-title">Pagina no encontrada</h2>
-        <p>
-          La ruta que intentaste abrir no existe o fue movida. Puedes continuar
-          explorando nuestros productos desde el inicio.
-        </p>
+        <p className={styles.tag}>{t.notFound.tag}</p>
+        <h2 id="not-found-title">{t.notFound.titulo}</h2>
+        <p>{t.notFound.desc}</p>
         <Link
           to="/productos"
           className={styles.cta}
-          aria-label="Ir al catalogo de productos"
+          aria-label={t.notFound.cta}
         >
-          Ir a productos
+          {t.notFound.cta}
         </Link>
       </div>
     </section>

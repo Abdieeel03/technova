@@ -5,7 +5,11 @@ import styles from "../../css_components/BestSellers.module.css";
 
 const ITEMS_PER_PAGE = 6;
 
-export default function BestSellers({ productos, isLoading: isLoadingProp, error: errorProp }) {
+export default function BestSellers({
+  productos,
+  isLoading: isLoadingProp,
+  error: errorProp,
+}) {
   const [masVendidosFallback, setMasVendidosFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -51,12 +55,19 @@ export default function BestSellers({ productos, isLoading: isLoadingProp, error
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.titulo}>🔥 Más Vendidos</h2>
+        <div className={styles.header}>
+          <div className={styles.headerText}>
+            <span className={styles.kicker}>Tendencia ahora</span>
+            <h2 className={styles.titulo}>Más Vendidos</h2>
+          </div>
+          <span className={styles.flameBadge}>🔥 Top ventas</span>
+        </div>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
             onClick={prev}
             disabled={currentPage === 0 || isLoading}
+            aria-label="Anterior"
           >
             &#8249;
           </button>
@@ -74,7 +85,10 @@ export default function BestSellers({ productos, isLoading: isLoadingProp, error
           <button
             className={styles.arrow}
             onClick={next}
-            disabled={isLoading || totalPages <= 1 || currentPage === totalPages - 1}
+            disabled={
+              isLoading || totalPages <= 1 || currentPage === totalPages - 1
+            }
+            aria-label="Siguiente"
           >
             &#8250;
           </button>

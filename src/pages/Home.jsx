@@ -40,7 +40,9 @@ export default function Home() {
       <FeaturedProducts
         productos={productos.slice(0, 12)}
         isLoading={isLoadingProductos}
-        error={productosError && "No se pudieron cargar los productos destacados."}
+        error={
+          productosError && "No se pudieron cargar los productos destacados."
+        }
       />
       <BestSellers
         productos={productos.filter((producto) => producto.masVendido)}
@@ -48,23 +50,35 @@ export default function Home() {
         error={productosError && "No se pudieron cargar los más vendidos."}
       />
       <CategoryCarousel
-        tipo="pantalla"
-        titulo="🖥️ Pantallas"
-        productos={productos.filter((producto) => producto.tipo === "pantalla")}
+        tipo="monitor"
+        icono="🖥️"
+        titulo="Pantallas"
+        productos={productos.filter(
+          (producto) =>
+            producto.tipo?.toLowerCase().includes("monitor") ||
+            producto.tipo?.toLowerCase().includes("pantalla"),
+        )}
         isLoading={isLoadingProductos}
         error={productosError && "No se pudieron cargar estos productos."}
       />
       <CategoryCarousel
         tipo="mouse"
-        titulo="🖱️ Mouse"
+        icono="🖱️"
+        titulo="Mouse"
         productos={productos.filter((producto) => producto.tipo === "mouse")}
         isLoading={isLoadingProductos}
         error={productosError && "No se pudieron cargar estos productos."}
       />
       <CategoryCarousel
         tipo="audífonos"
-        titulo="🎧 Audífonos"
-        productos={productos.filter((producto) => producto.tipo === "audífonos")}
+        icono="🎧"
+        titulo="Audífonos"
+        productos={productos.filter(
+          (producto) =>
+            producto.tipo?.toLowerCase().includes("audifono") ||
+            producto.tipo?.toLowerCase().includes("audífono") ||
+            producto.tipo?.toLowerCase().includes("auricular"),
+        )}
         isLoading={isLoadingProductos}
         error={productosError && "No se pudieron cargar estos productos."}
       />

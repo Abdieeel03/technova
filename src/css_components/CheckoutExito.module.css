@@ -210,6 +210,15 @@
   color: var(--color-text);
 }
 
+.totalRowSecondary {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-2);
+}
+
 .totalValue {
   color: var(--color-primary-dark);
 }
@@ -228,11 +237,17 @@
   justify-content: center;
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 100%
+  );
   color: #fff;
   font-weight: 700;
   text-decoration: none;
-  transition: transform var(--transition-fast), box-shadow var(--transition-normal);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-normal);
 }
 
 .ctaPrimary:hover {

@@ -1,6 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&display=swap");
 
 :root {
+  --color-ink: #14213d;
+  --color-ink-soft: #4a5568;
+  --color-flame: #e85d4e;
+  --color-flame-soft: #fdeae6;
+  --color-accent-soft: #fbf2e6;
+  --color-primary-tint: #eaf4f7;
   --color-primary-dark: #2f7f9b;
   --color-primary: #4f9fba;
   --color-primary-soft: #69afc7;
@@ -15,8 +21,8 @@
   --color-link-light: #f8f1e4;
   --color-white: #ffffff;
 
-  --font-display: 'Lato', sans-serif;
-  --font-base: 'Lato', sans-serif;
+  --font-display: "Lato", sans-serif;
+  --font-base: "Lato", sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -132,7 +138,10 @@ button {
   font-size: var(--text-base);
   font-weight: 600;
   letter-spacing: 0.004em;
-  transition: background-color var(--transition-normal), color var(--transition-normal), transform var(--transition-fast);
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    transform var(--transition-fast);
 }
 
 a {
@@ -140,7 +149,9 @@ a {
   font-weight: 500;
   letter-spacing: 0.003em;
   color: inherit;
-  transition: color var(--transition-normal), border-color var(--transition-normal);
+  transition:
+    color var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
 :focus-visible {
@@ -167,7 +178,10 @@ a {
 /* --- Cursor grande (nivel 2) --- */
 body[data-cursor-size="large"],
 body[data-cursor-size="large"] * {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8l4.78-4.78h7.01L5.5 3.21z" fill="white" stroke="black" stroke-width="1.5"/></svg>') 0 0, auto !important;
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M5.5 3.21V20.8l4.78-4.78h7.01L5.5 3.21z" fill="white" stroke="black" stroke-width="1.5"/></svg>')
+      0 0,
+    auto !important;
 }
 
 /* --- Dislexia amigable (solo espaciado de letras, misma fuente) --- */

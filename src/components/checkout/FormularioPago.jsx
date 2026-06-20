@@ -84,7 +84,11 @@ const INITIAL_ERRORS = {
   cvv: "",
 };
 
-export default function FormularioPago({ onSubmit, isProcessing }) {
+export default function FormularioPago({
+  onSubmit,
+  isProcessing,
+  disabled = false,
+}) {
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
   const [touched, setTouched] = useState({});
@@ -105,13 +109,19 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
     setForm((prev) => ({ ...prev, [field]: formatted }));
 
     if (touched[field]) {
-      setErrors((prev) => ({ ...prev, [field]: validateField(field, formatted) }));
+      setErrors((prev) => ({
+        ...prev,
+        [field]: validateField(field, formatted),
+      }));
     }
   };
 
   const handleBlur = (field) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
-    setErrors((prev) => ({ ...prev, [field]: validateField(field, form[field]) }));
+    setErrors((prev) => ({
+      ...prev,
+      [field]: validateField(field, form[field]),
+    }));
   };
 
   const validateField = (field, value) => {
@@ -174,7 +184,7 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isProcessing) {
+    if (isProcessing || disabled) {
       return;
     }
 
@@ -201,10 +211,14 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
         <div className={styles.cardPreview}>
           <div className={styles.cardChip} />
           <div className={styles.cardBrands}>
-            <span className={`${styles.brandIcon} ${cardBrand === "visa" ? styles.brandActive : ""}`}>
+            <span
+              className={`${styles.brandIcon} ${cardBrand === "visa" ? styles.brandActive : ""}`}
+            >
               VISA
             </span>
-            <span className={`${styles.brandIcon} ${cardBrand === "mastercard" ? styles.brandActive : ""}`}>
+            <span
+              className={`${styles.brandIcon} ${cardBrand === "mastercard" ? styles.brandActive : ""}`}
+            >
               MC
             </span>
           </div>
@@ -223,7 +237,7 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
             value={form.cardNumber}
             onChange={(e) => handleChange("cardNumber", e.target.value)}
             onBlur={() => handleBlur("cardNumber")}
-            disabled={isProcessing}
+            disabled={isProcessing || disabled}
             autoComplete="cc-number"
           />
           {errors.cardNumber && touched.cardNumber ? (
@@ -243,7 +257,7 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
             value={form.titular}
             onChange={(e) => handleChange("titular", e.target.value)}
             onBlur={() => handleBlur("titular")}
-            disabled={isProcessing}
+            disabled={isProcessing || disabled}
             autoComplete="cc-name"
           />
           {errors.titular && touched.titular ? (
@@ -265,7 +279,7 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
               value={form.expiry}
               onChange={(e) => handleChange("expiry", e.target.value)}
               onBlur={() => handleBlur("expiry")}
-              disabled={isProcessing}
+              disabled={isProcessing || disabled}
               autoComplete="cc-exp"
             />
             {errors.expiry && touched.expiry ? (
@@ -286,7 +300,7 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
               value={form.cvv}
               onChange={(e) => handleChange("cvv", e.target.value)}
               onBlur={() => handleBlur("cvv")}
-              disabled={isProcessing}
+              disabled={isProcessing || disabled}
               autoComplete="cc-csc"
             />
             {errors.cvv && touched.cvv ? (
@@ -299,13 +313,15 @@ export default function FormularioPago({ onSubmit, isProcessing }) {
           id="checkout-pay-button"
           type="submit"
           className={styles.payButton}
-          disabled={isProcessing}
+          disabled={isProcessing || disabled}
         >
           {isProcessing ? (
             <span className={styles.payButtonLoading}>
               <span className={styles.spinner} />
               Procesando pago...
             </span>
+          ) : disabled ? (
+            "Completa los datos de envio"
           ) : (
             "Pagar ahora"
           )}

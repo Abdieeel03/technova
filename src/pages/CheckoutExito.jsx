@@ -109,6 +109,40 @@ export default function CheckoutExito() {
               Tarjeta •••• {orden.pago?.ultimos4 || "****"}
             </span>
           </div>
+          {orden.envio?.metodo ? (
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Envio</span>
+              <span className={styles.infoValue}>
+                {orden.envio.metodo === "pickup"
+                  ? "Recojo en tienda"
+                  : "Envio estandar"}
+              </span>
+            </div>
+          ) : null}
+          {orden.envio?.metodo === "standard" && orden.envio?.direccion ? (
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Direccion</span>
+              <span className={styles.infoValue}>
+                {[
+                  orden.envio.direccion.direccion,
+                  orden.envio.direccion.distrito,
+                  orden.envio.direccion.zona === "provincia"
+                    ? orden.envio.direccion.ciudad
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+              </span>
+            </div>
+          ) : null}
+          {orden.envio?.metodo === "pickup" ? (
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Punto de recojo</span>
+              <span className={styles.infoValue}>
+                Av. Larco 345, Miraflores, Lima
+              </span>
+            </div>
+          ) : null}
           <div className={styles.infoRow}>
             <span className={styles.infoLabel}>Estado</span>
             <span className={`${styles.infoValue} ${styles.statusPaid}`}>
@@ -138,6 +172,18 @@ export default function CheckoutExito() {
         </div>
 
         <div className={styles.totalSection}>
+          {orden.envio?.costoEnvio ? (
+            <>
+              <div className={styles.totalRowSecondary}>
+                <span>Subtotal</span>
+                <span>{formatCurrency(orden.subtotal)}</span>
+              </div>
+              <div className={styles.totalRowSecondary}>
+                <span>Envio</span>
+                <span>{formatCurrency(orden.envio.costoEnvio)}</span>
+              </div>
+            </>
+          ) : null}
           <div className={styles.totalRow}>
             <span>Total pagado</span>
             <span className={styles.totalValue}>
