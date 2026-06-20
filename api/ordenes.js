@@ -5,20 +5,39 @@ const buildOrder = ({ userId, items, total }) => ({
   id: randomUUID(),
   userId,
   items,
+  subtotal: total,
   total,
+  pago: {
+    metodo: "directa",
+    ultimos4: null,
+    titular: null,
+    status: "pagado",
+    transaccionId: null,
+    pagadoEn: new Date().toISOString(),
+    moneda: "PEN",
+  },
+  envio: {},
+  status: "pagado",
   createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
 });
 
 const handleGet = async (req, res) => {
-  const { userId } = req.query;
+  const { userId, status } = req.query;
 
   if (!userId) {
     return res.status(400).json({ error: "Missing userId" });
   }
 
   const collection = await getOrdenesCollection();
+  const query = { userId };
+
+  if (status) {
+    query.status = status;
+  }
+
   const ordenes = await collection
-    .find({ userId }, { projection: { _id: 0 } })
+    .find(query, { projection: { _id: 0 } })
     .sort({ createdAt: -1 })
     .toArray();
 
@@ -46,7 +65,9 @@ const handlePost = async (req, res) => {
   const order = buildOrder({ userId, items: safeItems, total: amount });
   await collection.insertOne(order);
 
-  return res.status(201).json({ orden: order });
+  const { _id, ...orderWithoutMongo } = order;
+
+  return res.status(201).json({ orden: orderWithoutMongo });
 };
 
 export default async function handler(req, res) {
@@ -66,3 +87,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Error handling ordenes" });
   }
 }
+

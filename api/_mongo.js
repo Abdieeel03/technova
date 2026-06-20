@@ -28,3 +28,8 @@ export async function getOrdenesCollection() {
   const client = await clientPromise;
   return client.db(dbName).collection("ordenes");
 }
+
+export async function getTransaccionesCollection() {
+  const client = await clientPromise;
+  return client.db(dbName).collection("transacciones");
+}

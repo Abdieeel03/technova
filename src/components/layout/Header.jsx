@@ -7,7 +7,6 @@ import CarritoButton from "../cart/CarritoButton";
 import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 import useAuth from "../../auth/hooks/useAuth";
-import { createOrder } from "../../services/ordersStorage";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -70,11 +69,7 @@ const {
     setCartOwner(user?.id ?? null);
   }, [setCartOwner, user?.id]);
 
-  const handleCheckout = async () => {
-    if (isCheckingOut) {
-      return;
-    }
-
+  const handleCheckout = () => {
     if (!user) {
       setCheckoutNotice({
         type: "error",
@@ -85,23 +80,8 @@ const {
       return;
     }
 
-    setIsCheckingOut(true);
-    const result = await createOrder({
-      userId: user.id,
-      items,
-      total: totalPrice,
-    });
-    setIsCheckingOut(false);
-
-    if (!result.ok) {
-      setCheckoutNotice({ type: "error", text: result.error });
-      return;
-    }
-    clearCart();
-    setCheckoutNotice({
-      type: "success",
-      text: "Compra registrada. Revisa tu historial en tu perfil.",
-    });
+    closeCarrito();
+    navigate("/checkout");
   };
 
   useEffect(() => {
