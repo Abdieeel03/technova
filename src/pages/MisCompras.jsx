@@ -20,7 +20,7 @@ const formatDate = (value) => {
 
 export default function MisCompras() {
   const { user } = useAuth();
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
     if (!user?.id) {
@@ -47,7 +47,7 @@ export default function MisCompras() {
   }, [user?.id]);
 
   const totalCompras = useMemo(
-    () => orders.reduce((acc, order) => acc + Number(order.total || 0), 0),
+    () => (orders || []).reduce((acc, order) => acc + Number(order.total || 0), 0),
     [orders],
   );
 
@@ -73,7 +73,15 @@ export default function MisCompras() {
         </div>
       </section>
 
-      {orders.length === 0 ? (
+      {orders === null ? (
+        <section className={styles.loading} aria-live="polite" aria-busy="true">
+          <div className={styles.spinner} />
+          <div>
+            <h2>Cargando tus compras...</h2>
+            <p>Estamos consultando tu historial actualizado.</p>
+          </div>
+        </section>
+      ) : orders.length === 0 ? (
         <section className={styles.empty}>
           <div className={styles.emptyIcon}>🧾</div>
           <h2>Aun no tienes compras</h2>

@@ -28,7 +28,6 @@ const {
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const openLogin = () => {
     setIsLoginOpen(true);
