@@ -9,7 +9,7 @@ export default function DetalleProducto() {
   const [producto, setProducto] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { addItem } = useCarrito();
+  const { addItem, openModal } = useCarrito();
   const location = useLocation();
   const backUrl = location.state?.from || "/productos";
   const categoriaLabel = (() => {
