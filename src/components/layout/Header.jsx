@@ -76,7 +76,7 @@ const {
         type: "error",
         text: "Debes iniciar sesion para continuar con la compra.",
       });
-      setIsCarritoOpen(false);
+      closeCarrito();
       openLogin();
       return;
     }
