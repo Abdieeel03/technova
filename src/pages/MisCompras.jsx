@@ -9,6 +9,25 @@ const formatCurrency = (value) => {
   return `S/. ${numeric.toFixed(2)}`;
 };
 
+const METODO_LABELS = {
+  standard: "Envio estandar",
+  pickup: "Recojo en tienda",
+};
+
+const formatDireccion = (direccion) => {
+  if (!direccion) {
+    return null;
+  }
+
+  const partes = [
+    direccion.direccion,
+    direccion.distrito,
+    direccion.zona === "provincia" ? direccion.ciudad : null,
+  ].filter(Boolean);
+
+  return partes.join(", ");
+};
+
 const formatDate = (value) => {
   if (!value) {
     return "-";
@@ -47,7 +66,8 @@ export default function MisCompras() {
   }, [user?.id]);
 
   const totalCompras = useMemo(
-    () => (orders || []).reduce((acc, order) => acc + Number(order.total || 0), 0),
+    () =>
+      (orders || []).reduce((acc, order) => acc + Number(order.total || 0), 0),
     [orders],
   );
 
@@ -99,7 +119,9 @@ export default function MisCompras() {
               <header className={styles.cardHeader}>
                 <div>
                   <p className={styles.orderLabel}>Orden #{order.id}</p>
-                  <p className={styles.orderDate}>{formatDate(order.createdAt)}</p>
+                  <p className={styles.orderDate}>
+                    {formatDate(order.createdAt)}
+                  </p>
                 </div>
                 <div className={styles.orderTotal}>
                   {formatCurrency(order.total)}
@@ -123,6 +145,40 @@ export default function MisCompras() {
                   </div>
                 ))}
               </div>
+
+              {order.envio?.metodo ? (
+                <div className={styles.shippingBlock}>
+                  <div className={styles.shippingInfo}>
+                    <span className={styles.shippingIcon}>
+                      {order.envio.metodo === "pickup" ? "🏬" : "📦"}
+                    </span>
+                    <div>
+                      <p className={styles.shippingMethod}>
+                        {METODO_LABELS[order.envio.metodo] ||
+                          order.envio.metodo}
+                      </p>
+                      {order.envio.metodo === "pickup" ? (
+                        <p className={styles.shippingAddress}>
+                          Av. Larco 345, Miraflores, Lima
+                        </p>
+                      ) : formatDireccion(order.envio.direccion) ? (
+                        <p className={styles.shippingAddress}>
+                          {order.envio.direccion.nombreReceptor} ·{" "}
+                          {formatDireccion(order.envio.direccion)}
+                          {order.envio.direccion.telefono
+                            ? ` · ${order.envio.direccion.telefono}`
+                            : ""}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                  <span className={styles.shippingCost}>
+                    {order.envio.costoEnvio > 0
+                      ? formatCurrency(order.envio.costoEnvio)
+                      : "Envio gratis"}
+                  </span>
+                </div>
+              ) : null}
             </article>
           ))}
         </section>

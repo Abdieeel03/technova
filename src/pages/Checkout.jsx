@@ -17,6 +17,7 @@ export default function Checkout() {
     metodo: "standard",
     costoEnvio: 0,
     direccion: null,
+    valido: false,
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [pagoError, setPagoError] = useState(null);
@@ -26,15 +27,22 @@ export default function Checkout() {
   }, []);
 
   const handlePago = async (datosPago) => {
+    if (!envioInfo.valido) {
+      setPagoError("Completa los datos de envio antes de pagar.");
+      return;
+    }
+
     setIsProcessing(true);
     setPagoError(null);
+
+    const { valido: _valido, ...envioParaApi } = envioInfo;
 
     const result = await procesarPago({
       userId: user.id,
       items,
       subtotal: totalPrice,
       pago: datosPago,
-      envio: envioInfo,
+      envio: envioParaApi,
     });
 
     setIsProcessing(false);
@@ -75,6 +83,7 @@ export default function Checkout() {
             <FormularioPago
               onSubmit={handlePago}
               isProcessing={isProcessing}
+              disabled={!envioInfo.valido}
             />
 
             {pagoError ? (

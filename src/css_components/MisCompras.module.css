@@ -118,7 +118,11 @@
   justify-content: center;
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
   color: var(--color-white);
   font-weight: 700;
   text-decoration: none;
@@ -213,6 +217,60 @@
   color: var(--color-text);
   display: grid;
   gap: 4px;
+}
+
+.shippingBlock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: rgba(var(--color-primary-rgb), 0.05);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.12);
+}
+
+.shippingInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.shippingIcon {
+  font-size: var(--text-lg);
+  line-height: 1.2;
+}
+
+.shippingMethod {
+  margin: 0 0 2px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.shippingAddress {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-soft);
+  max-width: 480px;
+}
+
+.shippingCost {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .shippingBlock {
+    flex-direction: column;
+  }
+
+  .shippingCost {
+    align-self: flex-end;
+  }
 }
 
 @media (max-width: 720px) {
