@@ -10,6 +10,9 @@ const CATEGORIAS = [
   { key: "gaming", label: "Gaming" },
   { key: "accesorios", label: "Accesorios" },
   { key: "camaras", label: "Cámaras" },
+  { key: "laptops", label: "Laptops" },
+  { key: "celulares", label: "Celulares" },
+  { key: "componentes", label: "Componentes" },
 ];
 
 const RANGOS_PRECIO = [
