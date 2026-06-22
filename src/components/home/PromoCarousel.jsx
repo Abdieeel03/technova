@@ -7,13 +7,13 @@ const slides = [
     id: 1,
     img: "Promo1.png",
     alt: "Promoción laptops",
-    link: "/productos?categoria=celulares",
+    link: "/productos?categoria=laptops",
   },
   {
     id: 2,
     img: "Promo2.png",
     alt: "Promoción celulares",
-    link: "/productos?categoria=laptops",
+    link: "/productos?categoria=celulares",
   },
   {
     id: 3,
