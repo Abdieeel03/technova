@@ -151,7 +151,7 @@ const translations = {
       actualizado: "Última actualización: 21 de junio de 2026",
       s1Titulo: "1. Información que recopilamos",
       s1Texto:
-        "Cuando creas una cuenta o realizas una compra en TechNova, recopilamos tu nombre completo, correo electrónico, contraseña (almacenada de forma cifrada) e historial de órdenes. Esta información se guarda de forma segura en nuestra base de datos.",
+        "Cuando creas una cuenta en TechNova, recopilamos tu nombre, correo electrónico y contraseña (almacenada de forma cifrada). Al realizar una compra, también recopilamos los datos necesarios para el envío, como tu nombre de contacto, teléfono, dirección y distrito. Esta información se guarda de forma segura en nuestra base de datos. Los datos de tarjeta ingresados en el checkout no se almacenan en ningún momento, ya que nuestro sistema de pago es una simulación con fines académicos.",
       s2Titulo: "2. Almacenamiento local en tu navegador",
       s2Texto:
         "Para mejorar tu experiencia de navegación, TechNova utiliza el almacenamiento local de tu navegador (localStorage y sessionStorage), en lugar de cookies tradicionales.",
@@ -186,6 +186,51 @@ const translations = {
         "Podemos actualizar esta política ocasionalmente para reflejar cambios en nuestros servicios. Te recomendamos revisarla periódicamente.",
       s7Titulo: "7. Contacto",
       s7Texto: "Si tienes preguntas sobre esta política, escríbenos a",
+    },
+    politicaPrivacidad: {
+      titulo: "Política de Privacidad",
+      subtitulo: "Cómo TechNova recopila, usa y protege tus datos personales",
+      actualizado: "Última actualización: 21 de junio de 2026",
+      introTexto:
+        "En TechNova nos comprometemos a proteger tu privacidad. Esta política explica de forma clara qué información recopilamos cuando creas una cuenta o realizas una compra, y cómo la utilizamos.",
+      s1Titulo: "1. Datos que recopilamos",
+      s1Texto: "Cuando creas una cuenta en TechNova, recopilamos únicamente:",
+      s1Item1: "Nombre",
+      s1Item2: "Correo electrónico",
+      s1Item3: "Contraseña (almacenada de forma cifrada, nunca en texto plano)",
+      s1Item4: "Fecha de creación de tu cuenta",
+      s1Nota:
+        "No solicitamos ni almacenamos datos como teléfono, fecha de nacimiento, sexo, dirección o ubicación. Solo pedimos la información estrictamente necesaria para que puedas crear tu cuenta y realizar compras.",
+      s2Titulo: "2. Finalidad del tratamiento de datos",
+      s2Texto: "Utilizamos tu información exclusivamente para:",
+      s2Item1: "Crear y gestionar tu cuenta de usuario",
+      s2Item2: "Procesar tus compras y mantener tu historial de órdenes",
+      s2Item3: "Permitirte iniciar sesión de forma segura",
+      s2Item4: "Brindarte soporte cuando lo solicites",
+      s3Titulo: "3. Base legal del tratamiento",
+      s3Texto:
+        "Tratamos tus datos personales con base en tu consentimiento expreso al momento de registrarte, y en la necesidad de ejecutar el servicio de compra-venta que nos solicitas como usuario.",
+      s4Titulo: "4. Seguridad de tus datos",
+      s4Texto:
+        "Tu contraseña se almacena utilizando cifrado (hash), por lo que ni siquiera nuestro equipo puede ver tu contraseña real. El acceso a nuestra base de datos está protegido y restringido.",
+      s4bTitulo: "4.1 Procesamiento de pagos",
+      s4bTexto:
+        "El sistema de pagos de TechNova es una simulación con fines académicos. Los datos de tarjeta (número, titular, fecha de expiración y CVV) que ingresas en el checkout no se almacenan en ningún momento en nuestra base de datos ni en ningún servidor: se descartan inmediatamente después de simular la transacción. Únicamente se guarda el registro del pedido (productos, dirección de envío y monto total).",
+      s5Titulo: "5. Compartir información con terceros",
+      s5Texto:
+        "TechNova no vende, alquila ni comparte tu información personal con terceros para fines publicitarios. Tus datos solo se utilizan internamente para el funcionamiento de la plataforma.",
+      s6Titulo: "6. Tus derechos como usuario",
+      s6Texto: "Como usuario de TechNova, tienes derecho a:",
+      s6Item1: "Acceder a los datos personales que tenemos sobre ti",
+      s6Item2: "Solicitar la corrección de datos incorrectos",
+      s6Item3: "Solicitar la eliminación de tu cuenta y tus datos",
+      s6Nota: "Para ejercer cualquiera de estos derechos, contáctanos a través de nuestra página de contacto.",
+      s7Titulo: "7. Cambios en esta política",
+      s7Texto:
+        "Podemos actualizar esta política ocasionalmente para reflejar mejoras en nuestros servicios. Te recomendamos revisarla periódicamente.",
+      s8Titulo: "8. Contacto",
+      s8Texto: "Si tienes dudas sobre el tratamiento de tus datos, visita",
+      s8Link: "nuestra página de contacto",
     },
     // Accessibility sidebar
     accesibilidad: {
@@ -335,7 +380,7 @@ const translations = {
       actualizado: "Last updated: June 21, 2026",
       s1Titulo: "1. Information we collect",
       s1Texto:
-        "When you create an account or make a purchase at TechNova, we collect your full name, email address, password (stored encrypted), and order history. This information is securely stored in our database.",
+        "When you create an account at TechNova, we collect your name, email, and password (stored encrypted). When you make a purchase, we also collect the data needed for shipping, such as your contact name, phone number, address, and district. This information is securely stored in our database. Card data entered at checkout is never stored, since our payment system is a simulation for academic purposes.",
       s2Titulo: "2. Local storage in your browser",
       s2Texto:
         "To improve your browsing experience, TechNova uses your browser's local storage (localStorage and sessionStorage) instead of traditional cookies.",
@@ -359,6 +404,9 @@ const translations = {
       s4Titulo: "4. Data security",
       s4Texto:
         "Your password is stored encrypted and is never saved or displayed in plain text. Access to our database is restricted and protected through authentication.",
+      s4bTitulo: "4.1 Payment processing",
+      s4bTexto:
+        "TechNova's payment system is a simulation for academic purposes. Card data (number, cardholder, expiration date, and CVV) entered at checkout is never stored in our database or on any server: it is immediately discarded after the transaction is simulated. Only the order record (products, shipping address, and total amount) is saved.",  
       s5Titulo: "5. Your rights",
       s5Texto: "You may request at any time:",
       s5Item1: "Access to your personal data",
@@ -370,6 +418,48 @@ const translations = {
         "We may update this policy occasionally to reflect changes in our services. We recommend reviewing it periodically.",
       s7Titulo: "7. Contact",
       s7Texto: "If you have questions about this policy, write to us at",
+    },
+    politicaPrivacidad: {
+      titulo: "Privacy Policy",
+      subtitulo: "How TechNova collects, uses, and protects your personal data",
+      actualizado: "Last updated: June 21, 2026",
+      introTexto:
+        "At TechNova we are committed to protecting your privacy. This policy clearly explains what information we collect when you create an account or make a purchase, and how we use it.",
+      s1Titulo: "1. Data we collect",
+      s1Texto: "When you create an account at TechNova, we only collect:",
+      s1Item1: "Name",
+      s1Item2: "Email address",
+      s1Item3: "Password (stored encrypted, never in plain text)",
+      s1Item4: "Account creation date",
+      s1Nota:
+        "We do not request or store data such as phone number, date of birth, gender, address, or location. We only ask for the information strictly necessary to create your account and make purchases.",
+      s2Titulo: "2. Purpose of data processing",
+      s2Texto: "We use your information exclusively to:",
+      s2Item1: "Create and manage your user account",
+      s2Item2: "Process your purchases and maintain your order history",
+      s2Item3: "Allow you to securely sign in",
+      s2Item4: "Provide support when requested",
+      s3Titulo: "3. Legal basis for processing",
+      s3Texto:
+        "We process your personal data based on your express consent at the time of registration, and on the need to perform the purchase service you request as a user.",
+      s4Titulo: "4. Data security",
+      s4Texto:
+        "Your password is stored using encryption (hashing), so not even our team can see your real password. Access to our database is protected and restricted.",
+      s5Titulo: "5. Sharing information with third parties",
+      s5Texto:
+        "TechNova does not sell, rent, or share your personal information with third parties for advertising purposes. Your data is only used internally for the platform's operation.",
+      s6Titulo: "6. Your rights as a user",
+      s6Texto: "As a TechNova user, you have the right to:",
+      s6Item1: "Access the personal data we have about you",
+      s6Item2: "Request correction of incorrect data",
+      s6Item3: "Request deletion of your account and data",
+      s6Nota: "To exercise any of these rights, contact us through our contact page.",
+      s7Titulo: "7. Changes to this policy",
+      s7Texto:
+        "We may update this policy occasionally to reflect improvements in our services. We recommend reviewing it periodically.",
+      s8Titulo: "8. Contact",
+      s8Texto: "If you have questions about how we handle your data, visit",
+      s8Link: "our contact page",
     },
     accesibilidad: {
       titulo: "Accessibility menu",
@@ -514,7 +604,7 @@ const translations = {
       actualizado: "Qhipa kutiyachisqa: 21 junio 2026",
       s1Titulo: "1. Willakuykuna huñunchik",
       s1Texto:
-        "Cuentaykita ruwaspa utaq rantispa, sutiykita, correoykita, contraseñaykita (pakasqa) hinaspa rantikuyniykita huñunchik. Kay willakuykuna allinta base de datosninchikpi waqaychakun.",
+        "Cuentaykita ruwaspa, sutiykita, correoykita, contraseñaykita (pakasqa) huñunchik. Rantispaykiqa, apachinapaq willakuykunatapas huñunchik, sutiykita, telefonoykita, wasiykita hinaspa distritoykita. Kay willakuykuna allinta base de datosninchikpi waqaychakun. Checkout-pi churasqayki tarjeta willakuykunaqa manam imaynapipas waqaychakunchu, pagana sistemanchikmi pura simulacionllam yachay ruwanapaqlla.",
       s2Titulo: "2. Navegadorpi yuyaykuna wakichina",
       s2Texto:
         "Aswan allin purinaykipaq, TechNova localStorage hinaspa sessionStorage-ta servichikun, manam cookie-kunata.",
@@ -538,6 +628,9 @@ const translations = {
       s4Titulo: "4. Willakuykiykuna seguridad",
       s4Texto:
         "Contraseñaykim pakasqa waqaychakun, manam imaynapipas qhawarinapaq rikurinchu. Base de datosninchikman yaykuy harkasqa kachkan, autenticación nisqawan.",
+      s4bTitulo: "4.1 Pagana procesamiento",
+      s4bTexto:
+        "TechNova pagana sistemanmi pura simulacionllam, yachay ruwanapaqlla. Tarjeta willakuykuna (numero, sutiy, expiracion, CVV) checkout-pi churasqayki manam imaynapipas base de datosninchikpi waqaychakunchu: pagana simulacion ruwasqa qhipallanmi pichukun. Pedido willakuyllam waqaychakun (ranqakuna, maytachus apachina, hinaspa tukuy pagana).",  
       s5Titulo: "5. Derechoykikuna",
       s5Texto: "Imaynapas mañakuyta atinki:",
       s5Item1: "Willakuykikunaman yaykuyta",
@@ -549,6 +642,48 @@ const translations = {
         "Kay kamachita kutiyachisunchik servicionchikpi kutiyachiykuna kasqanrayku. Watuchispa qhawayta sugerinchik.",
       s7Titulo: "7. Rimana",
       s7Texto: "Kay kamachimanta tapukuy kanqachu, qillqaykuwayku:",
+    },
+    politicaPrivacidad: {
+      titulo: "Pakasqa Kamachi",
+      subtitulo: "Imaynatachus TechNova willakuykita huñun, servichikun, hinaspa harkan",
+      actualizado: "Qhipa kutiyachisqa: 21 junio 2026",
+      introTexto:
+        "TechNova-pi pakasqaykita harkayta munaykunchik. Kay kamachi sut'inta willan imakunatachus huñunchik cuentaykita ruwaspa utaq rantispa, hinaspa imaynatachus servichinchik.",
+      s1Titulo: "1. Willakuykuna huñunchik",
+      s1Texto: "Cuentaykita ruwaspa, kaykunallatam huñunchik:",
+      s1Item1: "Sutiy",
+      s1Item2: "Correo elektroniko",
+      s1Item3: "Contraseña (pakasqa waqaychasqa, manam rikuriqchu)",
+      s1Item4: "Cuentaykita ruwasqa p'unchaw",
+      s1Nota:
+        "Mana tapunchikchu nitaq waqaychanchikchu telefono, nacisqa p'unchaw, qhari-warmi, wasiyki, utaq maypi kasqaykita. Cuentaykita ruwanaykipaq, rantinaykipaqllapas, willakuyniyoq huñunchik.",
+      s2Titulo: "2. Willakuykita servichinanchik",
+      s2Texto: "Willakuykita kaykunallapaqmi servichinchik:",
+      s2Item1: "Cuentaykita ruwaspa hinaspa kamachispa",
+      s2Item2: "Rantikuyniykita procesaspa hinaspa historianta waqaychaspa",
+      s2Item3: "Allinta yaykunaykipaq",
+      s2Item4: "Mañakuspaykim yanapananchikpaq",
+      s3Titulo: "3. Kamachimanta base legal",
+      s3Texto:
+        "Willakuykita servichinchik consentimientoykiwan, registrakuy pachapi, hinaspa rantikuy servicio rurananchikpaq.",
+      s4Titulo: "4. Willakuykiykuna seguridad",
+      s4Texto:
+        "Contraseñaykim pakasqa waqaychakun (hash), chayrayku ñuqanchikpas mana rikuyta atinchikchu contraseñaykita. Base de datosninchikman yaykuy harkasqa kachkan.",
+      s5Titulo: "5. Willakuykita huk runakunaman qoyta",
+      s5Texto:
+        "TechNova willakuykita mana ranqonchu, mana mañachinchu, nitaq huk runakunaman qonchu publicidadpaq. Willakuykim plataformanchikpaq ruwananchikpaqllam servichikun.",
+      s6Titulo: "6. Derechoykikuna",
+      s6Texto: "TechNova-pi runa hina, derechoykikim kanmi:",
+      s6Item1: "Willakuykikunaman yaykuyta",
+      s6Item2: "Mana allin willakuyta allinchayta mañakuyta",
+      s6Item3: "Cuentaykita hinaspa willakuykikunata pichuyta mañakuyta",
+      s6Nota: "Kay derechokunata servichinaykipaq, rimana páginanchikwan rimasunchik.",
+      s7Titulo: "7. Kay kamachipi kutiyachiykuna",
+      s7Texto:
+        "Kay kamachita kutiyachisunchik servicionchikpi allinchaykuna kasqanrayku. Watuchispa qhawayta sugerinchik.",
+      s8Titulo: "8. Rimana",
+      s8Texto: "Willakuykikunata imaynatachus servichinchik tapukuyniykim kanqachu, kayman ri:",
+      s8Link: "rimana páginanchikman",
     },
     accesibilidad: {
       titulo: "Nisiyuq menú",
