@@ -21,6 +21,8 @@ import TextSpacing from "./components/layout/accessibility/accessibilityWidgets/
 import Daltonismo from "./components/layout/accessibility/accessibilityWidgets/Daltonismo";
 import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets/TextToSpeech";
 import PoliticaCookies from "./pages/PoliticaCookies";
+import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -38,15 +40,8 @@ function App() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/politica-cookies" element={<PoliticaCookies />} />
-          <Route
-            path="/politica-privacidad"
-            element={
-              <InfoPage
-                title="Politica de privacidad"
-                description="Aqui publicaremos de forma clara como protegemos tus datos personales y como puedes ejercer tus derechos."
-              />
-            }
-          />
+          <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+          <Route path="/admin" element={<Admin />} />
           <Route
             path="/terminos-condiciones"
             element={
