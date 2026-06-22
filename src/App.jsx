@@ -20,6 +20,7 @@ import DyslexiaFriendly from "./components/layout/accessibility/accessibilityWid
 import TextSpacing from "./components/layout/accessibility/accessibilityWidgets/TextSpacing";
 import Daltonismo from "./components/layout/accessibility/accessibilityWidgets/Daltonismo";
 import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets/TextToSpeech";
+import PoliticaCookies from "./pages/PoliticaCookies";
 
 function App() {
   return (
@@ -36,15 +37,7 @@ function App() {
           <Route path="/productos/:id" element={<DetalleProducto />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route
-            path="/politica-cookies"
-            element={
-              <InfoPage
-                title="Politica de cookies"
-                description="Estamos preparando esta seccion para explicar como usamos cookies y mejorar tu experiencia en el sitio."
-              />
-            }
-          />
+          <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route
             path="/politica-privacidad"
             element={

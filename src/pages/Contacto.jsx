@@ -14,9 +14,9 @@ export default function Contacto() {
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
-    if (!toast) {
-      return undefined;
-    }
+  window.scrollTo(0, 0);
+}, []);
+useEffect(() => {
 
     const timeoutId = setTimeout(() => {
       setToast(null);
