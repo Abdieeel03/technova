@@ -8,6 +8,9 @@ import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import InfoPage from "./pages/InfoPage";
 import MisCompras from "./pages/MisCompras";
+import Checkout from "./pages/Checkout";
+import CheckoutExito from "./pages/CheckoutExito";
+import CheckoutCancelado from "./pages/CheckoutCancelado";
 import NotFound from "./pages/NotFound";
 import AccessibilityWidget from "./components/layout/accessibility/AccessibilityWidget";
 import LectureMask from "./components/layout/accessibility/accessibilityWidgets/LectureMask";
@@ -17,6 +20,7 @@ import DyslexiaFriendly from "./components/layout/accessibility/accessibilityWid
 import TextSpacing from "./components/layout/accessibility/accessibilityWidgets/TextSpacing";
 import Daltonismo from "./components/layout/accessibility/accessibilityWidgets/Daltonismo";
 import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets/TextToSpeech";
+import PoliticaCookies from "./pages/PoliticaCookies";
 
 function App() {
   return (
@@ -27,18 +31,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/mis-compras" element={<MisCompras />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/exito" element={<CheckoutExito />} />
+          <Route path="/checkout/cancelado" element={<CheckoutCancelado />} />
           <Route path="/productos/:id" element={<DetalleProducto />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route
-            path="/politica-cookies"
-            element={
-              <InfoPage
-                title="Politica de cookies"
-                description="Estamos preparando esta seccion para explicar como usamos cookies y mejorar tu experiencia en el sitio."
-              />
-            }
-          />
+          <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route
             path="/politica-privacidad"
             element={

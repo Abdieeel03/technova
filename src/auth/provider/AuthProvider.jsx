@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import {
   getCurrentUser,
@@ -12,13 +12,8 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(() => getCurrentUser());
   const [session, setSession] = useState(() => getSession());
 
-  useEffect(() => {
-    setUser(getCurrentUser());
-    setSession(getSession());
-  }, []);
-
-  const login = useCallback(({ email, password }) => {
-    const result = loginUser({ email, password });
+  const login = useCallback(async ({ email, password }) => {
+    const result = await loginUser({ email, password });
     if (result.ok) {
       setUser(result.user);
       setSession(getSession());
@@ -26,8 +21,8 @@ export default function AuthProvider({ children }) {
     return result;
   }, []);
 
-  const register = useCallback(({ name, email, password }) => {
-    const result = registerUser({ name, email, password });
+  const register = useCallback(async ({ name, email, password }) => {
+    const result = await registerUser({ name, email, password });
     if (result.ok) {
       setUser(result.user);
       setSession(getSession());

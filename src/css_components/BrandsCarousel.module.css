@@ -1,5 +1,5 @@
 .section {
-  padding: 2.5rem 1rem;
+  padding: 3rem 1rem;
   background: #fff;
 }
 
@@ -10,10 +10,13 @@
 
 .titulo {
   text-align: center;
-  font-size: 1.4rem;
+  font-family: var(--font-base);
+  font-size: 0.78rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #1a1a2e;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  margin-bottom: 1.8rem;
 }
 
 .carouselWrapper {
@@ -30,22 +33,24 @@
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  background: var(--color-primary-tint);
+  border: 1px solid transparent;
+  border-radius: 12px;
   padding: 1.2rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 80px;
   transition:
-    box-shadow 0.2s,
-    border-color 0.2s;
+    box-shadow 0.25s,
+    border-color 0.25s,
+    transform 0.25s;
 }
 
 .card:hover {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(79, 159, 186, 0.18);
+  border-color: var(--color-primary-soft);
+  transform: translateY(-3px);
 }
 
 .logo {
@@ -66,38 +71,42 @@
 
 .arrow {
   background: #fff;
-  border: 1px solid #e5e7eb;
+  border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #555;
+  color: var(--color-ink);
   flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(20, 33, 61, 0.1);
   transition:
-    background 0.2s,
-    border-color 0.2s;
+    background-color 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
   line-height: 1;
 }
 
 .arrow:hover:not(:disabled) {
-  background: #f1f5f9;
-  border-color: #94a3b8;
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(79, 159, 186, 0.35);
 }
 
 .arrow:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: default;
+  box-shadow: none;
 }
 
 .dots {
   display: flex;
   justify-content: center;
   gap: 6px;
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
 }
 
 .dot {
@@ -114,12 +123,12 @@
 }
 
 .dot:hover {
-  background: #9ca3af;
+  background: var(--color-primary-soft);
 }
 
 .dotActive {
-  background: #1a1a2e;
-  transform: scale(1.2);
+  background: var(--color-primary);
+  transform: scale(1.25);
 }
 
 @media (max-width: 768px) {

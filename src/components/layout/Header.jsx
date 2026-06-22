@@ -7,22 +7,23 @@ import CarritoButton from "../cart/CarritoButton";
 import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 import useAuth from "../../auth/hooks/useAuth";
-import { createOrder } from "../../services/ordersStorage";
 
 export default function Header() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isCarritoOpen, setIsCarritoOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const {
-    items,
-    totalItems,
-    totalPrice,
-    updateItemQty,
-    removeItem,
-    clearCart,
-    setCartOwner,
-  } = useCarrito();
+const {
+  items,
+  totalItems,
+  totalPrice,
+  updateItemQty,
+  removeItem,
+  clearCart,
+  setCartOwner,
+  isModalOpen: isCarritoOpen,
+  openModal: openCarrito,
+  closeModal: closeCarrito,
+} = useCarrito();
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
@@ -55,14 +56,6 @@ export default function Header() {
     clearLoginModalQuery();
   };
 
-  const openCarrito = () => {
-    setIsCarritoOpen(true);
-  };
-
-  const closeCarrito = () => {
-    setIsCarritoOpen(false);
-  };
-
   const handleLogout = () => {
     logout();
     clearCart();
@@ -82,24 +75,13 @@ export default function Header() {
         type: "error",
         text: "Debes iniciar sesion para continuar con la compra.",
       });
-      setIsCarritoOpen(false);
+      closeCarrito();
       openLogin();
       return;
     }
-    const result = createOrder({
-      userId: user.id,
-      items,
-      total: totalPrice,
-    });
-    if (!result.ok) {
-      setCheckoutNotice({ type: "error", text: result.error });
-      return;
-    }
-    clearCart();
-    setCheckoutNotice({
-      type: "success",
-      text: "Compra registrada. Revisa tu historial en tu perfil.",
-    });
+
+    closeCarrito();
+    navigate("/checkout");
   };
 
   useEffect(() => {

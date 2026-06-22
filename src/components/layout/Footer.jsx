@@ -7,9 +7,11 @@ import {
   faInstagram,
   faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Footer() {
   const location = useLocation();
+  const { t } = useLanguage();
   const searchParams = new URLSearchParams(location.search);
   searchParams.set("modal", "login");
 
@@ -20,27 +22,27 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.div1} aria-label="Politicas del sitio">
-        <p>Nuestras Políticas</p>
-        <Link to="/politica-cookies">Política de cookies</Link>
-        <Link to="/politica-privacidad">Política de privacidad</Link>
-        <Link to="/terminos-condiciones">Términos y condiciones</Link>
+      <div className={styles.div1} aria-label={t.footer.nuestrasPoliticas}>
+        <p>{t.footer.nuestrasPoliticas}</p>
+        <Link to="/politica-cookies">{t.footer.politicaCookies}</Link>
+        <Link to="/politica-privacidad">{t.footer.politicaPrivacidad}</Link>
+        <Link to="/terminos-condiciones">{t.footer.terminosCondiciones}</Link>
       </div>
-      <div className={styles.div2} aria-label="Enlaces principales">
-        <p>Enlaces directos</p>
-        <Link to={loginLinkTo}>Inicia Sesión</Link>
-        <Link to="/productos">Productos</Link>
-        <Link to="/contacto">Contactanos</Link>
+      <div className={styles.div2} aria-label={t.footer.enlacesDirectos}>
+        <p>{t.footer.enlacesDirectos}</p>
+        <Link to={loginLinkTo}>{t.footer.iniciaSesion}</Link>
+        <Link to="/productos">{t.nav.productos}</Link>
+        <Link to="/contacto">{t.footer.contactanos}</Link>
       </div>
       <div className={styles.div3}>
         <div className={styles.containerRedes}>
-          <h4>Siguenos en:</h4>
+          <h4>{t.footer.siguenos}</h4>
           <div className={styles.linksSociales}>
             <a
               href="https://www.facebook.com/"
               target="_blank"
               rel="noreferrer"
-              aria-label="Ir a Facebook"
+              aria-label="Facebook"
             >
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
@@ -48,7 +50,7 @@ export default function Footer() {
               href="https://www.instagram.com/"
               target="_blank"
               rel="noreferrer"
-              aria-label="Ir a Instagram"
+              aria-label="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
@@ -56,7 +58,7 @@ export default function Footer() {
               href="https://www.tiktok.com/"
               target="_blank"
               rel="noreferrer"
-              aria-label="Ir a TikTok"
+              aria-label="TikTok"
             >
               <FontAwesomeIcon icon={faTiktok} />
             </a>

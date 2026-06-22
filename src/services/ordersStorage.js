@@ -1,36 +1,19 @@
-const ORDERS_KEY = "technovaOrders";
+const requestJson = async (url, options) => {
+  const response = await fetch(url, {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  });
 
-const safeParse = (value, fallback) => {
-  if (!value) {
-    return fallback;
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || `Request failed with status ${response.status}`);
   }
 
-  try {
-    return JSON.parse(value);
-  } catch {
-    return fallback;
-  }
+  return data;
 };
 
-const getOrders = () => {
-  const raw = localStorage.getItem(ORDERS_KEY);
-  const parsed = safeParse(raw, []);
-  return Array.isArray(parsed) ? parsed : [];
-};
-
-const saveOrders = (orders) => {
-  localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
-};
-
-const buildOrder = ({ userId, items, total }) => ({
-  id: crypto.randomUUID(),
-  userId,
-  items,
-  total,
-  createdAt: new Date().toISOString(),
-});
-
-export const createOrder = ({ userId, items, total }) => {
+export const createOrder = async ({ userId, items, total }) => {
   if (!userId) {
     return { ok: false, error: "Debes iniciar sesion para comprar." };
   }
@@ -45,17 +28,24 @@ export const createOrder = ({ userId, items, total }) => {
     return { ok: false, error: "Total invalido." };
   }
 
-  const orders = getOrders();
-  const newOrder = buildOrder({ userId, items: safeItems, total: amount });
-  saveOrders([...orders, newOrder]);
+  try {
+    const data = await requestJson("/api/ordenes", {
+      method: "POST",
+      body: JSON.stringify({ userId, items: safeItems, total: amount }),
+    });
 
-  return { ok: true, order: newOrder };
+    return { ok: true, order: data.orden };
+  } catch (error) {
+    return { ok: false, error: error.message };
+  }
 };
 
-export const getOrdersByUser = (userId) => {
+export const getOrdersByUser = async (userId) => {
   if (!userId) {
     return [];
   }
 
-  return getOrders().filter((order) => order.userId === userId);
+  const searchParams = new URLSearchParams({ userId });
+  const data = await requestJson(`/api/ordenes?${searchParams.toString()}`);
+  return data.ordenes || [];
 };

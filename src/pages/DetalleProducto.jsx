@@ -1,13 +1,15 @@
 import { useParams, Link, useLocation } from "react-router";
-import { useEffect } from "react";
-import data from "../data/productos.json";
+import { useEffect, useState } from "react";
 import styles from "../css_components/DetalleProducto.module.css";
 import useCarrito from "../hooks/useCarrito";
+import { fetchProductoById } from "../services/productosApi";
 
 export default function DetalleProducto() {
   const { id } = useParams();
-  const producto = data.productos.find((p) => p.id === Number(id));
-  const { addItem } = useCarrito();
+  const [producto, setProducto] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { addItem, openModal } = useCarrito();
   const location = useLocation();
   const backUrl = location.state?.from || "/productos";
   const categoriaLabel = (() => {
@@ -27,8 +29,48 @@ export default function DetalleProducto() {
     window.scrollTo(0, 0);
   }, [id]);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetchProductoById(id, controller.signal)
+      .then((productoData) => {
+        setProducto(productoData);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudo cargar el producto.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <main className={styles.page}>
+        <div className={styles.backBar}>
+          <div className={styles.backBarInner}>
+            <Link to={backUrl} className={styles.backLink}>
+              <span className={styles.backIcon}>←</span> {categoriaLabel}
+            </Link>
+          </div>
+        </div>
+        <div className={styles.container}>
+          <div className={styles.notFound}>
+            <h2 className={styles.notFoundTitle}>Cargando producto...</h2>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   /* ── Producto no encontrado ── */
-  if (!producto) {
+  if (error || !producto) {
     return (
       <main className={styles.page}>
         <div className={styles.backBar}>
@@ -41,7 +83,9 @@ export default function DetalleProducto() {
         <div className={styles.container}>
           <div className={styles.notFound}>
             <div className={styles.notFoundIcon}>📦</div>
-            <h2 className={styles.notFoundTitle}>Producto no encontrado</h2>
+            <h2 className={styles.notFoundTitle}>
+              {error || "Producto no encontrado"}
+            </h2>
             <p className={styles.notFoundText}>
               El producto que buscas no existe o fue eliminado.
             </p>
@@ -136,7 +180,7 @@ export default function DetalleProducto() {
               <button
                 type="button"
                 className={styles.addToCartButton}
-                onClick={() => addItem(producto, 1)}
+                onClick={() => { addItem(producto, 1); openModal(); }}
               >
                 Agregar al carrito
               </button>

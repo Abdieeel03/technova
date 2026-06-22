@@ -4,13 +4,16 @@ import "./css_components/general.css";
 import App from "./App.jsx";
 import CarritoProvider from "./provider/CarritoProvider";
 import AuthProvider from "./auth/provider/AuthProvider";
+import { LanguageProvider } from "./context/LanguageContext";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
-      <CarritoProvider>
-        <App />
-      </CarritoProvider>
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <CarritoProvider>
+          <App />
+        </CarritoProvider>
+      </AuthProvider>
+    </LanguageProvider>
   </BrowserRouter>,
 );

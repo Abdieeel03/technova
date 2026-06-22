@@ -52,6 +52,7 @@ export default function BrandsCarousel() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
+        <p className={styles.titulo}>Marcas que confían en nosotros</p>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}

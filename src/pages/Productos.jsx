@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import data from "../data/productos.json";
 import CardProducto from "../components/products/CardProducto";
+import { fetchProductos } from "../services/productosApi";
 import styles from "../css_components/Productos.module.css";
 
 const CATEGORIAS = [
@@ -10,6 +10,9 @@ const CATEGORIAS = [
   { key: "gaming", label: "Gaming" },
   { key: "accesorios", label: "Accesorios" },
   { key: "camaras", label: "Cámaras" },
+  { key: "laptops", label: "Laptops" },
+  { key: "celulares", label: "Celulares" },
+  { key: "componentes", label: "Componentes" },
 ];
 
 const RANGOS_PRECIO = [
@@ -25,7 +28,9 @@ const MARCAS_VISIBLES = 4;
 const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
-  const { productos } = data;
+  const [productos, setProductos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoriaActiva = searchParams.get("categoria") || "todos";
   const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
@@ -101,7 +106,8 @@ export default function Productos() {
   const totalPaginas = Math.ceil(
     productosFiltrados.length / PRODUCTOS_POR_PAGINA
   );
-  const inicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+  const paginaSegura = totalPaginas > 0 ? Math.min(paginaActual, totalPaginas) : 1;
+  const inicio = (paginaSegura - 1) * PRODUCTOS_POR_PAGINA;
   const productosPagina = productosFiltrados.slice(
     inicio,
     inicio + PRODUCTOS_POR_PAGINA
@@ -116,19 +122,37 @@ export default function Productos() {
     if (totalPaginas <= 7)
       return Array.from({ length: totalPaginas }, (_, i) => i + 1);
     const pages = [];
-    if (paginaActual <= 4) {
+    if (paginaSegura <= 4) {
       pages.push(1, 2, 3, 4, 5, "...", totalPaginas);
-    } else if (paginaActual >= totalPaginas - 3) {
+    } else if (paginaSegura >= totalPaginas - 3) {
       pages.push(1, "...", totalPaginas - 4, totalPaginas - 3, totalPaginas - 2, totalPaginas - 1, totalPaginas);
     } else {
-      pages.push(1, "...", paginaActual - 1, paginaActual, paginaActual + 1, "...", totalPaginas);
+      pages.push(1, "...", paginaSegura - 1, paginaSegura, paginaSegura + 1, "...", totalPaginas);
     }
     return pages;
   };
 
   useEffect(() => {
-    if (paginaActual > totalPaginas && totalPaginas > 0) setPaginaActual(1);
-  }, [productosFiltrados.length]);
+    const controller = new AbortController();
+
+    fetchProductos(undefined, controller.signal)
+      .then((productosData) => {
+        setProductos(productosData);
+        setError(null);
+      })
+      .catch((fetchError) => {
+        if (fetchError.name !== "AbortError") {
+          setError("No se pudieron cargar los productos.");
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(SCROLL_KEY);
@@ -266,12 +290,21 @@ export default function Productos() {
               {productosFiltrados.length !== 1 ? "s" : ""}
             </span>
             {totalPaginas > 1 && (
-              <span>Página {paginaActual} de {totalPaginas}</span>
+              <span>Página {paginaSegura} de {totalPaginas}</span>
             )}
           </div>
 
           <div className={styles.grid}>
-            {productosPagina.length > 0 ? (
+            {isLoading ? (
+              <div className={styles.noResults}>
+                <h3 className={styles.noResultsTitle}>Cargando productos...</h3>
+              </div>
+            ) : error ? (
+              <div className={styles.noResults}>
+                <h3 className={styles.noResultsTitle}>{error}</h3>
+                <p className={styles.noResultsText}>Intenta nuevamente en unos minutos</p>
+              </div>
+            ) : productosPagina.length > 0 ? (
               productosPagina.map((producto, index) => (
                 <div
                   key={producto.id}
@@ -294,8 +327,8 @@ export default function Productos() {
             <div className={styles.paginacion}>
               <button
                 className={styles.pgBtn}
-                onClick={() => irAPagina(paginaActual - 1)}
-                disabled={paginaActual === 1}
+                onClick={() => irAPagina(paginaSegura - 1)}
+                disabled={paginaSegura === 1}
                 aria-label="Página anterior"
               >
                 ‹
@@ -306,7 +339,7 @@ export default function Productos() {
                 ) : (
                   <button
                     key={p}
-                    className={`${styles.pgBtn} ${paginaActual === p ? styles.pgBtnActivo : ""}`}
+                    className={`${styles.pgBtn} ${paginaSegura === p ? styles.pgBtnActivo : ""}`}
                     onClick={() => irAPagina(p)}
                   >
                     {p}
@@ -315,8 +348,8 @@ export default function Productos() {
               )}
               <button
                 className={styles.pgBtn}
-                onClick={() => irAPagina(paginaActual + 1)}
-                disabled={paginaActual === totalPaginas}
+                onClick={() => irAPagina(paginaSegura + 1)}
+                disabled={paginaSegura === totalPaginas}
                 aria-label="Página siguiente"
               >
                 ›
