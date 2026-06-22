@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styles from "../../css_components/BrandsCarousel.module.css";
 
 const brands = [
@@ -68,13 +69,18 @@ export default function BrandsCarousel() {
 
           <div className={styles.track}>
             {visibles.map((brand) => (
-              <div key={brand.id} className={styles.card}>
+              <Link
+                key={brand.id}
+                to={`/productos?marca=${encodeURIComponent(brand.name)}`}
+                className={styles.card}
+                aria-label={`Ver productos de ${brand.name}`}
+              >
                 <img
                   src={brand.logo}
                   alt={brand.name}
                   className={styles.logo}
                 />
-              </div>
+              </Link>
             ))}
           </div>
 

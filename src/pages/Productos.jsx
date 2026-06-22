@@ -33,7 +33,10 @@ export default function Productos() {
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const categoriaActiva = searchParams.get("categoria") || "todos";
-  const [marcasSeleccionadas, setMarcasSeleccionadas] = useState([]);
+  const marcaUrl = searchParams.get("marca");
+  const [marcasSeleccionadas, setMarcasSeleccionadas] = useState(
+    marcaUrl ? [marcaUrl] : [],
+  );
   const [rangoActivo, setRangoActivo] = useState(null);
   const [precioMin, setPrecioMin] = useState("");
   const [precioMax, setPrecioMax] = useState("");
@@ -61,7 +64,7 @@ export default function Productos() {
   const toggleMarca = (marca) => {
     setPaginaActual(1);
     setMarcasSeleccionadas((prev) =>
-      prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca]
+      prev.includes(marca) ? prev.filter((m) => m !== marca) : [...prev, marca],
     );
   };
 
@@ -95,7 +98,9 @@ export default function Productos() {
     .filter(
       (p) =>
         marcasSeleccionadas.length === 0 ||
-        marcasSeleccionadas.includes(p.marca)
+        marcasSeleccionadas.some(
+          (m) => m.toLowerCase() === p.marca?.toLowerCase(),
+        ),
     )
     .filter((p) => {
       const min = precioMin === "" ? 0 : Number(precioMin);
@@ -104,13 +109,14 @@ export default function Productos() {
     });
 
   const totalPaginas = Math.ceil(
-    productosFiltrados.length / PRODUCTOS_POR_PAGINA
+    productosFiltrados.length / PRODUCTOS_POR_PAGINA,
   );
-  const paginaSegura = totalPaginas > 0 ? Math.min(paginaActual, totalPaginas) : 1;
+  const paginaSegura =
+    totalPaginas > 0 ? Math.min(paginaActual, totalPaginas) : 1;
   const inicio = (paginaSegura - 1) * PRODUCTOS_POR_PAGINA;
   const productosPagina = productosFiltrados.slice(
     inicio,
-    inicio + PRODUCTOS_POR_PAGINA
+    inicio + PRODUCTOS_POR_PAGINA,
   );
 
   const irAPagina = (n) => {
@@ -125,12 +131,35 @@ export default function Productos() {
     if (paginaSegura <= 4) {
       pages.push(1, 2, 3, 4, 5, "...", totalPaginas);
     } else if (paginaSegura >= totalPaginas - 3) {
-      pages.push(1, "...", totalPaginas - 4, totalPaginas - 3, totalPaginas - 2, totalPaginas - 1, totalPaginas);
+      pages.push(
+        1,
+        "...",
+        totalPaginas - 4,
+        totalPaginas - 3,
+        totalPaginas - 2,
+        totalPaginas - 1,
+        totalPaginas,
+      );
     } else {
-      pages.push(1, "...", paginaSegura - 1, paginaSegura, paginaSegura + 1, "...", totalPaginas);
+      pages.push(
+        1,
+        "...",
+        paginaSegura - 1,
+        paginaSegura,
+        paginaSegura + 1,
+        "...",
+        totalPaginas,
+      );
     }
     return pages;
   };
+
+  useEffect(() => {
+    if (marcaUrl) {
+      setMarcasSeleccionadas([marcaUrl]);
+      setPaginaActual(1);
+    }
+  }, [marcaUrl]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -207,12 +236,17 @@ export default function Productos() {
           <div className={styles.filterGroup}>
             <p className={styles.filterLabel}>Marca</p>
             {marcasDisponibles
-              .slice(0, verMasMarcas ? marcasDisponibles.length : MARCAS_VISIBLES)
+              .slice(
+                0,
+                verMasMarcas ? marcasDisponibles.length : MARCAS_VISIBLES,
+              )
               .map((marca) => (
                 <label key={marca} className={styles.checkLabel}>
                   <input
                     type="checkbox"
-                    checked={marcasSeleccionadas.includes(marca)}
+                    checked={marcasSeleccionadas.some(
+                      (m) => m.toLowerCase() === marca.toLowerCase(),
+                    )}
                     onChange={() => toggleMarca(marca)}
                   />
                   {marca}
@@ -235,7 +269,9 @@ export default function Productos() {
               <button
                 key={rango.label}
                 className={`${styles.rangoBtn} ${
-                  rangoActivo?.label === rango.label ? styles.rangoBtnActivo : ""
+                  rangoActivo?.label === rango.label
+                    ? styles.rangoBtnActivo
+                    : ""
                 }`}
                 onClick={() => aplicarRango(rango)}
               >
@@ -248,7 +284,10 @@ export default function Productos() {
                 className={styles.precioInput}
                 placeholder="Mínimo"
                 value={inputMin}
-                onChange={(e) => { setInputMin(e.target.value); setRangoActivo(null); }}
+                onChange={(e) => {
+                  setInputMin(e.target.value);
+                  setRangoActivo(null);
+                }}
               />
               <span className={styles.precioSep}>–</span>
               <input
@@ -256,7 +295,10 @@ export default function Productos() {
                 className={styles.precioInput}
                 placeholder="Máximo"
                 value={inputMax}
-                onChange={(e) => { setInputMax(e.target.value); setRangoActivo(null); }}
+                onChange={(e) => {
+                  setInputMax(e.target.value);
+                  setRangoActivo(null);
+                }}
               />
             </div>
             <button className={styles.aplicarBtn} onClick={aplicarInputs}>
@@ -290,7 +332,9 @@ export default function Productos() {
               {productosFiltrados.length !== 1 ? "s" : ""}
             </span>
             {totalPaginas > 1 && (
-              <span>Página {paginaSegura} de {totalPaginas}</span>
+              <span>
+                Página {paginaSegura} de {totalPaginas}
+              </span>
             )}
           </div>
 
@@ -302,7 +346,9 @@ export default function Productos() {
             ) : error ? (
               <div className={styles.noResults}>
                 <h3 className={styles.noResultsTitle}>{error}</h3>
-                <p className={styles.noResultsText}>Intenta nuevamente en unos minutos</p>
+                <p className={styles.noResultsText}>
+                  Intenta nuevamente en unos minutos
+                </p>
               </div>
             ) : productosPagina.length > 0 ? (
               productosPagina.map((producto, index) => (
@@ -317,8 +363,12 @@ export default function Productos() {
             ) : (
               <div className={styles.noResults}>
                 <div className={styles.noResultsIcon}>🔍</div>
-                <h3 className={styles.noResultsTitle}>No se encontraron productos</h3>
-                <p className={styles.noResultsText}>Intenta con otra categoría o filtro</p>
+                <h3 className={styles.noResultsTitle}>
+                  No se encontraron productos
+                </h3>
+                <p className={styles.noResultsText}>
+                  Intenta con otra categoría o filtro
+                </p>
               </div>
             )}
           </div>
@@ -335,7 +385,9 @@ export default function Productos() {
               </button>
               {getPaginas().map((p, i) =>
                 p === "..." ? (
-                  <span key={`dots-${i}`} className={styles.pgDots}>…</span>
+                  <span key={`dots-${i}`} className={styles.pgDots}>
+                    …
+                  </span>
                 ) : (
                   <button
                     key={p}
@@ -344,7 +396,7 @@ export default function Productos() {
                   >
                     {p}
                   </button>
-                )
+                ),
               )}
               <button
                 className={styles.pgBtn}

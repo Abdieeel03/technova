@@ -41,6 +41,8 @@
   align-items: center;
   justify-content: center;
   height: 80px;
+  text-decoration: none;
+  cursor: pointer;
   transition:
     box-shadow 0.25s,
     border-color 0.25s,
