@@ -23,14 +23,18 @@ const buildOrder = ({ userId, items, total }) => ({
 });
 
 const handleGet = async (req, res) => {
-  const { userId, status } = req.query;
-
-  if (!userId) {
-    return res.status(400).json({ error: "Missing userId" });
-  }
+  const { userId, status, all } = req.query;
 
   const collection = await getOrdenesCollection();
-  const query = { userId };
+  const query = {};
+
+  if (all !== "true") {
+    if (!userId) {
+      return res.status(400).json({ error: "Missing userId" });
+    }
+
+    query.userId = userId;
+  }
 
   if (status) {
     query.status = status;

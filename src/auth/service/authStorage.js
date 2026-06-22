@@ -18,6 +18,11 @@ const buildSession = (user) => ({
   loggedAt: new Date().toISOString(),
 });
 
+const normalizeUser = (user) => ({
+  ...user,
+  role: user?.role || user?.rol || "cliente",
+});
+
 const requestJson = async (url, options) => {
   const response = await fetch(url, {
     headers: { "Content-Type": "application/json" },
@@ -59,9 +64,10 @@ export const registerUser = async ({ name, email, password }) => {
       }),
     });
 
-    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(data.user)));
+    const user = normalizeUser(data.user);
+    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(user)));
 
-    return { ok: true, user: data.user };
+    return { ok: true, user };
   } catch (error) {
     return { ok: false, error: error.message };
   }
@@ -81,9 +87,10 @@ export const loginUser = async ({ email, password }) => {
       body: JSON.stringify({ email: trimmedEmail, password: trimmedPassword }),
     });
 
-    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(data.user)));
+    const user = normalizeUser(data.user);
+    localStorage.setItem(SESSION_KEY, JSON.stringify(buildSession(user)));
 
-    return { ok: true, user: data.user };
+    return { ok: true, user };
   } catch (error) {
     return { ok: false, error: error.message };
   }
@@ -101,7 +108,7 @@ export const getCurrentUser = () => {
     return null;
   }
 
-  return session.user;
+  return normalizeUser(session.user);
 };
 
 export const getSession = () => {

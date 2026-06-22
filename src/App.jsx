@@ -22,6 +22,7 @@ import Daltonismo from "./components/layout/accessibility/accessibilityWidgets/D
 import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets/TextToSpeech";
 import PoliticaCookies from "./pages/PoliticaCookies";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
+          <Route path="/admin" element={<Admin />} />
           <Route
             path="/terminos-condiciones"
             element={

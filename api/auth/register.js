@@ -8,6 +8,7 @@ const toPublicUser = (user) => ({
   id: user.id,
   name: user.name,
   email: user.email,
+  role: user.role || "cliente",
 });
 
 export default async function handler(req, res) {
@@ -46,6 +47,7 @@ export default async function handler(req, res) {
       name: trimmedName,
       email: trimmedEmail,
       passwordHash: bcrypt.hashSync(trimmedPassword, SALT_ROUNDS),
+      role: "cliente",
       createdAt: new Date().toISOString(),
     };
 
