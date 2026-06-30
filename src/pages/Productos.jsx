@@ -222,9 +222,8 @@ export default function Productos() {
             {CATEGORIAS.map((cat) => (
               <button
                 key={cat.key}
-                className={`${styles.sidebarBtn} ${
-                  categoriaActiva === cat.key ? styles.sidebarBtnActivo : ""
-                }`}
+                className={`${styles.sidebarBtn} ${categoriaActiva === cat.key ? styles.sidebarBtnActivo : ""
+                  }`}
                 onClick={() => setCategoriaActiva(cat.key)}
               >
                 {cat.label}
@@ -268,11 +267,10 @@ export default function Productos() {
             {RANGOS_PRECIO.map((rango) => (
               <button
                 key={rango.label}
-                className={`${styles.rangoBtn} ${
-                  rangoActivo?.label === rango.label
+                className={`${styles.rangoBtn} ${rangoActivo?.label === rango.label
                     ? styles.rangoBtnActivo
                     : ""
-                }`}
+                  }`}
                 onClick={() => aplicarRango(rango)}
               >
                 {rango.label}

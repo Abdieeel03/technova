@@ -40,12 +40,12 @@ const getStatusTone = (status) => {
 
 export default function Admin() {
   const { user, login, logout } = useAuth();
-  
+
   // Data State
   const [productos, setProductos] = useState([]);
   const [ordenes, setOrdenes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // UI State
   const [activeView, setActiveView] = useState("ordenes");
   const [accessForm, setAccessForm] = useState({ email: "", password: "" });
@@ -71,6 +71,21 @@ export default function Admin() {
   // Confirm Delete Modal
   const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, product: null });
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isReloading, setIsReloading] = useState(false);
+
+  const handleReload = async () => {
+    setIsReloading(true);
+    setMessage(null);
+    try {
+      const productosData = await fetchProductos(undefined, undefined, true);
+      setProductos(productosData);
+      setMessage({ type: "success", text: "Productos recargados correctamente." });
+    } catch (error) {
+      setMessage({ type: "error", text: "Error al recargar productos: " + error.message });
+    } finally {
+      setIsReloading(false);
+    }
+  };
 
   useEffect(() => {
     if (user?.role !== "admin") return;
@@ -106,8 +121,8 @@ export default function Admin() {
 
   const filteredProducts = useMemo(() => {
     return productos.filter(p => {
-      const matchesSearch = p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            p.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = p.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.descripcion.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = filterCategory ? p.categoria === filterCategory : true;
       return matchesSearch && matchesCategory;
     });
@@ -270,12 +285,12 @@ export default function Admin() {
       masVendido: form.masVendido,
       oferta: form.ofertaActiva
         ? {
-            activa: true,
-            etiqueta: "Oferta",
-            precioOriginal: Number(form.ofertaPrecioOriginal || form.precio),
-            precioOferta: Number(form.ofertaPrecioOferta || form.precio),
-            descuento: Number(form.ofertaDescuento || 0),
-          }
+          activa: true,
+          etiqueta: "Oferta",
+          precioOriginal: Number(form.ofertaPrecioOriginal || form.precio),
+          precioOferta: Number(form.ofertaPrecioOferta || form.precio),
+          descuento: Number(form.ofertaDescuento || 0),
+        }
         : { activa: false },
     };
 
@@ -413,8 +428,8 @@ export default function Admin() {
               <span className={styles.statValue}>{formatCurrency(stats.ingresos)}</span>
             </div>
           </div>
-          
-          <br/>
+
+          <br />
           <div className={styles.ordersPanel}>
             <h2 className={styles.panelTitle}>
               <span className={styles.panelTitleIcon}>📦</span>
@@ -436,33 +451,43 @@ export default function Admin() {
               <div>
                 <div className={styles.toolbar}>
                   <div className={styles.toolbarActions}>
-                    <input 
-                      type="text" 
-                      placeholder="Buscar por nombre o descripción..." 
+                    <input
+                      type="text"
+                      placeholder="Buscar por nombre o descripción..."
                       className={styles.searchInput}
                       value={searchTerm}
                       onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                     />
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       className={styles.submitSecondary}
                       onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
                     >
                       Filtros avanzados {showAdvancedFilters ? "▲" : "▼"}
                     </button>
                   </div>
-                  <button type="button" className={styles.submit} onClick={openCreateModal}>
-                    ➕ Crear producto
-                  </button>
+                  <div style={{ display: "flex", gap: "0.75rem" }}>
+                    <button
+                      type="button"
+                      className={styles.submitSecondary}
+                      onClick={handleReload}
+                      disabled={isReloading}
+                    >
+                      {isReloading ? "🔄 Recargando..." : "🔄 Recargar productos"}
+                    </button>
+                    <button type="button" className={styles.submit} onClick={openCreateModal}>
+                      ➕ Crear producto
+                    </button>
+                  </div>
                 </div>
 
                 {showAdvancedFilters && (
                   <div className={styles.advancedFilters}>
                     <div className={styles.field}>
                       <label className={styles.label}>Categoría</label>
-                      <select 
-                        className={styles.select} 
-                        value={filterCategory} 
+                      <select
+                        className={styles.select}
+                        value={filterCategory}
                         onChange={(e) => { setFilterCategory(e.target.value); setCurrentPage(1); }}
                       >
                         <option value="">Todas</option>
@@ -520,24 +545,24 @@ export default function Admin() {
                     </div>
                     {totalPages > 1 && (
                       <div className={styles.pagination}>
-                        <button 
-                          className={styles.paginationButton} 
+                        <button
+                          className={styles.paginationButton}
                           disabled={currentPage === 1}
                           onClick={() => setCurrentPage(prev => prev - 1)}
                         >
                           Anterior
                         </button>
                         {[...Array(totalPages)].map((_, i) => (
-                          <button 
-                            key={i} 
+                          <button
+                            key={i}
                             className={`${styles.paginationButton} ${currentPage === i + 1 ? styles.paginationButtonActive : ''}`}
                             onClick={() => setCurrentPage(i + 1)}
                           >
                             {i + 1}
                           </button>
                         ))}
-                        <button 
-                          className={styles.paginationButton} 
+                        <button
+                          className={styles.paginationButton}
                           disabled={currentPage === totalPages}
                           onClick={() => setCurrentPage(prev => prev + 1)}
                         >
@@ -693,7 +718,7 @@ export default function Admin() {
                         </button>
                       </div>
                     ))}
-                    <button type="button" className={`${styles.submit} ${styles.submitSecondary}`} onClick={() => addArrayItem("caracteristicas", "") }>
+                    <button type="button" className={`${styles.submit} ${styles.submitSecondary}`} onClick={() => addArrayItem("caracteristicas", "")}>
                       + Agregar caracteristica
                     </button>
                   </div>
@@ -781,15 +806,15 @@ export default function Admin() {
             <div className={styles.modalBody}>
               <p>¿Estás seguro que deseas eliminar el producto <strong>{confirmDelete.product?.nombre}</strong>?</p>
               <div className={styles.confirmModalActions}>
-                <button 
-                  className={styles.submitSecondary} 
+                <button
+                  className={styles.submitSecondary}
                   onClick={() => setConfirmDelete({ isOpen: false, product: null })}
                   disabled={isDeleting}
                 >
                   Cancelar
                 </button>
-                <button 
-                  className={styles.submit} 
+                <button
+                  className={styles.submit}
                   style={{ background: '#dc2626' }}
                   onClick={handleDelete}
                   disabled={isDeleting}
