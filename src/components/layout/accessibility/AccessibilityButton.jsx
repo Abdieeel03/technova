@@ -1,13 +1,15 @@
 import styles from "../../../css_components/accessibility/AccessibilityButton.module.css";
-import { useState } from 'react';
+import { useState } from "react";
+import { useLanguage } from "../../../context/LanguageContext";
 
 export default function AccessibilityButton({ onClick }) {
+  const { t } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <button
       className={styles.container}
-      aria-label="Abrir opciones de accesibilidad"
+      aria-label={t.accesibilidad.abrirAria}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -19,7 +21,7 @@ export default function AccessibilityButton({ onClick }) {
         viewBox="0 0 1000 1000"
         className={`${styles.icon} ${isHovered ? styles.animateIcon : ""}`}
       >
-        <title>Símbolo Internacional de Accesibilidad</title>
+        <title>{t.accesibilidad.simboloTitulo}</title>
 
         <g className={styles.arcs}>
           <path d="M807.6,802.4c8.2,7.5,15.1,16.3,20.5,26.1c87.3-87,136.2-205.3,135.9-328.6c0-10.1-0.4-20.1-1-30.1 c-9.9,3.2-20.3,4.8-30.8,4.8c-0.6,0-1.3,0-1.9,0c0.5,8.4,0.8,16.8,0.8,25.3C931.3,613.1,887,721.8,807.6,802.4z" />

@@ -5,27 +5,29 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
+import { useLanguage } from "../context/LanguageContext";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
   return `S/. ${numeric.toFixed(2)}`;
 };
 
-const METODO_LABELS = {
-  standard: "Envio estandar",
-  pickup: "Recojo en tienda",
+const getMetodoLabel = (t, metodo) => {
+  if (metodo === "pickup") return t.misCompras.metodoRecojo;
+  if (metodo === "standard") return t.misCompras.metodoEstandar;
+  return metodo;
 };
 
-const STATUS_CONFIG = {
-  pagado: { label: "Pagado", tone: "success" },
-  entregado: { label: "Entregado", tone: "success" },
-  enviado: { label: "Enviado", tone: "info" },
-  pendiente: { label: "Pendiente", tone: "warning" },
-  cancelado: { label: "Cancelado", tone: "danger" },
-  rechazado: { label: "Rechazado", tone: "danger" },
-};
+const getStatusConfig = (t, status) => {
+  const STATUS_CONFIG = {
+    pagado: { label: t.misCompras.estadoPagado, tone: "success" },
+    entregado: { label: t.misCompras.estadoEntregado, tone: "success" },
+    enviado: { label: t.misCompras.estadoEnviado, tone: "info" },
+    pendiente: { label: t.misCompras.estadoPendiente, tone: "warning" },
+    cancelado: { label: t.misCompras.estadoCancelado, tone: "danger" },
+    rechazado: { label: t.misCompras.estadoRechazado, tone: "danger" },
+  };
 
-const getStatusConfig = (status) => {
   if (status && STATUS_CONFIG[status]) {
     return STATUS_CONFIG[status];
   }
@@ -40,16 +42,16 @@ const getStatusConfig = (status) => {
   return STATUS_CONFIG.pagado;
 };
 
-const getPaymentLabel = (pago) => {
+const getPaymentLabel = (t, pago) => {
   if (!pago) {
-    return "Pago directo";
+    return t.misCompras.pagoDirecto;
   }
 
   if (pago.ultimos4) {
-    return `Tarjeta •••• ${pago.ultimos4}`;
+    return t.misCompras.tarjetaTerminacion.replace("{n}", pago.ultimos4);
   }
 
-  return "Pago directo";
+  return t.misCompras.pagoDirecto;
 };
 
 const formatDireccion = (direccion) => {
@@ -102,6 +104,7 @@ const getShortOrderId = (id) => {
 
 export default function MisCompras() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [orders, setOrders] = useState(null);
   const [expandedOrders, setExpandedOrders] = useState({});
 
@@ -147,14 +150,13 @@ export default function MisCompras() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div>
-          <h1>Mis compras</h1>
+          <h1>{t.misCompras.titulo}</h1>
           <p>
-            Revisa tu historial y el detalle de cada orden registrada en
-            TechNova.
+            {t.misCompras.subtitulo}
           </p>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>Total gastado</span>
+          <span className={styles.summaryLabel}>{t.misCompras.totalGastado}</span>
           <strong className={styles.summaryValue}>
             {formatCurrency(totalCompras)}
           </strong>
@@ -165,25 +167,25 @@ export default function MisCompras() {
         <section className={styles.loading} aria-live="polite" aria-busy="true">
           <div className={styles.spinner} />
           <div>
-            <h2>Cargando tus compras...</h2>
-            <p>Estamos consultando tu historial actualizado.</p>
+            <h2>{t.misCompras.cargandoTitulo}</h2>
+            <p>{t.misCompras.cargandoDesc}</p>
           </div>
         </section>
       ) : orders.length === 0 ? (
         <section className={styles.empty}>
           <div className={styles.emptyIcon}>🧾</div>
-          <h2>Aun no tienes compras</h2>
+          <h2>{t.misCompras.sinCompras}</h2>
           <p>
-            Cuando completes una compra, aparecera aqui con todos los detalles.
+            {t.misCompras.sinComprasDesc}
           </p>
           <Link to="/productos" className={styles.cta}>
-            Ver productos
+            {t.misCompras.verProductos}
           </Link>
         </section>
       ) : (
         <section className={styles.list}>
           {orders.map((order) => {
-            const statusConfig = getStatusConfig(order.status);
+            const statusConfig = getStatusConfig(t, order.status);
             const isExpanded = Boolean(expandedOrders[order.id]);
             const hasShipping = Boolean(order.envio?.metodo);
             const shippingCost = Number(order.envio?.costoEnvio || 0);
@@ -262,23 +264,23 @@ export default function MisCompras() {
 
                 <div className={styles.breakdown}>
                   <div className={styles.breakdownRow}>
-                    <span>Subtotal</span>
+                    <span>{t.common.subtotal}</span>
                     <span>{formatCurrency(subtotal)}</span>
                   </div>
                   {hasShipping ? (
                     <div className={styles.breakdownRow}>
-                      <span>Envio</span>
+                      <span>{t.common.envio}</span>
                       <span>
                         {shippingCost > 0
                           ? formatCurrency(shippingCost)
-                          : "Gratis"}
+                          : t.common.gratis}
                       </span>
                     </div>
                   ) : null}
                   <div
                     className={`${styles.breakdownRow} ${styles.breakdownTotal}`}
                   >
-                    <span>Total</span>
+                    <span>{t.common.total}</span>
                     <span>{formatCurrency(total)}</span>
                   </div>
                 </div>
@@ -291,8 +293,8 @@ export default function MisCompras() {
                   aria-controls={detailId}
                 >
                   <span className={styles.detailsToggleText}>
-                    Pedido #{getShortOrderId(order.id)} ·{" "}
-                    {getPaymentLabel(order.pago)} ·{" "}
+                    {t.misCompras.pedido}{getShortOrderId(order.id)} ·{" "}
+                    {getPaymentLabel(t, order.pago)} ·{" "}
                     {formatDate(order.createdAt)}
                   </span>
                   <FontAwesomeIcon
@@ -307,19 +309,19 @@ export default function MisCompras() {
                   <div id={detailId} className={styles.detailsPanel}>
                     <div className={styles.detailRow}>
                       <span className={styles.detailLabel}>
-                        Numero de pedido
+                        {t.misCompras.numeroPedido}
                       </span>
                       <span className={styles.detailValue}>{order.id}</span>
                     </div>
                     <div className={styles.detailRow}>
-                      <span className={styles.detailLabel}>Metodo de pago</span>
+                      <span className={styles.detailLabel}>{t.misCompras.metodoPago}</span>
                       <span className={styles.detailValue}>
-                        {getPaymentLabel(order.pago)}
+                        {getPaymentLabel(t, order.pago)}
                       </span>
                     </div>
                     {order.pago?.pagadoEn ? (
                       <div className={styles.detailRow}>
-                        <span className={styles.detailLabel}>Pagado el</span>
+                        <span className={styles.detailLabel}>{t.misCompras.pagadoEl}</span>
                         <span className={styles.detailValue}>
                           {formatDate(order.pago.pagadoEn)}
                         </span>
@@ -334,12 +336,11 @@ export default function MisCompras() {
                           </span>
                           <div>
                             <p className={styles.shippingMethod}>
-                              {METODO_LABELS[order.envio.metodo] ||
-                                order.envio.metodo}
+                              {getMetodoLabel(t, order.envio.metodo)}
                             </p>
                             {order.envio.metodo === "pickup" ? (
                               <p className={styles.shippingAddress}>
-                                Av. Larco 345, Miraflores, Lima
+                                {t.misCompras.direccionTienda}
                               </p>
                             ) : formatDireccion(order.envio.direccion) ? (
                               <p className={styles.shippingAddress}>
@@ -355,7 +356,7 @@ export default function MisCompras() {
                         <span className={styles.shippingCost}>
                           {shippingCost > 0
                             ? formatCurrency(shippingCost)
-                            : "Envio gratis"}
+                            : t.misCompras.envioGratis}
                         </span>
                       </div>
                     ) : null}

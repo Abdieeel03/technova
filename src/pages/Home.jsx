@@ -6,8 +6,10 @@ import BestSellers from "../components/home/BestSellers";
 import BrandsCarousel from "../components/home/BrandsCarousel";
 import CategoryCarousel from "../components/home/CategoryCarousel";
 import { fetchProductos } from "../services/productosApi";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Home() {
+  const { t } = useLanguage();
   const [productos, setProductos] = useState([]);
   const [isLoadingProductos, setIsLoadingProductos] = useState(true);
   const [productosError, setProductosError] = useState(null);
@@ -22,7 +24,7 @@ export default function Home() {
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setProductosError("No se pudieron cargar los productos.");
+          setProductosError(t.home.errorProductos);
         }
       })
       .finally(() => {
@@ -40,39 +42,37 @@ export default function Home() {
       <FeaturedProducts
         productos={productos.slice(0, 12)}
         isLoading={isLoadingProductos}
-        error={
-          productosError && "No se pudieron cargar los productos destacados."
-        }
+        error={productosError && t.home.errorDestacados}
       />
       <BestSellers
         productos={productos.filter((producto) => producto.masVendido)}
         isLoading={isLoadingProductos}
-        error={productosError && "No se pudieron cargar los más vendidos."}
+        error={productosError && t.home.errorMasVendidos}
       />
       <CategoryCarousel
         tipo="monitor"
         icono="🖥️"
-        titulo="Pantallas"
+        titulo={t.home.tituloPantallas}
         productos={productos.filter(
           (producto) =>
             producto.tipo?.toLowerCase().includes("monitor") ||
             producto.tipo?.toLowerCase().includes("pantalla"),
         )}
         isLoading={isLoadingProductos}
-        error={productosError && "No se pudieron cargar estos productos."}
+        error={productosError && t.home.errorCategoria}
       />
       <CategoryCarousel
         tipo="mouse"
         icono="🖱️"
-        titulo="Mouse"
+        titulo={t.home.tituloMouse}
         productos={productos.filter((producto) => producto.tipo === "mouse")}
         isLoading={isLoadingProductos}
-        error={productosError && "No se pudieron cargar estos productos."}
+        error={productosError && t.home.errorCategoria}
       />
       <CategoryCarousel
         tipo="audífonos"
         icono="🎧"
-        titulo="Audífonos"
+        titulo={t.home.tituloAudifonos}
         productos={productos.filter(
           (producto) =>
             producto.tipo?.toLowerCase().includes("audifono") ||
@@ -80,7 +80,7 @@ export default function Home() {
             producto.tipo?.toLowerCase().includes("auricular"),
         )}
         isLoading={isLoadingProductos}
-        error={productosError && "No se pudieron cargar estos productos."}
+        error={productosError && t.home.errorCategoria}
       />
       <BrandsCarousel />
       <PromoCarousel />

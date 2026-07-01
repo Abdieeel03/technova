@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/Perfiles.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -21,42 +22,42 @@ function dispatchProfileFeatures(caracteristicas, activate) {
         window.dispatchEvent(
           new CustomEvent("set-text-size", {
             detail: { level: activate ? value : 1 },
-          })
+          }),
         );
         break;
       case "CursorSize":
         window.dispatchEvent(
           new CustomEvent("set-cursor-size", {
             detail: { large: activate ? value >= 2 : false },
-          })
+          }),
         );
         break;
       case "Dislexia":
         window.dispatchEvent(
           new CustomEvent("set-dyslexia", {
             detail: { active: activate },
-          })
+          }),
         );
         break;
       case "TextSpacing":
         window.dispatchEvent(
           new CustomEvent("set-text-spacing", {
             detail: { active: activate },
-          })
+          }),
         );
         break;
       case "FocusMode":
         window.dispatchEvent(
           new CustomEvent("toggle-lecture-mask", {
             detail: { active: activate },
-          })
+          }),
         );
         break;
       case "Daltonismo":
         window.dispatchEvent(
           new CustomEvent("set-daltonismo", {
             detail: { active: activate },
-          })
+          }),
         );
         break;
       default:
@@ -68,29 +69,30 @@ function dispatchProfileFeatures(caracteristicas, activate) {
 // Resetear todos los widgets a su estado por defecto
 function resetAllWidgets() {
   window.dispatchEvent(
-    new CustomEvent("set-text-size", { detail: { level: 1 } })
+    new CustomEvent("set-text-size", { detail: { level: 1 } }),
   );
   window.dispatchEvent(
-    new CustomEvent("set-cursor-size", { detail: { large: false } })
+    new CustomEvent("set-cursor-size", { detail: { large: false } }),
   );
   window.dispatchEvent(
-    new CustomEvent("set-dyslexia", { detail: { active: false } })
+    new CustomEvent("set-dyslexia", { detail: { active: false } }),
   );
   window.dispatchEvent(
-    new CustomEvent("set-text-spacing", { detail: { active: false } })
+    new CustomEvent("set-text-spacing", { detail: { active: false } }),
   );
   window.dispatchEvent(
-    new CustomEvent("toggle-lecture-mask", { detail: { active: false } })
+    new CustomEvent("toggle-lecture-mask", { detail: { active: false } }),
   );
   window.dispatchEvent(
-    new CustomEvent("set-daltonismo", { detail: { active: false } })
+    new CustomEvent("set-daltonismo", { detail: { active: false } }),
   );
   window.dispatchEvent(
-    new CustomEvent("set-tts", { detail: { active: false } })
+    new CustomEvent("set-tts", { detail: { active: false } }),
   );
 }
 
 export default function Perfiles() {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPerfil, setSelectedPerfil] = useState("");
   const [perfilName, setPerfilName] = useState("");
@@ -110,35 +112,38 @@ export default function Perfiles() {
 
     window.addEventListener("lecture-mask-deactivated", handleMaskDeactivated);
     return () => {
-      window.removeEventListener("lecture-mask-deactivated", handleMaskDeactivated);
+      window.removeEventListener(
+        "lecture-mask-deactivated",
+        handleMaskDeactivated,
+      );
     };
   }, []);
 
   const perfiles = [
     {
       id: 1,
-      name: "Visión Baja",
+      name: t.accesibilidad.perfilVisionBaja,
       iconType: "icon",
       icon: faEyeSlash,
       caracteristicas: [{ TextSize: 4 }, { CursorSize: 2 }],
     },
     {
       id: 2,
-      name: "Dislexia",
+      name: t.accesibilidad.perfilDislexia,
       iconType: "text",
       iconText: "∀?",
       caracteristicas: [{ Dislexia: true }, { TextSpacing: true }],
     },
     {
       id: 3,
-      name: "TDHA",
+      name: t.accesibilidad.perfilTDHA,
       iconType: "icon",
       icon: faBrain,
       caracteristicas: [{ FocusMode: true }],
     },
     {
       id: 4,
-      name: "Daltonismo",
+      name: t.accesibilidad.perfilDaltonismo,
       iconType: "icon",
       icon: faCircleHalfStroke,
       caracteristicas: [{ Daltonismo: true }],
@@ -182,7 +187,10 @@ export default function Perfiles() {
     <section className={styles.dropdownContainer}>
       <div>
         <button onClick={toggleMenu} className={styles.dropdownButton}>
-          <span>Perfil: {isActive ? `[${perfilName}], activo` : ""}</span>
+          <span>
+            {t.accesibilidad.perfil}:{" "}
+            {isActive ? `[${perfilName}], ${t.accesibilidad.perfilActivo}` : ""}
+          </span>
           <FontAwesomeIcon
             icon={isOpen ? faChevronUp : faChevronDown}
             className={styles.chevronIcon}
@@ -224,4 +232,3 @@ export default function Perfiles() {
     </section>
   );
 }
-

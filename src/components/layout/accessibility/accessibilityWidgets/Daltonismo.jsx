@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/Daltonismo.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function Daltonismo() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(false);
 
   // Escuchar eventos del perfil "Daltonismo"
@@ -36,7 +38,7 @@ export default function Daltonismo() {
       onClick={toggle}
       className={`${styles.widgetButton} ${active ? styles.activeButton : ""}`}
       aria-pressed={active}
-      aria-label={`Daltonismo: ${active ? "activado" : "desactivado"}`}
+      aria-label={`${t.accesibilidad.contrastes}: ${active ? t.accesibilidad.daltonismoActivado : t.accesibilidad.daltonismoDesactivado}`}
       type="button"
     >
       {/* Icono: gota de contraste/color */}
@@ -57,7 +59,7 @@ export default function Daltonismo() {
         />
       </svg>
 
-      <span className={styles.label}>Contrastes</span>
+      <span className={styles.label}>{t.accesibilidad.contrastes}</span>
 
       {/* Toggle switch visual */}
       <div className={styles.toggleTrack}>

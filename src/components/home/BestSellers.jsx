@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../products/ProductCard";
 import { fetchProductos } from "../../services/productosApi";
 import styles from "../../css_components/BestSellers.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -10,6 +11,7 @@ export default function BestSellers({
   isLoading: isLoadingProp,
   error: errorProp,
 }) {
+  const { t } = useLanguage();
   const [masVendidosFallback, setMasVendidosFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -40,7 +42,7 @@ export default function BestSellers({
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setErrorFallback("No se pudieron cargar los más vendidos.");
+          setErrorFallback(t.home.errorMasVendidos);
         }
       })
       .finally(() => {
@@ -57,23 +59,23 @@ export default function BestSellers({
       <div className={styles.inner}>
         <div className={styles.header}>
           <div className={styles.headerText}>
-            <span className={styles.kicker}>Tendencia ahora</span>
-            <h2 className={styles.titulo}>Más Vendidos</h2>
+            <span className={styles.kicker}>{t.home.tendenciaAhora}</span>
+            <h2 className={styles.titulo}>{t.home.masVendidosTitulo}</h2>
           </div>
-          <span className={styles.flameBadge}>🔥 Top ventas</span>
+          <span className={styles.flameBadge}>{t.home.topVentas}</span>
         </div>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
             onClick={prev}
             disabled={currentPage === 0 || isLoading}
-            aria-label="Anterior"
+            aria-label={t.common.anterior}
           >
             &#8249;
           </button>
           <div className={styles.grid}>
             {isLoading ? (
-              <p>Cargando productos...</p>
+              <p>{t.common.cargandoProductos}</p>
             ) : error ? (
               <p>{error}</p>
             ) : (
@@ -88,7 +90,7 @@ export default function BestSellers({
             disabled={
               isLoading || totalPages <= 1 || currentPage === totalPages - 1
             }
-            aria-label="Siguiente"
+            aria-label={t.common.siguiente}
           >
             &#8250;
           </button>
