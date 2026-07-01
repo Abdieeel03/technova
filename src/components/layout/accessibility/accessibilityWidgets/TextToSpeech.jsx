@@ -1,8 +1,16 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "../../../../css_components/accessibility/TextToSpeech.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
+
+const SPEECH_LANG_MAP = {
+  es: "es-ES",
+  en: "en-US",
+  qu: "es-ES",
+};
 
 export default function TextToSpeech() {
+  const { lang, t } = useLanguage();
   const [active, setActive] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const utteranceRef = useRef(null);
@@ -39,7 +47,7 @@ export default function TextToSpeech() {
     window.speechSynthesis.cancel();
 
     const speech = new SpeechSynthesisUtterance(texto);
-    speech.lang = "es-ES";
+    speech.lang = SPEECH_LANG_MAP[lang] || "es-ES";
 
     speech.onstart = () => setIsSpeaking(true);
     speech.onend = () => setIsSpeaking(false);
@@ -47,7 +55,7 @@ export default function TextToSpeech() {
 
     utteranceRef.current = speech;
     window.speechSynthesis.speak(speech);
-  }, []);
+  }, [lang]);
 
   // Detener la lectura
   const detenerLectura = useCallback(() => {
@@ -96,7 +104,12 @@ export default function TextToSpeech() {
         onClick={toggle}
         className={`${styles.widgetButton} ${active ? styles.activeButton : ""}`}
         aria-pressed={active}
-        aria-label={`Lector de voz: ${active ? "activado" : "desactivado"}`}
+        aria-label={t.accesibilidad.lectorVozAria.replace(
+          "{estado}",
+          active
+            ? t.accesibilidad.daltonismoActivado
+            : t.accesibilidad.daltonismoDesactivado,
+        )}
         type="button"
       >
         {/* Icono: altavoz / megáfono */}
@@ -131,7 +144,7 @@ export default function TextToSpeech() {
           )}
         </svg>
 
-        <span className={styles.label}>Lector de Voz</span>
+        <span className={styles.label}>{t.accesibilidad.lectorVoz}</span>
 
         {/* Toggle switch visual */}
         <div className={styles.toggleTrack}>
@@ -147,7 +160,7 @@ export default function TextToSpeech() {
           <button
             className={styles.floatingControl}
             onClick={detenerLectura}
-            aria-label="Detener lectura de voz"
+            aria-label={t.accesibilidad.detenerLecturaAria}
             type="button"
           >
             {/* Indicador animado de ondas de sonido */}
@@ -158,7 +171,9 @@ export default function TextToSpeech() {
               <span></span>
               <span></span>
             </span>
-            <span className={styles.stopLabel}>Detener ⏹</span>
+            <span className={styles.stopLabel}>
+              {t.accesibilidad.detenerLectura}
+            </span>
           </button>,
           document.body,
         )}

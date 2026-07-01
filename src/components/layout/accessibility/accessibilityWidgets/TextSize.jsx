@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/TextSize.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 const TEXT_SIZE_LEVELS = [
-  { level: 1, label: "Normal", fontSize: "16px" },
-  { level: 2, label: "Mediano", fontSize: "18px" },
-  { level: 3, label: "Grande", fontSize: "20px" },
-  { level: 4, label: "Muy grande", fontSize: "22px" },
+  { level: 1, fontSize: "16px" },
+  { level: 2, fontSize: "18px" },
+  { level: 3, fontSize: "20px" },
+  { level: 4, fontSize: "22px" },
 ];
 
 export default function TextSize() {
+  const { t } = useLanguage();
   const [currentLevel, setCurrentLevel] = useState(1);
 
   // Escuchar eventos del perfil "Visión Baja"
@@ -52,7 +54,7 @@ export default function TextSize() {
     <button
       onClick={cycleLevel}
       className={`${styles.widgetButton} ${isActive ? styles.activeButton : ""}`}
-      aria-label={`Tamaño de texto: nivel ${currentLevel} de 4`}
+      aria-label={t.accesibilidad.tamanoTextoAria.replace("{n}", currentLevel)}
       type="button"
     >
       {/* Icono: T pequeña + T grande */}
@@ -61,7 +63,7 @@ export default function TextSize() {
         <span className={styles.iconLargeT}>T</span>
       </div>
 
-      <span className={styles.label}>Tamaño de texto</span>
+      <span className={styles.label}>{t.accesibilidad.tamanoTexto}</span>
 
       {/* Indicador de nivel con puntos */}
       <div className={styles.levelIndicator}>

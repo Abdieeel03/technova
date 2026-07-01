@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "../css_components/CheckoutCancelado.module.css";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function CheckoutCancelado() {
+  const { t } = useLanguage();
+
   return (
     <main className={styles.page}>
       <div className={styles.card}>
@@ -9,18 +12,17 @@ export default function CheckoutCancelado() {
           <span className={styles.xmark}>✕</span>
         </div>
 
-        <h1>Pago no completado</h1>
+        <h1>{t.checkoutCancelado.titulo}</h1>
         <p className={styles.subtitle}>
-          Tu pago no pudo ser procesado. No se ha realizado ningun cargo a tu
-          tarjeta. Puedes intentarlo de nuevo o volver a revisar tu carrito.
+          {t.checkoutCancelado.desc}
         </p>
 
         <div className={styles.actions}>
           <Link to="/checkout" className={styles.ctaPrimary}>
-            Intentar de nuevo
+            {t.checkoutCancelado.intentar}
           </Link>
           <Link to="/productos" className={styles.ctaSecondary}>
-            Seguir comprando
+            {t.checkoutCancelado.seguirComprando}
           </Link>
         </div>
       </div>

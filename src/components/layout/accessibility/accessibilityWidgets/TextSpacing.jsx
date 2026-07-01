@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/TextSpacing.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
-const SPACING_LEVELS = [
-  { level: 1, label: "Normal" },
-  { level: 2, label: "2rem" },
-  { level: 3, label: "3rem" },
-];
+const SPACING_LEVELS = [1, 2, 3];
 
 export default function TextSpacing() {
+  const { t } = useLanguage();
   const [currentLevel, setCurrentLevel] = useState(1);
 
   // Escuchar eventos del perfil "Dislexia"
@@ -46,7 +44,7 @@ export default function TextSpacing() {
     <button
       onClick={cycleLevel}
       className={`${styles.widgetButton} ${isActive ? styles.activeButton : ""}`}
-      aria-label={`Interlineado: nivel ${currentLevel} de 3`}
+      aria-label={t.accesibilidad.interlineadoAria.replace("{n}", currentLevel)}
       type="button"
     >
       {/* Icono SVG: líneas horizontales con espaciado */}
@@ -62,15 +60,15 @@ export default function TextSpacing() {
         <path d="M22 14 L22 16" />
       </svg>
 
-      <span className={styles.label}>Interlineado</span>
+      <span className={styles.label}>{t.accesibilidad.interlineado}</span>
 
       {/* Indicador de nivel con puntos */}
       <div className={styles.levelIndicator}>
         {SPACING_LEVELS.map((lvl) => (
           <span
-            key={lvl.level}
+            key={lvl}
             className={`${styles.levelDot} ${
-              lvl.level <= currentLevel ? styles.levelDotActive : ""
+              lvl <= currentLevel ? styles.levelDotActive : ""
             }`}
           />
         ))}

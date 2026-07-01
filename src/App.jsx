@@ -23,8 +23,10 @@ import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets
 import PoliticaCookies from "./pages/PoliticaCookies";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import Admin from "./pages/Admin";
+import { useLanguage } from "./context/LanguageContext";
 
 function App() {
+  const { t } = useLanguage();
   return (
     <>
       <Header />
@@ -46,8 +48,8 @@ function App() {
             path="/terminos-condiciones"
             element={
               <InfoPage
-                title="Terminos y condiciones"
-                description="Pronto encontraras en esta pagina las condiciones de uso, compra y garantias de TechNova."
+                title={t.terminos.titulo}
+                description={t.terminos.desc}
               />
             }
           />
