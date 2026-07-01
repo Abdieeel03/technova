@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../../css_components/Checkout.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const formatCardNumber = (value) => {
   const digits = value.replace(/\D/g, "").slice(0, 16);
@@ -89,6 +90,7 @@ export default function FormularioPago({
   isProcessing,
   disabled = false,
 }) {
+  const { t } = useLanguage();
   const [form, setForm] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
   const [touched, setTouched] = useState({});
@@ -129,36 +131,36 @@ export default function FormularioPago({
       case "cardNumber": {
         const digits = value.replace(/\D/g, "");
         if (digits.length === 0) {
-          return "Ingresa el numero de tarjeta.";
+          return t.checkout.errTarjetaVacia;
         }
         if (digits.length < 13) {
-          return "Numero de tarjeta muy corto.";
+          return t.checkout.errTarjetaCorta;
         }
         if (!isValidLuhn(digits)) {
-          return "Numero de tarjeta invalido.";
+          return t.checkout.errTarjetaInvalida;
         }
         return "";
       }
       case "titular":
         if (!value.trim()) {
-          return "Ingresa el nombre del titular.";
+          return t.checkout.errTitularVacio;
         }
         if (value.trim().length < 3) {
-          return "Nombre muy corto.";
+          return t.checkout.errTitularCorto;
         }
         return "";
       case "expiry":
         if (!value) {
-          return "Ingresa la fecha de expiracion.";
+          return t.checkout.errExpiracionVacia;
         }
         if (!isExpiryValid(value)) {
-          return "Fecha invalida o vencida.";
+          return t.checkout.errExpiracionInvalida;
         }
         return "";
       case "cvv": {
         const cvvDigits = value.replace(/\D/g, "");
         if (cvvDigits.length < 3) {
-          return "CVV invalido (3-4 digitos).";
+          return t.checkout.errCvvInvalido;
         }
         return "";
       }
@@ -204,7 +206,7 @@ export default function FormularioPago({
     <section className={styles.pagoSection}>
       <h3 className={styles.sectionTitle}>
         <span className={styles.sectionIcon}>💳</span>
-        Informacion de Pago
+        {t.checkout.pagoTitulo}
       </h3>
 
       <form className={styles.cardForm} onSubmit={handleSubmit} noValidate>
@@ -226,7 +228,7 @@ export default function FormularioPago({
 
         <div className={styles.fieldGroup}>
           <label htmlFor="checkout-card-number" className={styles.fieldLabel}>
-            Numero de tarjeta
+            {t.checkout.numeroTarjeta}
           </label>
           <input
             id="checkout-card-number"
@@ -247,13 +249,13 @@ export default function FormularioPago({
 
         <div className={styles.fieldGroup}>
           <label htmlFor="checkout-titular" className={styles.fieldLabel}>
-            Nombre del titular
+            {t.checkout.nombreTitular}
           </label>
           <input
             id="checkout-titular"
             type="text"
             className={`${styles.fieldInput} ${errors.titular && touched.titular ? styles.fieldError : ""}`}
-            placeholder="Como aparece en la tarjeta"
+            placeholder={t.checkout.titularPh}
             value={form.titular}
             onChange={(e) => handleChange("titular", e.target.value)}
             onBlur={() => handleBlur("titular")}
@@ -268,7 +270,7 @@ export default function FormularioPago({
         <div className={styles.fieldRow}>
           <div className={styles.fieldGroup}>
             <label htmlFor="checkout-expiry" className={styles.fieldLabel}>
-              Expiracion
+              {t.checkout.expiracion}
             </label>
             <input
               id="checkout-expiry"
@@ -318,18 +320,18 @@ export default function FormularioPago({
           {isProcessing ? (
             <span className={styles.payButtonLoading}>
               <span className={styles.spinner} />
-              Procesando pago...
+              {t.checkout.procesandoPago}
             </span>
           ) : disabled ? (
-            "Completa los datos de envio"
+            t.checkout.completaDatosEnvio
           ) : (
-            "Pagar ahora"
+            t.checkout.pagarAhora
           )}
         </button>
 
         <p className={styles.secureNote}>
           <span className={styles.lockIcon}>🔒</span>
-          Pago seguro — Tus datos estan protegidos
+          {t.checkout.pagoSeguro}
         </p>
       </form>
     </section>

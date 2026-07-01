@@ -7,23 +7,25 @@ import CarritoButton from "../cart/CarritoButton";
 import CarritoModal from "../cart/CarritoModal";
 import useCarrito from "../../hooks/useCarrito";
 import useAuth from "../../auth/hooks/useAuth";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function Header() {
+  const { t } = useLanguage();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-const {
-  items,
-  totalItems,
-  totalPrice,
-  updateItemQty,
-  removeItem,
-  clearCart,
-  setCartOwner,
-  isModalOpen: isCarritoOpen,
-  openModal: openCarrito,
-  closeModal: closeCarrito,
-} = useCarrito();
+  const {
+    items,
+    totalItems,
+    totalPrice,
+    updateItemQty,
+    removeItem,
+    clearCart,
+    setCartOwner,
+    isModalOpen: isCarritoOpen,
+    openModal: openCarrito,
+    closeModal: closeCarrito,
+  } = useCarrito();
 
   const { user, logout } = useAuth();
   const [checkoutNotice, setCheckoutNotice] = useState(null);
@@ -73,7 +75,7 @@ const {
     if (!user) {
       setCheckoutNotice({
         type: "error",
-        text: "Debes iniciar sesion para continuar con la compra.",
+        text: t.carrito.errorDebesIniciarSesion,
       });
       closeCarrito();
       openLogin();
@@ -108,7 +110,7 @@ const {
         <Link
           className={styles.headerLink}
           to="/"
-          aria-label="Ir al inicio de TechNova"
+          aria-label={t.nav.ariaInicio}
         >
           <img className={styles.logo} src={logo} alt="Logo" />
           <h1 className={styles.headerTitle}>TechNova</h1>
@@ -121,7 +123,7 @@ const {
                 <Link
                   to="/admin"
                   className={`${styles.login} ${styles.loginLogged}`}
-                  aria-label="Abrir panel de administrador"
+                  aria-label={t.nav.ariaAdmin}
                 >
                   <div className={styles.svgIcon} aria-hidden="true">
                     <svg
@@ -141,15 +143,19 @@ const {
                     </svg>
                   </div>
                   <div className={styles.loginText}>
-                    <span className={styles.loginLabel}>ADMIN</span>
-                    <span className={styles.loginValue}>Panel</span>
+                    <span className={styles.loginLabel}>
+                      {t.nav.adminLabel}
+                    </span>
+                    <span className={styles.loginValue}>
+                      {t.nav.panelLabel}
+                    </span>
                   </div>
                 </Link>
               ) : null}
               <Link
                 to="/mis-compras"
                 className={`${styles.login} ${styles.loginLogged}`}
-                aria-label="Ver mis compras"
+                aria-label={t.nav.ariaMisCompras}
               >
                 <div className={styles.svgIcon} aria-hidden="true">
                   <svg
@@ -170,7 +176,7 @@ const {
                   </svg>
                 </div>
                 <div className={styles.loginText}>
-                  <span className={styles.loginLabel}>BIENVENIDO</span>
+                  <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
                   <span className={styles.loginValue}>{user.name}</span>
                 </div>
               </Link>
@@ -178,7 +184,7 @@ const {
                 type="button"
                 className={styles.login}
                 onClick={handleLogout}
-                aria-label="Cerrar sesión"
+                aria-label={t.nav.ariaCerrarSesion}
               >
                 <div className={styles.svgIcon} aria-hidden="true">
                   <svg
@@ -198,8 +204,10 @@ const {
                   </svg>
                 </div>
                 <div className={styles.loginText}>
-                  <span className={styles.loginLabel}>SALIR</span>
-                  <span className={styles.loginAction}>Cerrar sesión</span>
+                  <span className={styles.loginLabel}>{t.nav.salir}</span>
+                  <span className={styles.loginAction}>
+                    {t.nav.ariaCerrarSesion}
+                  </span>
                 </div>
               </button>
             </div>
@@ -230,14 +238,14 @@ const {
                 </svg>
               </div>
               <div className={styles.loginText}>
-                <span className={styles.loginLabel}>BIENVENIDO</span>
-                <span className={styles.loginAction}>Inicia sesion</span>
+                <span className={styles.loginLabel}>{t.nav.bienvenido}</span>
+                <span className={styles.loginAction}>{t.nav.iniciaSesion}</span>
               </div>
             </button>
           )}
         </div>
       </header>
-      <nav className={styles.nav} aria-label="Navegacion principal">
+      <nav className={styles.nav} aria-label={t.nav.ariaNav}>
         <ul>
           <li>
             <NavLink
@@ -246,9 +254,9 @@ const {
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
               end
-              aria-label="Ir a Inicio"
+              aria-label={t.nav.ariaIrInicio}
             >
-              Inicio
+              {t.nav.inicio}
             </NavLink>
           </li>
           <li>
@@ -257,9 +265,9 @@ const {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Productos"
+              aria-label={t.nav.ariaIrProductos}
             >
-              Productos
+              {t.nav.productos}
             </NavLink>
           </li>
           <li>
@@ -268,9 +276,9 @@ const {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Nosotros"
+              aria-label={t.nav.ariaIrNosotros}
             >
-              Nosotros
+              {t.nav.nosotros}
             </NavLink>
           </li>
           <li>
@@ -279,9 +287,9 @@ const {
               className={({ isActive }) =>
                 `${styles.link} ${isActive ? styles.active : ""}`
               }
-              aria-label="Ir a Contacto"
+              aria-label={t.nav.ariaIrContacto}
             >
-              Contacto
+              {t.nav.contacto}
             </NavLink>
           </li>
         </ul>

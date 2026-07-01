@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../products/ProductCard";
 import { fetchProductos } from "../../services/productosApi";
 import styles from "../../css_components/CategoryCarousel.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -13,6 +14,7 @@ export default function CategoryCarousel({
   isLoading: isLoadingProp,
   error: errorProp,
 }) {
+  const { t } = useLanguage();
   const [visiblesFallback, setVisiblesFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -43,7 +45,7 @@ export default function CategoryCarousel({
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setErrorFallback("No se pudieron cargar estos productos.");
+          setErrorFallback(t.home.errorCategoria);
         }
       })
       .finally(() => {
@@ -61,7 +63,7 @@ export default function CategoryCarousel({
         <div className={styles.header}>
           <span className={styles.iconBubble}>{icono}</span>
           <div>
-            <span className={styles.kicker}>Por categoría</span>
+            <span className={styles.kicker}>{t.home.porCategoria}</span>
             <h2 className={styles.titulo}>{titulo}</h2>
           </div>
         </div>
@@ -70,13 +72,13 @@ export default function CategoryCarousel({
             className={styles.arrow}
             onClick={prev}
             disabled={currentPage === 0 || isLoading}
-            aria-label="Anterior"
+            aria-label={t.common.anterior}
           >
             &#8249;
           </button>
           <div className={styles.grid}>
             {isLoading ? (
-              <p>Cargando productos...</p>
+              <p>{t.common.cargandoProductos}</p>
             ) : error ? (
               <p>{error}</p>
             ) : (
@@ -91,7 +93,7 @@ export default function CategoryCarousel({
             disabled={
               isLoading || totalPages <= 1 || currentPage === totalPages - 1
             }
-            aria-label="Siguiente"
+            aria-label={t.common.siguiente}
           >
             &#8250;
           </button>

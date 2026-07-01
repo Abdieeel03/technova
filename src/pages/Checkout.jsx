@@ -7,11 +7,13 @@ import ResumenOrden from "../components/checkout/ResumenOrden";
 import EnvioSection from "../components/checkout/EnvioSection";
 import FormularioPago from "../components/checkout/FormularioPago";
 import { procesarPago } from "../services/checkoutApi";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Checkout() {
   const { user } = useAuth();
   const { items, totalPrice, clearCart } = useCarrito();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const [envioInfo, setEnvioInfo] = useState({
     metodo: "standard",
@@ -28,7 +30,7 @@ export default function Checkout() {
 
   const handlePago = async (datosPago) => {
     if (!envioInfo.valido) {
-      setPagoError("Completa los datos de envio antes de pagar.");
+      setPagoError(t.checkout.errorEnvioIncompleto);
       return;
     }
 
@@ -68,8 +70,8 @@ export default function Checkout() {
     <main className={styles.page}>
       <div className={styles.container}>
         <header className={styles.pageHeader}>
-          <h1>Checkout</h1>
-          <p>Completa tu compra de forma segura</p>
+          <h1>{t.checkout.titulo}</h1>
+          <p>{t.checkout.subtitulo}</p>
         </header>
 
         <div className={styles.layout}>

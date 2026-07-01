@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import styles from "../css_components/CheckoutExito.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { obtenerOrden } from "../services/checkoutApi";
+import { useLanguage } from "../context/LanguageContext";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -19,6 +20,7 @@ const formatDate = (value) => {
 
 export default function CheckoutExito() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("orderId");
 
@@ -57,7 +59,7 @@ export default function CheckoutExito() {
       <main className={styles.page}>
         <div className={styles.loader}>
           <div className={styles.spinner} />
-          <p>Cargando tu orden...</p>
+          <p>{t.checkoutExito.cargandoOrden}</p>
         </div>
       </main>
     );
@@ -70,10 +72,10 @@ export default function CheckoutExito() {
           <div className={styles.iconWrap}>
             <span className={styles.iconError}>❌</span>
           </div>
-          <h1>Orden no encontrada</h1>
-          <p>No pudimos encontrar los detalles de esta orden.</p>
+          <h1>{t.checkoutExito.ordenNoEncontrada}</h1>
+          <p>{t.checkoutExito.ordenNoEncontradaDesc}</p>
           <Link to="/productos" className={styles.ctaPrimary}>
-            Ver productos
+            {t.misCompras.verProductos}
           </Link>
         </div>
       </main>
@@ -87,41 +89,41 @@ export default function CheckoutExito() {
           <span className={styles.checkmark}>✓</span>
         </div>
 
-        <h1>¡Pago exitoso!</h1>
+        <h1>{t.checkoutExito.pagoExitoso}</h1>
         <p className={styles.subtitle}>
-          Tu orden ha sido registrada correctamente
+          {t.checkoutExito.ordenRegistrada}
         </p>
 
         <div className={styles.orderInfo}>
           <div className={styles.infoRow}>
-            <span className={styles.infoLabel}>Numero de orden</span>
+            <span className={styles.infoLabel}>{t.checkoutExito.numeroOrden}</span>
             <span className={styles.infoValue}>{orden.id}</span>
           </div>
           <div className={styles.infoRow}>
-            <span className={styles.infoLabel}>Fecha</span>
+            <span className={styles.infoLabel}>{t.checkoutExito.fecha}</span>
             <span className={styles.infoValue}>
               {formatDate(orden.createdAt)}
             </span>
           </div>
           <div className={styles.infoRow}>
-            <span className={styles.infoLabel}>Metodo de pago</span>
+            <span className={styles.infoLabel}>{t.checkoutExito.metodoPago}</span>
             <span className={styles.infoValue}>
-              Tarjeta •••• {orden.pago?.ultimos4 || "****"}
+              {t.misCompras.tarjetaTerminacion.replace("{n}", orden.pago?.ultimos4 || "****")}
             </span>
           </div>
           {orden.envio?.metodo ? (
             <div className={styles.infoRow}>
-              <span className={styles.infoLabel}>Envio</span>
+              <span className={styles.infoLabel}>{t.checkoutExito.envio}</span>
               <span className={styles.infoValue}>
                 {orden.envio.metodo === "pickup"
-                  ? "Recojo en tienda"
-                  : "Envio estandar"}
+                  ? t.checkoutExito.metodoRecojo
+                  : t.checkoutExito.metodoEstandar}
               </span>
             </div>
           ) : null}
           {orden.envio?.metodo === "standard" && orden.envio?.direccion ? (
             <div className={styles.infoRow}>
-              <span className={styles.infoLabel}>Direccion</span>
+              <span className={styles.infoLabel}>{t.checkoutExito.direccion}</span>
               <span className={styles.infoValue}>
                 {[
                   orden.envio.direccion.direccion,
@@ -137,22 +139,22 @@ export default function CheckoutExito() {
           ) : null}
           {orden.envio?.metodo === "pickup" ? (
             <div className={styles.infoRow}>
-              <span className={styles.infoLabel}>Punto de recojo</span>
+              <span className={styles.infoLabel}>{t.checkoutExito.puntoRecojo}</span>
               <span className={styles.infoValue}>
-                Av. Larco 345, Miraflores, Lima
+                {t.checkoutExito.direccionTienda}
               </span>
             </div>
           ) : null}
           <div className={styles.infoRow}>
-            <span className={styles.infoLabel}>Estado</span>
+            <span className={styles.infoLabel}>{t.checkoutExito.estado}</span>
             <span className={`${styles.infoValue} ${styles.statusPaid}`}>
-              Pagado
+              {t.checkoutExito.pagado}
             </span>
           </div>
         </div>
 
         <div className={styles.itemsList}>
-          <h3>Productos</h3>
+          <h3>{t.checkoutExito.productosTitulo}</h3>
           {orden.items.map((item) => (
             <div key={item.id} className={styles.itemRow}>
               <div className={styles.itemThumb}>
@@ -175,17 +177,17 @@ export default function CheckoutExito() {
           {orden.envio?.costoEnvio ? (
             <>
               <div className={styles.totalRowSecondary}>
-                <span>Subtotal</span>
+                <span>{t.common.subtotal}</span>
                 <span>{formatCurrency(orden.subtotal)}</span>
               </div>
               <div className={styles.totalRowSecondary}>
-                <span>Envio</span>
+                <span>{t.checkoutExito.envio}</span>
                 <span>{formatCurrency(orden.envio.costoEnvio)}</span>
               </div>
             </>
           ) : null}
           <div className={styles.totalRow}>
-            <span>Total pagado</span>
+            <span>{t.checkoutExito.totalPagado}</span>
             <span className={styles.totalValue}>
               {formatCurrency(orden.total)}
             </span>
@@ -194,10 +196,10 @@ export default function CheckoutExito() {
 
         <div className={styles.actions}>
           <Link to="/mis-compras" className={styles.ctaPrimary}>
-            Ver mis compras
+            {t.checkoutExito.verMisCompras}
           </Link>
           <Link to="/productos" className={styles.ctaSecondary}>
-            Seguir comprando
+            {t.checkoutExito.seguirComprando}
           </Link>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../products/ProductCard";
 import { fetchProductos } from "../../services/productosApi";
 import styles from "../../css_components/FeaturedProducts.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -10,6 +11,7 @@ export default function FeaturedProducts({
   isLoading: isLoadingProp,
   error: errorProp,
 }) {
+  const { t } = useLanguage();
   const [productosFallback, setProductosFallback] = useState([]);
   const [isLoadingFallback, setIsLoadingFallback] = useState(true);
   const [errorFallback, setErrorFallback] = useState(null);
@@ -40,7 +42,7 @@ export default function FeaturedProducts({
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setErrorFallback("No se pudieron cargar los productos destacados.");
+          setErrorFallback(t.home.errorDestacados);
         }
       })
       .finally(() => {
@@ -56,24 +58,22 @@ export default function FeaturedProducts({
     <section className={styles.section}>
       <div className={styles.inner}>
         <div className={styles.header}>
-          <span className={styles.kicker}>Selección TechNova</span>
-          <h2 className={styles.titulo}>Lo mejor para tu setup</h2>
-          <p className={styles.subtitulo}>
-            Equipos elegidos por su calidad, rendimiento y respaldo de marca.
-          </p>
+          <span className={styles.kicker}>{t.home.seleccionTitulo}</span>
+          <h2 className={styles.titulo}>{t.home.featuredTitulo}</h2>
+          <p className={styles.subtitulo}>{t.home.featuredSubtitulo}</p>
         </div>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
             onClick={prev}
             disabled={page === 0 || isLoading}
-            aria-label="Anterior"
+            aria-label={t.common.anterior}
           >
             &#8249;
           </button>
           <div className={styles.grid}>
             {isLoading ? (
-              <p>Cargando productos...</p>
+              <p>{t.common.cargandoProductos}</p>
             ) : error ? (
               <p>{error}</p>
             ) : (
@@ -86,7 +86,7 @@ export default function FeaturedProducts({
             className={styles.arrow}
             onClick={next}
             disabled={isLoading || totalPages <= 1 || page === totalPages - 1}
-            aria-label="Siguiente"
+            aria-label={t.common.siguiente}
           >
             &#8250;
           </button>

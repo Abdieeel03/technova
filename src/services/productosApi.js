@@ -70,10 +70,19 @@ const withAbortSignal = (request, signal) => {
   ]);
 };
 
-const requestJson = async (url, signal) => {
-  const cachedData = getCachedData(url);
-  if (cachedData) {
-    return cachedData;
+const requestJson = async (url, signal, forceRefresh = false) => {
+  if (forceRefresh) {
+    memoryCache.delete(url);
+    try {
+      sessionStorage.removeItem(`productos:${url}`);
+    } catch {
+      // Ignore
+    }
+  } else {
+    const cachedData = getCachedData(url);
+    if (cachedData) {
+      return cachedData;
+    }
   }
 
   const pendingRequest = pendingRequests.get(url);
@@ -81,7 +90,13 @@ const requestJson = async (url, signal) => {
     return withAbortSignal(pendingRequest, signal);
   }
 
-  const request = fetch(url)
+  const fetchUrl = forceRefresh
+    ? (url.includes("?") ? `${url}&_t=${Date.now()}` : `${url}?_t=${Date.now()}`)
+    : url;
+
+  const fetchOptions = forceRefresh ? { cache: "no-store" } : {};
+
+  const request = fetch(fetchUrl, fetchOptions)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Request failed with status ${response.status}`);
@@ -128,8 +143,8 @@ const getProductoFromListCache = (id) => {
   return null;
 };
 
-export async function fetchProductos(params, signal) {
-  const data = await requestJson(`/api/productos${buildQueryString(params)}`, signal);
+export async function fetchProductos(params, signal, forceRefresh = false) {
+  const data = await requestJson(`/api/productos${buildQueryString(params)}`, signal, forceRefresh);
   return data.productos || [];
 }
 

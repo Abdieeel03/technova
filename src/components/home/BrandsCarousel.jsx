@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../css_components/BrandsCarousel.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 const brands = [
   { id: 1, name: "MSI", logo: "/img/brands/msilogo.png" },
@@ -21,6 +22,7 @@ const VISIBLE = 6;
 const TOTAL_PAGES = Math.ceil(brands.length / VISIBLE);
 
 export default function BrandsCarousel() {
+  const { t } = useLanguage();
   const [page, setPage] = useState(0);
   const intervalRef = useRef(null);
 
@@ -53,7 +55,7 @@ export default function BrandsCarousel() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.titulo}>Marcas que confían en nosotros</p>
+        <p className={styles.titulo}>{t.home.marcasConfian}</p>
         <div className={styles.carouselWrapper}>
           <button
             className={styles.arrow}
@@ -62,7 +64,7 @@ export default function BrandsCarousel() {
               resetTimer();
             }}
             disabled={page === 0}
-            aria-label="Anterior"
+            aria-label={t.common.anterior}
           >
             &#8249;
           </button>
@@ -73,7 +75,10 @@ export default function BrandsCarousel() {
                 key={brand.id}
                 to={`/productos?marca=${encodeURIComponent(brand.name)}`}
                 className={styles.card}
-                aria-label={`Ver productos de ${brand.name}`}
+                aria-label={t.home.verProductosDeMarca.replace(
+                  "{marca}",
+                  brand.name,
+                )}
               >
                 <img
                   src={brand.logo}
@@ -91,7 +96,7 @@ export default function BrandsCarousel() {
               resetTimer();
             }}
             disabled={page === TOTAL_PAGES - 1}
-            aria-label="Siguiente"
+            aria-label={t.common.siguiente}
           >
             &#8250;
           </button>
@@ -106,7 +111,7 @@ export default function BrandsCarousel() {
                 setPage(i);
                 resetTimer();
               }}
-              aria-label={`Página ${i + 1}`}
+              aria-label={t.common.paginaDot.replace("{n}", i + 1)}
             />
           ))}
         </div>

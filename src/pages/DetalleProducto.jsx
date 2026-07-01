@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "../css_components/DetalleProducto.module.css";
 import useCarrito from "../hooks/useCarrito";
 import { fetchProductoById } from "../services/productosApi";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function DetalleProducto() {
   const { id } = useParams();
@@ -11,17 +12,12 @@ export default function DetalleProducto() {
   const [error, setError] = useState(null);
   const { addItem, openModal } = useCarrito();
   const location = useLocation();
+  const { t } = useLanguage();
   const backUrl = location.state?.from || "/productos";
   const categoriaLabel = (() => {
     const params = new URLSearchParams(backUrl.split("?")[1]);
     const cat = params.get("categoria");
-    const labels = {
-      audio: "Audio",
-      gaming: "Gaming",
-      accesorios: "Accesorios",
-      camaras: "Cámaras"
-  };
-  return cat ? labels[cat] : "Productos";
+    return cat ? t.productos.categorias[cat] || t.nav.productos : t.nav.productos;
 })();
 
   /* Scroll al top al entrar a la página */
@@ -38,7 +34,7 @@ export default function DetalleProducto() {
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setError("No se pudo cargar el producto.");
+          setError(t.detalleProducto.errorCarga);
         }
       })
       .finally(() => {
@@ -62,7 +58,7 @@ export default function DetalleProducto() {
         </div>
         <div className={styles.container}>
           <div className={styles.notFound}>
-            <h2 className={styles.notFoundTitle}>Cargando producto...</h2>
+            <h2 className={styles.notFoundTitle}>{t.detalleProducto.cargando}</h2>
           </div>
         </div>
       </main>
@@ -84,13 +80,13 @@ export default function DetalleProducto() {
           <div className={styles.notFound}>
             <div className={styles.notFoundIcon}>📦</div>
             <h2 className={styles.notFoundTitle}>
-              {error || "Producto no encontrado"}
+              {error || t.detalleProducto.noEncontrado}
             </h2>
             <p className={styles.notFoundText}>
-              El producto que buscas no existe o fue eliminado.
+              {t.detalleProducto.noEncontradoDesc}
             </p>
             <Link to={backUrl} className={styles.notFoundBtn}>
-              ← Ver todos los productos
+              ← {t.detalleProducto.verTodos}
             </Link>
           </div>
         </div>
@@ -142,7 +138,7 @@ export default function DetalleProducto() {
           <div className={`${styles.infoPanel} ${styles.fadeInDelay}`}>
             <span className={styles.categoria}>{producto.categoria}</span>
             <h1 className={styles.nombre}>{producto.nombre}</h1>
-            <span className={styles.marca}>por {producto.marca}</span>
+            <span className={styles.marca}>{t.detalleProducto.por} {producto.marca}</span>
 
             {/* Precios */}
             <div className={styles.precioSection}>
@@ -167,7 +163,7 @@ export default function DetalleProducto() {
 
             {tieneOferta && (
               <span className={styles.ahorro}>
-                💰 Ahorras ${ahorro} con esta oferta
+                {t.detalleProducto.ahorras.replace("{monto}", ahorro)}
               </span>
             )}
 
@@ -182,7 +178,7 @@ export default function DetalleProducto() {
                 className={styles.addToCartButton}
                 onClick={() => { addItem(producto, 1); openModal(); }}
               >
-                Agregar al carrito
+                {t.detalleProducto.agregarCarrito}
               </button>
             </div>
 
@@ -198,14 +194,14 @@ export default function DetalleProducto() {
                   }
                 >
                   {producto.stock <= 10
-                    ? `¡Solo quedan ${producto.stock} unidades!`
-                    : `${producto.stock} unidades disponibles`}
+                    ? t.detalleProducto.soloQuedan.replace("{stock}", producto.stock)
+                    : t.detalleProducto.unidadesDisponibles.replace("{stock}", producto.stock)}
                 </span>
               </div>
               <div className={styles.metaItem}>
                 <span className={styles.metaIcon}>🛡️</span>
                 <span className={styles.garantia}>
-                  Garantía de {producto.garantia}
+                  {t.detalleProducto.garantiaDe.replace("{garantia}", producto.garantia)}
                 </span>
               </div>
             </div>
@@ -218,7 +214,7 @@ export default function DetalleProducto() {
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>
               <span className={styles.cardTitleIcon}>✨</span>
-              Características
+              {t.detalleProducto.caracteristicas}
             </h2>
             <ul className={styles.featureList}>
               {producto.caracteristicas.map((item, i) => (
@@ -234,7 +230,7 @@ export default function DetalleProducto() {
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>
               <span className={styles.cardTitleIcon}>📋</span>
-              Especificaciones
+              {t.detalleProducto.especificaciones}
             </h2>
             <table className={styles.specTable}>
               <tbody>

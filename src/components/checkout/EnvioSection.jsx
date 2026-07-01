@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "../../css_components/Checkout.module.css";
+import { useLanguage } from "../../context/LanguageContext";
 
 /**
  * Sistema de envíos.
@@ -45,29 +46,29 @@ const INITIAL_ERRORS = {
   direccion: "",
 };
 
-const validateField = (field, value, zona) => {
+const validateField = (field, value, zona, t) => {
   switch (field) {
     case "nombreReceptor":
-      if (!value.trim()) return "Ingresa el nombre de quien recibe.";
-      if (value.trim().length < 3) return "Nombre muy corto.";
+      if (!value.trim()) return t.checkout.errNombreVacio;
+      if (value.trim().length < 3) return t.checkout.errNombreCorto;
       return "";
     case "telefono": {
       const digits = value.replace(/\D/g, "");
-      if (digits.length === 0) return "Ingresa un telefono de contacto.";
-      if (digits.length !== 9) return "El telefono debe tener 9 digitos.";
+      if (digits.length === 0) return t.checkout.errTelefonoVacio;
+      if (digits.length !== 9) return t.checkout.errTelefonoDigitos;
       return "";
     }
     case "ciudad":
       if (zona === "provincia" && !value.trim()) {
-        return "Ingresa la ciudad.";
+        return t.checkout.errCiudad;
       }
       return "";
     case "distrito":
-      if (!value.trim()) return "Ingresa el distrito.";
+      if (!value.trim()) return t.checkout.errDistrito;
       return "";
     case "direccion":
-      if (!value.trim()) return "Ingresa la direccion completa.";
-      if (value.trim().length < 6) return "Direccion muy corta.";
+      if (!value.trim()) return t.checkout.errDireccionVacia;
+      if (value.trim().length < 6) return t.checkout.errDireccionCorta;
       return "";
     default:
       return "";
@@ -75,6 +76,7 @@ const validateField = (field, value, zona) => {
 };
 
 export default function EnvioSection({ onEnvioChange }) {
+  const { t } = useLanguage();
   const [metodo, setMetodo] = useState("standard");
   const [direccion, setDireccion] = useState(INITIAL_DIRECCION);
   const [errors, setErrors] = useState(INITIAL_ERRORS);
@@ -91,7 +93,7 @@ export default function EnvioSection({ onEnvioChange }) {
     const allFields =
       direccion.zona === "provincia" ? [...fields, "ciudad"] : fields;
     return allFields.every(
-      (f) => !validateField(f, direccion[f], direccion.zona),
+      (f) => !validateField(f, direccion[f], direccion.zona, t),
     );
   }, [metodo, direccion]);
 
@@ -110,7 +112,7 @@ export default function EnvioSection({ onEnvioChange }) {
     if (touched[field]) {
       setErrors((prev) => ({
         ...prev,
-        [field]: validateField(field, value, direccion.zona),
+        [field]: validateField(field, value, direccion.zona, t),
       }));
     }
   };
@@ -119,7 +121,7 @@ export default function EnvioSection({ onEnvioChange }) {
     setTouched((prev) => ({ ...prev, [field]: true }));
     setErrors((prev) => ({
       ...prev,
-      [field]: validateField(field, direccion[field], direccion.zona),
+      [field]: validateField(field, direccion[field], direccion.zona, t),
     }));
   };
 
@@ -128,7 +130,7 @@ export default function EnvioSection({ onEnvioChange }) {
     if (touched.ciudad) {
       setErrors((prev) => ({
         ...prev,
-        ciudad: validateField("ciudad", direccion.ciudad, zona),
+        ciudad: validateField("ciudad", direccion.ciudad, zona, t),
       }));
     }
   };
@@ -137,7 +139,7 @@ export default function EnvioSection({ onEnvioChange }) {
     <section className={styles.envioSection}>
       <h3 className={styles.sectionTitle}>
         <span className={styles.sectionIcon}>📦</span>
-        Metodo de Envio
+        {t.checkout.metodoEnvioTitulo}
       </h3>
 
       <div className={styles.envioPlaceholder}>
@@ -157,10 +159,8 @@ export default function EnvioSection({ onEnvioChange }) {
             ) : null}
           </div>
           <div className={styles.envioDetails}>
-            <p className={styles.envioLabel}>Envio estandar</p>
-            <p className={styles.envioDesc}>
-              Entrega en 5-7 dias habiles a tu domicilio
-            </p>
+            <p className={styles.envioLabel}>{t.checkout.envioEstandarLabel}</p>
+            <p className={styles.envioDesc}>{t.checkout.envioEstandarDesc}</p>
           </div>
           <span className={styles.envioCost}>
             S/.{" "}
@@ -186,10 +186,10 @@ export default function EnvioSection({ onEnvioChange }) {
             ) : null}
           </div>
           <div className={styles.envioDetails}>
-            <p className={styles.envioLabel}>Recojo en tienda</p>
+            <p className={styles.envioLabel}>{t.checkout.recojoTiendaLabel}</p>
             <p className={styles.envioDesc}>{TIENDA_DIRECCION}</p>
           </div>
-          <span className={styles.envioCost}>Gratis</span>
+          <span className={styles.envioCost}>{t.common.gratis}</span>
         </button>
       </div>
 
@@ -201,7 +201,7 @@ export default function EnvioSection({ onEnvioChange }) {
           <div className={styles.fieldRow}>
             <div className={styles.fieldGroup}>
               <label htmlFor="envio-zona" className={styles.fieldLabel}>
-                Zona de entrega
+                {t.checkout.zonaEntrega}
               </label>
               <select
                 id="envio-zona"
@@ -209,14 +209,14 @@ export default function EnvioSection({ onEnvioChange }) {
                 value={direccion.zona}
                 onChange={(e) => handleZonaChange(e.target.value)}
               >
-                <option value="lima">Lima Metropolitana — S/. 15.00</option>
-                <option value="provincia">Provincia — S/. 30.00</option>
+                <option value="lima">{t.checkout.zonaLima}</option>
+                <option value="provincia">{t.checkout.zonaProvincia}</option>
               </select>
             </div>
 
             <div className={styles.fieldGroup}>
               <label htmlFor="envio-telefono" className={styles.fieldLabel}>
-                Telefono de contacto
+                {t.checkout.telefonoContacto}
               </label>
               <input
                 id="envio-telefono"
@@ -241,13 +241,13 @@ export default function EnvioSection({ onEnvioChange }) {
 
           <div className={styles.fieldGroup}>
             <label htmlFor="envio-nombre" className={styles.fieldLabel}>
-              Nombre de quien recibe
+              {t.checkout.nombreRecibe}
             </label>
             <input
               id="envio-nombre"
               type="text"
               className={`${styles.fieldInput} ${errors.nombreReceptor && touched.nombreReceptor ? styles.fieldError : ""}`}
-              placeholder="Nombre completo"
+              placeholder={t.checkout.nombreCompletoPh}
               value={direccion.nombreReceptor}
               onChange={(e) => handleChange("nombreReceptor", e.target.value)}
               onBlur={() => handleBlur("nombreReceptor")}
@@ -261,13 +261,13 @@ export default function EnvioSection({ onEnvioChange }) {
             {direccion.zona === "provincia" ? (
               <div className={styles.fieldGroup}>
                 <label htmlFor="envio-ciudad" className={styles.fieldLabel}>
-                  Ciudad
+                  {t.checkout.ciudad}
                 </label>
                 <input
                   id="envio-ciudad"
                   type="text"
                   className={`${styles.fieldInput} ${errors.ciudad && touched.ciudad ? styles.fieldError : ""}`}
-                  placeholder="Arequipa, Trujillo, etc."
+                  placeholder={t.checkout.ciudadPh}
                   value={direccion.ciudad}
                   onChange={(e) => handleChange("ciudad", e.target.value)}
                   onBlur={() => handleBlur("ciudad")}
@@ -280,13 +280,13 @@ export default function EnvioSection({ onEnvioChange }) {
 
             <div className={styles.fieldGroup}>
               <label htmlFor="envio-distrito" className={styles.fieldLabel}>
-                Distrito
+                {t.checkout.distrito}
               </label>
               <input
                 id="envio-distrito"
                 type="text"
                 className={`${styles.fieldInput} ${errors.distrito && touched.distrito ? styles.fieldError : ""}`}
-                placeholder="Miraflores, San Isidro, etc."
+                placeholder={t.checkout.distritoPh}
                 value={direccion.distrito}
                 onChange={(e) => handleChange("distrito", e.target.value)}
                 onBlur={() => handleBlur("distrito")}
@@ -299,13 +299,13 @@ export default function EnvioSection({ onEnvioChange }) {
 
           <div className={styles.fieldGroup}>
             <label htmlFor="envio-direccion" className={styles.fieldLabel}>
-              Direccion
+              {t.checkout.direccion}
             </label>
             <input
               id="envio-direccion"
               type="text"
               className={`${styles.fieldInput} ${errors.direccion && touched.direccion ? styles.fieldError : ""}`}
-              placeholder="Calle, numero, depto."
+              placeholder={t.checkout.direccionPh}
               value={direccion.direccion}
               onChange={(e) => handleChange("direccion", e.target.value)}
               onBlur={() => handleBlur("direccion")}
@@ -317,13 +317,13 @@ export default function EnvioSection({ onEnvioChange }) {
 
           <div className={styles.fieldGroup}>
             <label htmlFor="envio-referencia" className={styles.fieldLabel}>
-              Referencia (opcional)
+              {t.checkout.referencia}
             </label>
             <input
               id="envio-referencia"
               type="text"
               className={styles.fieldInput}
-              placeholder="Frente al parque, portón azul, etc."
+              placeholder={t.checkout.referenciaPh}
               value={direccion.referencia}
               onChange={(e) => handleChange("referencia", e.target.value)}
             />
