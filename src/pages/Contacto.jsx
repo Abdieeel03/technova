@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "../css_components/Contacto.module.css";
+import { useLanguage } from "../context/LanguageContext";
 
 const initialForm = {
   nombre: "",
@@ -12,6 +13,7 @@ export default function Contacto() {
   const [formData, setFormData] = useState(initialForm);
   const [toast, setToast] = useState(null);
   const [isSending, setIsSending] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
   window.scrollTo(0, 0);
@@ -65,15 +67,15 @@ useEffect(() => {
           setFormData(initialForm);
           setToast({
             type: "success",
-            title: "Mensaje enviado",
-            message: "Gracias por contactarnos. Te responderemos lo antes posible.",
+            title: t.contacto.enviado,
+            message: t.contacto.enviadoMsg,
           });
         },
         (error) => {
           setToast({
             type: "error",
-            title: "No se pudo enviar",
-            message: error?.text || "Inténtalo nuevamente en unos minutos.",
+            title: t.contacto.errorTitulo,
+            message: error?.text || t.contacto.errorMsg,
           });
         },
       )
@@ -101,7 +103,7 @@ useEffect(() => {
             type="button"
             className={styles.toastClose}
             onClick={() => setToast(null)}
-            aria-label="Cerrar notificación"
+            aria-label={t.contacto.ariaCerrarNotif}
           >
             ×
           </button>
@@ -109,43 +111,41 @@ useEffect(() => {
       )}
 
       <section className={styles.contactoHeader}>
-        <h1>Contáctanos</h1>
+        <h1>{t.contacto.titulo}</h1>
         <p>
-          ¿Tienes dudas sobre nuestros productos? Escríbenos y te responderemos
-          lo antes posible.
+          {t.contacto.subtitulo}
         </p>
       </section>
 
       <section className={styles.contactoGrid}>
         <article className={styles.infoCard}>
-          <h2>Información de contacto</h2>
+          <h2>{t.contacto.infoTitulo}</h2>
           <p>
-            Estamos disponibles para ayudarte con compras, pedidos y soporte
-            general.
+            {t.contacto.infoDesc}
           </p>
 
           <ul className={styles.infoList}>
             <li>
-              <strong>Correo:</strong> contacto@technova.com
+              <strong>{t.contacto.correoLabel}</strong> contacto@technova.com
             </li>
             <li>
-              <strong>Teléfono:</strong> +57 300 000 0000
+              <strong>{t.contacto.telefonoLabel}</strong> +57 300 000 0000
             </li>
             <li>
-              <strong>Horario:</strong> Lunes a Viernes, 8:00 a.m. - 6:00 p.m.
+              <strong>{t.contacto.horarioLabel}</strong> {t.contacto.horarioValor}
             </li>
           </ul>
         </article>
 
         <form className={styles.formCard} onSubmit={handleSubmit}>
-          <h2>Envíanos un mensaje</h2>
+          <h2>{t.contacto.formTitulo}</h2>
 
           <label className={styles.field}>
-            Nombre
+            {t.contacto.nombre}
             <input
               type="text"
               name="nombre"
-              placeholder="Tu nombre"
+              placeholder={t.contacto.nombrePlaceholder}
               value={formData.nombre}
               onChange={handleChange}
               required
@@ -153,11 +153,11 @@ useEffect(() => {
           </label>
 
           <label className={styles.field}>
-            Correo electrónico
+            {t.contacto.correo}
             <input
               type="email"
               name="email"
-              placeholder="tunombre@correo.com"
+              placeholder={t.contacto.correoPh}
               value={formData.email}
               onChange={handleChange}
               required
@@ -165,11 +165,11 @@ useEffect(() => {
           </label>
 
           <label className={styles.field}>
-            Mensaje
+            {t.contacto.mensaje}
             <textarea
               name="mensaje"
               rows="5"
-              placeholder="Cuéntanos cómo podemos ayudarte"
+              placeholder={t.contacto.mensajePh}
               value={formData.mensaje}
               onChange={handleChange}
               required
@@ -177,7 +177,7 @@ useEffect(() => {
           </label>
 
           <button type="submit" disabled={isSending}>
-            {isSending ? "Enviando..." : "Enviar mensaje"}
+            {isSending ? t.contacto.enviando : t.contacto.enviar}
           </button>
         </form>
       </section>

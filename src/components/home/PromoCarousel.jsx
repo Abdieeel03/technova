@@ -1,29 +1,30 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
 import styles from "../../css_components/PromoCarousel.module.css";
-
-const slides = [
-  {
-    id: 1,
-    img: "Promo1.png",
-    alt: "Promoción laptops",
-    link: "/productos?categoria=laptops",
-  },
-  {
-    id: 2,
-    img: "Promo2.png",
-    alt: "Promoción celulares",
-    link: "/productos?categoria=celulares",
-  },
-  {
-    id: 3,
-    img: "Promo3.png",
-    alt: "Promoción audífonos",
-    link: "/productos?categoria=audio",
-  },
-];
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function PromoCarousel() {
+  const { t } = useLanguage();
+  const slides = [
+    {
+      id: 1,
+      img: "Promo1.png",
+      alt: t.promo.laptops,
+      link: "/productos?categoria=laptops",
+    },
+    {
+      id: 2,
+      img: "Promo2.png",
+      alt: t.promo.celulares,
+      link: "/productos?categoria=celulares",
+    },
+    {
+      id: 3,
+      img: "Promo3.png",
+      alt: t.promo.audifonos,
+      link: "/productos?categoria=audio",
+    },
+  ];
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ export default function PromoCarousel() {
       <button
         className={`${styles.nav} ${styles.navLeft}`}
         onClick={() => goTo(current - 1)}
-        aria-label="Anterior"
+        aria-label={t.common.anterior}
       >
         &#8249;
       </button>
@@ -67,7 +68,7 @@ export default function PromoCarousel() {
       <button
         className={`${styles.nav} ${styles.navRight}`}
         onClick={() => goTo(current + 1)}
-        aria-label="Siguiente"
+        aria-label={t.common.siguiente}
       >
         &#8250;
       </button>
@@ -78,7 +79,7 @@ export default function PromoCarousel() {
             key={i}
             className={`${styles.dot} ${i === current ? styles.dotActive : ""}`}
             onClick={() => goTo(i)}
-            aria-label={`Slide ${i + 1}`}
+            aria-label={t.promo.slideAria.replace("{n}", i + 1)}
           />
         ))}
       </div>

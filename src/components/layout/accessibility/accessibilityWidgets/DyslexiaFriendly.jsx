@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/DyslexiaFriendly.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function DyslexiaFriendly() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(false);
 
   // Escuchar eventos del perfil "Dislexia"
@@ -36,13 +38,13 @@ export default function DyslexiaFriendly() {
       onClick={toggle}
       className={`${styles.widgetButton} ${active ? styles.activeButton : ""}`}
       aria-pressed={active}
-      aria-label={`Dislexia amigable: ${active ? "activado" : "desactivado"}`}
+      aria-label={`${t.accesibilidad.dislexiaAmigable}: ${active ? t.accesibilidad.daltonismoActivado : t.accesibilidad.daltonismoDesactivado}`}
       type="button"
     >
       {/* Icono: letras AZ con estilo */}
       <span className={styles.iconText}>AZ</span>
 
-      <span className={styles.label}>Dislexia amigable</span>
+      <span className={styles.label}>{t.accesibilidad.dislexiaAmigable}</span>
 
       {/* Toggle switch visual */}
       <div className={styles.toggleTrack}>

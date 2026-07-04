@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "../../css_components/ModalLogin.module.css";
 import useAuth from "../../auth/hooks/useAuth";
+import { useLanguage } from "../../context/LanguageContext";
 
 const initialFormState = {
   name: "",
@@ -9,6 +10,7 @@ const initialFormState = {
 };
 
 export default function ModalLogin({ isOpen, onClose }) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState(initialFormState);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,23 +75,26 @@ export default function ModalLogin({ isOpen, onClose }) {
     const trimmedPassword = formData.password.trim();
 
     if (!trimmedEmail || !trimmedPassword) {
-      setErrorMessage("Completa correo y contrasena para continuar.");
+      setErrorMessage(t.login.errorCampos);
       return;
     }
 
     if (mode === "register" && !trimmedName) {
-      setErrorMessage("Ingresa tu nombre para registrarte.");
+      setErrorMessage(t.login.errorNombre);
       return;
     }
 
     if (mode === "register" && trimmedPassword.length < 6) {
-      setErrorMessage("La contrasena debe tener al menos 6 caracteres.");
+      setErrorMessage(t.login.errorPassword);
       return;
     }
 
     if (mode === "login") {
       setIsSubmitting(true);
-      const result = await login({ email: trimmedEmail, password: trimmedPassword });
+      const result = await login({
+        email: trimmedEmail,
+        password: trimmedPassword,
+      });
       setIsSubmitting(false);
       if (!result.ok) {
         setErrorMessage(result.error);
@@ -145,32 +150,30 @@ export default function ModalLogin({ isOpen, onClose }) {
           type="button"
           className={styles.closeButton}
           onClick={handleClose}
-          aria-label="Cerrar formulario de login"
+          aria-label={t.login.ariaCerrar}
         >
           x
         </button>
 
         <h2 id="modal-login-title" className={styles.title}>
-          {mode === "login" ? "Iniciar sesion" : "Crear cuenta"}
+          {mode === "login" ? t.login.iniciarTitulo : t.login.crearTitulo}
         </h2>
         <p className={styles.subtitle}>
-          {mode === "login"
-            ? "Accede a tu perfil para continuar con tu compra."
-            : "Registra tu cuenta para comprar mas rapido."}
+          {mode === "login" ? t.login.iniciarSub : t.login.crearSub}
         </p>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           {mode === "register" ? (
             <>
               <label className={styles.label} htmlFor="login-name">
-                Nombre
+                {t.login.nombre}
               </label>
               <input
                 id="login-name"
                 name="name"
                 className={styles.input}
                 type="text"
-                placeholder="Tu nombre"
+                placeholder={t.login.nombrePh}
                 value={formData.name}
                 onChange={handleChange}
                 autoComplete="name"
@@ -180,14 +183,14 @@ export default function ModalLogin({ isOpen, onClose }) {
           ) : null}
 
           <label className={styles.label} htmlFor="login-email">
-            Correo
+            {t.login.correo}
           </label>
           <input
             id="login-email"
             name="email"
             className={styles.input}
             type="email"
-            placeholder="correo@ejemplo.com"
+            placeholder={t.login.correoPh}
             value={formData.email}
             onChange={handleChange}
             autoComplete="email"
@@ -195,14 +198,14 @@ export default function ModalLogin({ isOpen, onClose }) {
           />
 
           <label className={styles.label} htmlFor="login-password">
-            Contrasena
+            {t.login.contrasena}
           </label>
           <input
             id="login-password"
             name="password"
             className={styles.input}
             type="password"
-            placeholder="********"
+            placeholder={t.login.passwordPh}
             value={formData.password}
             onChange={handleChange}
             autoComplete={
@@ -219,16 +222,22 @@ export default function ModalLogin({ isOpen, onClose }) {
 
           <div className={styles.actions}>
             <button type="submit" className={styles.submitButton}>
-              {isSubmitting ? "Procesando..." : mode === "login" ? "Entrar" : "Registrar"}
+              {isSubmitting
+                ? t.login.procesando
+                : mode === "login"
+                  ? t.login.entrar
+                  : t.login.registrar}
             </button>
             <p className={styles.accountPrompt}>
-              {mode === "login" ? "No tienes cuenta?" : "Ya tienes cuenta?"}
+              {mode === "login" ? t.login.noTienes : t.login.yaTienes}
               <button
                 type="button"
                 className={styles.accountLink}
                 onClick={toggleMode}
               >
-                {mode === "login" ? "Registrate gratis" : "Inicia sesion"}
+                {mode === "login"
+                  ? t.login.registrateGratis
+                  : t.login.iniciaSesion}
               </button>
             </p>
           </div>

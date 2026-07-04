@@ -3,31 +3,56 @@ import { useSearchParams } from "react-router";
 import CardProducto from "../components/products/CardProducto";
 import { fetchProductos } from "../services/productosApi";
 import styles from "../css_components/Productos.module.css";
-
-const CATEGORIAS = [
-  { key: "todos", label: "Todos" },
-  { key: "audio", label: "Audio" },
-  { key: "gaming", label: "Gaming" },
-  { key: "accesorios", label: "Accesorios" },
-  { key: "camaras", label: "Cámaras" },
-  { key: "laptops", label: "Laptops" },
-  { key: "celulares", label: "Celulares" },
-  { key: "componentes", label: "Componentes" },
-];
-
-const RANGOS_PRECIO = [
-  { label: "Hasta S/. 100", min: 0, max: 100 },
-  { label: "S/. 100 a S/. 300", min: 100, max: 300 },
-  { label: "S/. 300 a S/. 800", min: 300, max: 800 },
-  { label: "S/. 800 a S/. 2000", min: 800, max: 2000 },
-  { label: "Más de S/. 2000", min: 2000, max: 99999 },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 const PRODUCTOS_POR_PAGINA = 12;
 const MARCAS_VISIBLES = 4;
 const SCROLL_KEY = "productos_scroll_pos";
 
 export default function Productos() {
+  const { t } = useLanguage();
+
+  const CATEGORIAS = [
+    { key: "todos", label: t.productos.categorias.todos },
+    { key: "audio", label: t.productos.categorias.audio },
+    { key: "gaming", label: t.productos.categorias.gaming },
+    { key: "accesorios", label: t.productos.categorias.accesorios },
+    { key: "camaras", label: t.productos.categorias.camaras },
+    { key: "laptops", label: t.productos.categorias.laptops },
+    { key: "celulares", label: t.productos.categorias.celulares },
+    { key: "componentes", label: t.productos.categorias.componentes },
+  ];
+
+  const RANGOS_PRECIO = [
+    { label: t.productos.rangoHasta.replace("{max}", "100"), min: 0, max: 100 },
+    {
+      label: t.productos.rangoEntre
+        .replace("{min}", "100")
+        .replace("{max}", "300"),
+      min: 100,
+      max: 300,
+    },
+    {
+      label: t.productos.rangoEntre
+        .replace("{min}", "300")
+        .replace("{max}", "800"),
+      min: 300,
+      max: 800,
+    },
+    {
+      label: t.productos.rangoEntre
+        .replace("{min}", "800")
+        .replace("{max}", "2000"),
+      min: 800,
+      max: 2000,
+    },
+    {
+      label: t.productos.rangoMasDe.replace("{min}", "2000"),
+      min: 2000,
+      max: 99999,
+    },
+  ];
+
   const [productos, setProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -171,7 +196,7 @@ export default function Productos() {
       })
       .catch((fetchError) => {
         if (fetchError.name !== "AbortError") {
-          setError("No se pudieron cargar los productos.");
+          setError(t.productos.errorCargar);
         }
       })
       .finally(() => {
@@ -201,24 +226,23 @@ export default function Productos() {
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={styles.heroTitle}>Nuestros Productos</h1>
-        <p className={styles.heroSubtitle}>
-          Descubre la mejor tecnología al mejor precio
-        </p>
+        <h1 className={styles.heroTitle}>{t.productos.titulo}</h1>
+        <p className={styles.heroSubtitle}>{t.productos.subtitulo}</p>
         <span className={styles.totalProductos}>
-          {productos.length} productos disponibles
+          {productos.length} {t.productos.disponibles}
         </span>
       </section>
 
       <div className={styles.layout}>
         <aside className={styles.sidebar}>
           <h3 className={styles.sidebarTitle}>
-            <span className={styles.sidebarTitleIcon}>≡</span> Filtros
+            <span className={styles.sidebarTitleIcon}>≡</span>{" "}
+            {t.productos.filtrosTitulo}
           </h3>
 
           {/* Categorías */}
           <div className={styles.filterGroup}>
-            <p className={styles.filterLabel}>Categoría</p>
+            <p className={styles.filterLabel}>{t.productos.filtroCategoria}</p>
             {CATEGORIAS.map((cat) => (
               <button
                 key={cat.key}
@@ -234,7 +258,7 @@ export default function Productos() {
 
           {/* Marcas */}
           <div className={styles.filterGroup}>
-            <p className={styles.filterLabel}>Marca</p>
+            <p className={styles.filterLabel}>{t.productos.filtroMarca}</p>
             {marcasDisponibles
               .slice(
                 0,
@@ -257,14 +281,14 @@ export default function Productos() {
                 className={styles.verMasBtn}
                 onClick={() => setVerMasMarcas((v) => !v)}
               >
-                {verMasMarcas ? "▴ Ver menos" : "▾ Ver más"}
+                {verMasMarcas ? t.common.verMenosMarcas : t.common.verMasMarcas}
               </button>
             )}
           </div>
 
           {/* Precio */}
           <div className={styles.filterGroup}>
-            <p className={styles.filterLabel}>Precio</p>
+            <p className={styles.filterLabel}>{t.productos.filtroPrecio}</p>
             {RANGOS_PRECIO.map((rango) => (
               <button
                 key={rango.label}
@@ -282,7 +306,7 @@ export default function Productos() {
               <input
                 type="number"
                 className={styles.precioInput}
-                placeholder="Mínimo"
+                placeholder={t.productos.minimoPh}
                 value={inputMin}
                 onChange={(e) => {
                   setInputMin(e.target.value);
@@ -293,7 +317,7 @@ export default function Productos() {
               <input
                 type="number"
                 className={styles.precioInput}
-                placeholder="Máximo"
+                placeholder={t.productos.maximoPh}
                 value={inputMax}
                 onChange={(e) => {
                   setInputMax(e.target.value);
@@ -302,7 +326,7 @@ export default function Productos() {
               />
             </div>
             <button className={styles.aplicarBtn} onClick={aplicarInputs}>
-              Aplicar
+              {t.common.aplicar}
             </button>
           </div>
 
@@ -320,20 +344,21 @@ export default function Productos() {
               setVerMasMarcas(false);
             }}
           >
-            Limpiar filtros
+            {t.productos.limpiarFiltros}
           </button>
         </aside>
 
         <section className={styles.container}>
           <div className={styles.resultInfo}>
             <span>
-              {productosFiltrados.length} producto
-              {productosFiltrados.length !== 1 ? "s" : ""} encontrado
-              {productosFiltrados.length !== 1 ? "s" : ""}
+              {productosFiltrados.length}{" "}
+              {productosFiltrados.length !== 1
+                ? t.productos.encontrados
+                : t.productos.encontrado}
             </span>
             {totalPaginas > 1 && (
               <span>
-                Página {paginaSegura} de {totalPaginas}
+                {t.common.pagina} {paginaSegura} {t.common.de} {totalPaginas}
               </span>
             )}
           </div>
@@ -341,13 +366,15 @@ export default function Productos() {
           <div className={styles.grid}>
             {isLoading ? (
               <div className={styles.noResults}>
-                <h3 className={styles.noResultsTitle}>Cargando productos...</h3>
+                <h3 className={styles.noResultsTitle}>
+                  {t.common.cargandoProductos}
+                </h3>
               </div>
             ) : error ? (
               <div className={styles.noResults}>
                 <h3 className={styles.noResultsTitle}>{error}</h3>
                 <p className={styles.noResultsText}>
-                  Intenta nuevamente en unos minutos
+                  {t.productos.intentaNuevamente}
                 </p>
               </div>
             ) : productosPagina.length > 0 ? (
@@ -364,11 +391,9 @@ export default function Productos() {
               <div className={styles.noResults}>
                 <div className={styles.noResultsIcon}>🔍</div>
                 <h3 className={styles.noResultsTitle}>
-                  No se encontraron productos
+                  {t.productos.noResultados}
                 </h3>
-                <p className={styles.noResultsText}>
-                  Intenta con otra categoría o filtro
-                </p>
+                <p className={styles.noResultsText}>{t.productos.otraCat}</p>
               </div>
             )}
           </div>
@@ -379,7 +404,7 @@ export default function Productos() {
                 className={styles.pgBtn}
                 onClick={() => irAPagina(paginaSegura - 1)}
                 disabled={paginaSegura === 1}
-                aria-label="Página anterior"
+                aria-label={t.productos.paginaAnteriorAria}
               >
                 ‹
               </button>
@@ -402,7 +427,7 @@ export default function Productos() {
                 className={styles.pgBtn}
                 onClick={() => irAPagina(paginaSegura + 1)}
                 disabled={paginaSegura === totalPaginas}
-                aria-label="Página siguiente"
+                aria-label={t.productos.paginaSiguienteAria}
               >
                 ›
               </button>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/LectureMask.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function LectureMask() {
+  const { t } = useLanguage();
   const [active, setActive] = useState(false);
   const [mouseY, setMouseY] = useState(window.innerHeight / 2);
   const maskHeight = 140; // Altura de la máscara de lectura en píxeles
@@ -68,7 +70,7 @@ export default function LectureMask() {
             strokeWidth="3"
           />
         </svg>
-        <span className={styles.label}>Máscara de lectura</span>
+        <span className={styles.label}>{t.accesibilidad.mascaraLectura}</span>
 
         {/* Toggle switch visual */}
         <div className={styles.toggleTrack}>

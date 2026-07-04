@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "../../../../css_components/accessibility/CursorSize.module.css";
+import { useLanguage } from "../../../../context/LanguageContext";
 
 export default function CursorSize() {
+  const { t } = useLanguage();
   const [isLarge, setIsLarge] = useState(false);
 
   // Escuchar eventos del perfil "Visión Baja"
@@ -36,7 +38,7 @@ export default function CursorSize() {
       onClick={toggleCursor}
       className={`${styles.widgetButton} ${isLarge ? styles.activeButton : ""}`}
       aria-pressed={isLarge}
-      aria-label={`Cursor: ${isLarge ? "grande" : "normal"}`}
+      aria-label={`${t.accesibilidad.cursor}: ${isLarge ? t.accesibilidad.cursorAriaGrande : t.accesibilidad.cursorAriaNormal}`}
       type="button"
     >
       {/* Icono: cursor flecha */}
@@ -48,7 +50,7 @@ export default function CursorSize() {
         />
       </svg>
 
-      <span className={styles.label}>Cursor</span>
+      <span className={styles.label}>{t.accesibilidad.cursor}</span>
 
       {/* Toggle switch visual */}
       <div className={styles.toggleTrack}>
