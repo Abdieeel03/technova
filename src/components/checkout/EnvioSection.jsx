@@ -1,3 +1,4 @@
+import LocationPicker from "./LocationPicker";
 import { useEffect, useMemo, useState } from "react";
 import styles from "../../css_components/Checkout.module.css";
 import { useLanguage } from "../../context/LanguageContext";
@@ -31,11 +32,14 @@ const TIENDA_DIRECCION = "Av. Larco 345, Miraflores, Lima";
 const INITIAL_DIRECCION = {
   nombreReceptor: "",
   telefono: "",
-  zona: "lima", // "lima" | "provincia"
+  zona: "lima",
   ciudad: "",
   distrito: "",
   direccion: "",
   referencia: "",
+
+  latitud: null,
+  longitud: null,
 };
 
 const INITIAL_ERRORS = {
@@ -135,6 +139,16 @@ export default function EnvioSection({ onEnvioChange }) {
     }
   };
 
+  const handleLocationChange = (location) => {
+  setDireccion((prev) => ({
+    ...prev,
+    latitud: location.latitud,
+    longitud: location.longitud,
+    direccion: location.direccion || prev.direccion,
+    distrito: location.distrito || prev.distrito,
+    ciudad: location.ciudad || prev.ciudad,
+  }));
+};
   return (
     <section className={styles.envioSection}>
       <h3 className={styles.sectionTitle}>
@@ -314,6 +328,11 @@ export default function EnvioSection({ onEnvioChange }) {
               <p className={styles.errorMsg}>{errors.direccion}</p>
             ) : null}
           </div>
+
+          <LocationPicker
+            value={direccion}
+            onChange={handleLocationChange}
+          />
 
           <div className={styles.fieldGroup}>
             <label htmlFor="envio-referencia" className={styles.fieldLabel}>
