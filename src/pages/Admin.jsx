@@ -3,6 +3,7 @@ import useAuth from "../auth/hooks/useAuth";
 import styles from "../css_components/Admin.module.css";
 import { createProduct, updateProduct, deleteProduct, fetchAdminOrders, uploadImage } from "../services/adminApi";
 import { fetchProductos } from "../services/productosApi";
+import OrderDetailsModal from "../components/orders/OrderDetailsModal";
 
 const INITIAL_FORM = {
   id: null,
@@ -72,6 +73,9 @@ export default function Admin() {
   const [confirmDelete, setConfirmDelete] = useState({ isOpen: false, product: null });
   const [isDeleting, setIsDeleting] = useState(false);
   const [isReloading, setIsReloading] = useState(false);
+
+  // Order details modal
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const handleReload = async () => {
     setIsReloading(true);
@@ -585,6 +589,7 @@ export default function Admin() {
                       <th>Total</th>
                       <th>Envio</th>
                       <th>Estado</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -601,6 +606,15 @@ export default function Admin() {
                           <span className={`${styles.pill} ${styles[getStatusTone(orden.status)]}`}>
                             {orden.status || "pendiente"}
                           </span>
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            className={styles.actionButton}
+                            onClick={() => setSelectedOrder(orden)}
+                          >
+                            Ver
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -826,6 +840,13 @@ export default function Admin() {
           </div>
         </div>
       )}
+
+      {selectedOrder ? (
+        <OrderDetailsModal
+          orden={selectedOrder}
+          onClose={() => setSelectedOrder(null)}
+        />
+      ) : null}
     </main>
   );
 }
