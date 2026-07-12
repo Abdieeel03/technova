@@ -6,6 +6,7 @@ import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
 import { useLanguage } from "../context/LanguageContext";
+import OrderMap from "../components/orders/OrderMap";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -358,6 +359,13 @@ export default function MisCompras() {
                             ? formatCurrency(shippingCost)
                             : t.misCompras.envioGratis}
                         </span>
+                        {order.envio.metodo === "standard" &&
+                        order.envio.direccion ? (
+                          <OrderMap
+                            latitud={order.envio.direccion.latitud}
+                            longitud={order.envio.direccion.longitud}
+                          />
+                        ) : null}
                       </div>
                     ) : null}
                   </div>
