@@ -1,3 +1,4 @@
+import LocationPicker from "./LocationPicker";
 import { useEffect, useMemo, useState } from "react";
 import styles from "../../css_components/Checkout.module.css";
 import { useLanguage } from "../../context/LanguageContext";
@@ -31,11 +32,14 @@ const TIENDA_DIRECCION = "Av. Larco 345, Miraflores, Lima";
 const INITIAL_DIRECCION = {
   nombreReceptor: "",
   telefono: "",
-  zona: "lima", // "lima" | "provincia"
+  zona: "lima",
   ciudad: "",
   distrito: "",
   direccion: "",
   referencia: "",
+
+  latitud: null,
+  longitud: null,
 };
 
 const INITIAL_ERRORS = {
@@ -135,6 +139,39 @@ export default function EnvioSection({ onEnvioChange }) {
     }
   };
 
+  const handleLocationChange = (location) => {
+  setDireccion((prev) => ({
+    ...prev,
+    latitud: location.latitud,
+    longitud: location.longitud,
+    direccion: location.direccion || prev.direccion,
+    distrito: location.distrito || prev.distrito,
+    ciudad: location.ciudad || prev.ciudad,
+  }));
+};
+
+  const handleDireccionTextChange = (value) => {
+    setDireccion((prev) => ({ ...prev, direccion: value }));
+    if (touched.direccion) {
+      setErrors((prev) => ({
+        ...prev,
+        direccion: validateField("direccion", value, direccion.zona, t),
+      }));
+    }
+  };
+
+  const handleDireccionBlur = () => {
+    setTouched((prev) => ({ ...prev, direccion: true }));
+    setErrors((prev) => ({
+      ...prev,
+      direccion: validateField(
+        "direccion",
+        direccion.direccion,
+        direccion.zona,
+        t,
+      ),
+    }));
+  };
   return (
     <section className={styles.envioSection}>
       <h3 className={styles.sectionTitle}>
@@ -257,63 +294,35 @@ export default function EnvioSection({ onEnvioChange }) {
             ) : null}
           </div>
 
-          <div className={styles.fieldRow}>
-            {direccion.zona === "provincia" ? (
-              <div className={styles.fieldGroup}>
-                <label htmlFor="envio-ciudad" className={styles.fieldLabel}>
-                  {t.checkout.ciudad}
-                </label>
-                <input
-                  id="envio-ciudad"
-                  type="text"
-                  className={`${styles.fieldInput} ${errors.ciudad && touched.ciudad ? styles.fieldError : ""}`}
-                  placeholder={t.checkout.ciudadPh}
-                  value={direccion.ciudad}
-                  onChange={(e) => handleChange("ciudad", e.target.value)}
-                  onBlur={() => handleBlur("ciudad")}
-                />
-                {errors.ciudad && touched.ciudad ? (
-                  <p className={styles.errorMsg}>{errors.ciudad}</p>
-                ) : null}
-              </div>
-            ) : null}
-
+          {direccion.zona === "provincia" ? (
             <div className={styles.fieldGroup}>
-              <label htmlFor="envio-distrito" className={styles.fieldLabel}>
-                {t.checkout.distrito}
+              <label htmlFor="envio-ciudad" className={styles.fieldLabel}>
+                {t.checkout.ciudad}
               </label>
               <input
-                id="envio-distrito"
+                id="envio-ciudad"
                 type="text"
-                className={`${styles.fieldInput} ${errors.distrito && touched.distrito ? styles.fieldError : ""}`}
-                placeholder={t.checkout.distritoPh}
-                value={direccion.distrito}
-                onChange={(e) => handleChange("distrito", e.target.value)}
-                onBlur={() => handleBlur("distrito")}
+                className={`${styles.fieldInput} ${errors.ciudad && touched.ciudad ? styles.fieldError : ""}`}
+                placeholder={t.checkout.ciudadPh}
+                value={direccion.ciudad}
+                onChange={(e) => handleChange("ciudad", e.target.value)}
+                onBlur={() => handleBlur("ciudad")}
               />
-              {errors.distrito && touched.distrito ? (
-                <p className={styles.errorMsg}>{errors.distrito}</p>
+              {errors.ciudad && touched.ciudad ? (
+                <p className={styles.errorMsg}>{errors.ciudad}</p>
               ) : null}
             </div>
-          </div>
+          ) : null}
 
-          <div className={styles.fieldGroup}>
-            <label htmlFor="envio-direccion" className={styles.fieldLabel}>
-              {t.checkout.direccion}
-            </label>
-            <input
-              id="envio-direccion"
-              type="text"
-              className={`${styles.fieldInput} ${errors.direccion && touched.direccion ? styles.fieldError : ""}`}
-              placeholder={t.checkout.direccionPh}
-              value={direccion.direccion}
-              onChange={(e) => handleChange("direccion", e.target.value)}
-              onBlur={() => handleBlur("direccion")}
-            />
-            {errors.direccion && touched.direccion ? (
-              <p className={styles.errorMsg}>{errors.direccion}</p>
-            ) : null}
-          </div>
+          <LocationPicker
+            value={direccion}
+            onChange={handleLocationChange}
+            onDireccionTextChange={handleDireccionTextChange}
+            onDireccionBlur={handleDireccionBlur}
+            direccionError={
+              errors.direccion && touched.direccion ? errors.direccion : null
+            }
+          />
 
           <div className={styles.fieldGroup}>
             <label htmlFor="envio-referencia" className={styles.fieldLabel}>
