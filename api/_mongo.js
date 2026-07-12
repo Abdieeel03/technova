@@ -48,3 +48,8 @@ export async function getTransaccionesCollection() {
   const client = await clientPromise;
   return client.db(dbName).collection("transacciones");
 }
+
+export async function getReclamacionesCollection() {
+  const client = await clientPromise;
+  return client.db(dbName).collection("reclamaciones");
+}

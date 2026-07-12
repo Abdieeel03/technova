@@ -1,0 +1,102 @@
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.title {
+  text-align: center;
+  color: #0c6e8a;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.group input,
+.group textarea,
+.group select {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.group textarea {
+  min-height: 120px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.group select {
+  cursor: pointer;
+}
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus {
+  border-color: #0c6e8a;
+}
+
+
+.button {
+  width: 100%;  
+  margin-top: 15px;
+  padding: 14px;
+  background: #0c6e8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.button:hover {
+  background: #09556b;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

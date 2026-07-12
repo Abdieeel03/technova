@@ -23,6 +23,7 @@ import TextToSpeech from "./components/layout/accessibility/accessibilityWidgets
 import PoliticaCookies from "./pages/PoliticaCookies";
 import PoliticaPrivacidad from "./pages/PoliticaPrivacidad";
 import Admin from "./pages/Admin";
+import LibroReclamaciones from "./pages/LibroReclamaciones";
 import { useLanguage } from "./context/LanguageContext";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/productos/:id" element={<DetalleProducto />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
+          <Route path="/libro-reclamaciones" element={<LibroReclamaciones />} />
           <Route path="/politica-cookies" element={<PoliticaCookies />} />
           <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
           <Route path="/admin" element={<Admin />} />
