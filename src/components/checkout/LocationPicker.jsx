@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -10,6 +10,7 @@ import {
   reverseGeocode,
   searchAddress,
 } from "../../services/locationService";
+import { useLanguage } from "../../context/LanguageContext";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
@@ -45,15 +46,75 @@ function ChangeMapView({ position }) {
   return null;
 }
 
-export default function LocationPicker({ value, onChange }) {
+export default function LocationPicker({
+  value,
+  onChange,
+  onDireccionTextChange,
+  onDireccionBlur,
+  direccionError,
+}) {
+  const { t } = useLanguage();
   const [position, setPosition] = useState(DEFAULT_POSITION);
-  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const skipNextSearchRef = useRef(false);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     if (value?.latitud && value?.longitud) {
       setPosition([value.latitud, value.longitud]);
     }
   }, [value]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    if (skipNextSearchRef.current) {
+      skipNextSearchRef.current = false;
+      setResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const query = value?.direccion?.trim() || "";
+
+    if (query.length < 3) {
+      setResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    setSearching(true);
+
+    const timer = setTimeout(async () => {
+      try {
+        const items = await searchAddress(query);
+        setResults(items);
+        setShowDropdown(items.length > 0);
+      } catch (error) {
+        console.error("Error buscando dirección:", error);
+        setResults([]);
+        setShowDropdown(false);
+      } finally {
+        setSearching(false);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [value?.direccion]);
 
   const updateLocation = async ({ latitud, longitud }) => {
     setPosition([latitud, longitud]);
@@ -92,7 +153,7 @@ export default function LocationPicker({ value, onChange }) {
         });
       },
       (error) => {
-        
+
         console.error(error);
         alert("No se pudo obtener tu ubicación.");
       },
@@ -102,34 +163,19 @@ export default function LocationPicker({ value, onChange }) {
     );
   };
 
-  const handleSearch = async () => {
-    if (!search.trim()) return;
+  const handleSelectResult = (place) => {
+    skipNextSearchRef.current = true;
+    setShowDropdown(false);
+    setResults([]);
+    setPosition([place.latitud, place.longitud]);
 
-    try {
-      const results = await searchAddress(search);
-
-      if (results.length === 0) {
-        alert("No se encontraron resultados.");
-        return;
-      }
-
-      const place = results[0];
-
-      // Mover el mapa
-      setPosition([place.latitud, place.longitud]);
-
-      // Actualizar directamente los campos
-      onChange({
-        latitud: place.latitud,
-        longitud: place.longitud,
-        direccion: place.direccion,
-        distrito: place.distrito,
-        ciudad: place.ciudad,
-      });
-    } catch (error) {
-      console.error(error);
-      alert("Ocurrió un error al buscar la dirección.");
-    }
+    onChange({
+      latitud: place.latitud,
+      longitud: place.longitud,
+      direccion: place.direccion || value?.direccion,
+      distrito: place.distrito,
+      ciudad: place.ciudad,
+    });
   };
 
   return (
@@ -143,33 +189,6 @@ export default function LocationPicker({ value, onChange }) {
       >
         📍 Usar mi ubicación actual
       </button>
-
-      <label className={styles.searchLabel}>
-        🔍 Buscar una dirección
-      </label>
-
-      <div className={styles.searchContainer}>
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder="Ej: Av. Arequipa 1450, Miraflores..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-        />
-
-        <button
-          type="button"
-          className={styles.searchButton}
-          onClick={handleSearch}
-        >
-          🔍
-        </button>
-      </div>
 
       <MapContainer
         center={position}
@@ -205,9 +224,62 @@ export default function LocationPicker({ value, onChange }) {
       <div className={styles.locationCard}>
         <h4 className={styles.locationTitle}>📍 Ubicación seleccionada</h4>
 
-        <p className={styles.locationAddress}>
-          {value?.direccion || "Selecciona una ubicación en el mapa"}
-        </p>
+        <label className={styles.direccionLabel} htmlFor="mapa-direccion">
+          {t.checkout.direccion}
+        </label>
+
+        <div className={styles.direccionWrapper} ref={containerRef}>
+          <div
+            className={`${styles.direccionInputContainer} ${direccionError ? styles.direccionErrorInput : ""}`}
+          >
+            <input
+              id="mapa-direccion"
+              type="text"
+              className={styles.direccionInput}
+              autoComplete="off"
+              placeholder={
+                value?.latitud
+                  ? t.checkout.direccionPh
+                  : "Selecciona una ubicación en el mapa"
+              }
+              value={value?.direccion || ""}
+              onChange={(e) => onDireccionTextChange?.(e.target.value)}
+              onFocus={() => results.length > 0 && setShowDropdown(true)}
+              onBlur={() => onDireccionBlur?.()}
+            />
+
+            <button
+              type="button"
+              className={styles.direccionSearchButton}
+              aria-label="Buscar dirección"
+              disabled={searching}
+            >
+              {searching ? "⏳" : "🔍"}
+            </button>
+          </div>
+
+          {showDropdown && results.length > 0 ? (
+            <ul className={styles.dropdown}>
+              {results.map((place) => (
+                <li
+                  key={place.id}
+                  className={styles.dropdownItem}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleSelectResult(place);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>📍</span>
+                  <span className={styles.dropdownText}>{place.nombre}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+
+        {direccionError ? (
+          <p className={styles.errorMsg}>{direccionError}</p>
+        ) : null}
 
         {(value?.distrito || value?.ciudad) && (
           <>
@@ -221,7 +293,7 @@ export default function LocationPicker({ value, onChange }) {
           </>
         )}
 
-        {value?.direccion && (
+        {value?.direccion && !direccionError && (
           <div className={styles.success}>
             ✓ Lista para el envío
           </div>

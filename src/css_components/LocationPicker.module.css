@@ -94,6 +94,129 @@
   line-height: 1.5;
 }
 
+.direccionLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.direccionWrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.direccionInputContainer {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+.direccionInputContainer:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.direccionInput {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  background: transparent;
+}
+
+.direccionInput::placeholder {
+  color: #9ca3af;
+}
+
+.direccionSearchButton {
+  border: none;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0 14px;
+  height: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.15s ease;
+  border-left: 1px solid #e5e7eb;
+}
+
+.direccionSearchButton:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.direccionSearchButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.direccionErrorInput {
+  border-color: #ef4444;
+}
+
+.direccionErrorInput:focus-within {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #111827;
+  line-height: 1.4;
+  transition: background 0.1s ease;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+}
+
+.dropdownIcon {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.dropdownText {
+  word-break: break-word;
+}
+
+.errorMsg {
+  margin: 0 0 12px 0;
+  color: #ef4444;
+  font-size: 0.85rem;
+}
+
 .success {
   margin-top: 12px;
   display: inline-block;
