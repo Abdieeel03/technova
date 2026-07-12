@@ -27,6 +27,7 @@ export default function Footer() {
         <Link to="/politica-cookies">{t.footer.politicaCookies}</Link>
         <Link to="/politica-privacidad">{t.footer.politicaPrivacidad}</Link>
         <Link to="/terminos-condiciones">{t.footer.terminosCondiciones}</Link>
+        <Link to="/libro-reclamaciones">Libro de Reclamaciones</Link>
       </div>
       <div className={styles.div2} aria-label={t.footer.enlacesDirectos}>
         <p>{t.footer.enlacesDirectos}</p>
