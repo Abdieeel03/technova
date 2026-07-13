@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^2.108.2",
     "bcryptjs": "^2.4.3",
     "formidable": "^3.5.4",
+    "jspdf": "^4.2.1",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "mongodb": "^7.3.0",
