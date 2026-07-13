@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
 import { useLanguage } from "../context/LanguageContext";
 import OrderMap from "../components/orders/OrderMap";
+import { generarPdfCompras } from "../services/comprasPdf";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -108,9 +109,23 @@ export default function MisCompras() {
   const { t } = useLanguage();
   const [orders, setOrders] = useState(null);
   const [expandedOrders, setExpandedOrders] = useState({});
+  const [generandoPdf, setGenerandoPdf] = useState(false);
 
   const toggleOrder = (orderId) => {
     setExpandedOrders((prev) => ({ ...prev, [orderId]: !prev[orderId] }));
+  };
+
+  const handleDescargarPdf = async () => {
+    if (!orders || orders.length === 0 || generandoPdf) {
+      return;
+    }
+
+    setGenerandoPdf(true);
+    try {
+      generarPdfCompras({ orders, user, t });
+    } finally {
+      setGenerandoPdf(false);
+    }
   };
 
   useEffect(() => {
@@ -156,11 +171,26 @@ export default function MisCompras() {
             {t.misCompras.subtitulo}
           </p>
         </div>
-        <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>{t.misCompras.totalGastado}</span>
-          <strong className={styles.summaryValue}>
-            {formatCurrency(totalCompras)}
-          </strong>
+        <div className={styles.heroActions}>
+          <div className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>{t.misCompras.totalGastado}</span>
+            <strong className={styles.summaryValue}>
+              {formatCurrency(totalCompras)}
+            </strong>
+          </div>
+          {orders && orders.length > 0 ? (
+            <button
+              type="button"
+              className={styles.pdfButton}
+              onClick={handleDescargarPdf}
+              disabled={generandoPdf}
+            >
+              <FontAwesomeIcon icon={faFilePdf} />
+              {generandoPdf
+                ? t.misCompras.generandoPdf
+                : t.misCompras.descargarPdf}
+            </button>
+          ) : null}
         </div>
       </section>
 
