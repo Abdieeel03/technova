@@ -61,3 +61,8 @@ export const fetchAdminOrders = async () => {
   const data = await requestJson("/api/ordenes?all=true");
   return data.ordenes || [];
 };
+
+export const fetchAdminReclamaciones = async () => {
+  const data = await requestJson("/api/reclamaciones");
+  return data.reclamaciones || [];
+};

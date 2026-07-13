@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import useAuth from "../auth/hooks/useAuth";
 import styles from "../css_components/Admin.module.css";
-import { createProduct, updateProduct, deleteProduct, fetchAdminOrders, uploadImage } from "../services/adminApi";
+import { createProduct, updateProduct, deleteProduct, fetchAdminOrders, fetchAdminReclamaciones, uploadImage } from "../services/adminApi";
 import { fetchProductos } from "../services/productosApi";
 import OrderDetailsModal from "../components/orders/OrderDetailsModal";
+import ReclamacionDetailsModal from "../components/orders/ReclamacionDetailsModal";
 
 const INITIAL_FORM = {
   id: null,
@@ -39,12 +40,25 @@ const getStatusTone = (status) => {
   return "pillWarning";
 };
 
+const getReclamacionTipoTone = (tipo) => {
+  if (tipo === "Reclamo") return "pillWarning";
+  if (tipo === "Queja") return "pillInfo";
+  return "pillInfo";
+};
+
+const formatReclamacionDate = (value) => {
+  if (!value) return "-";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString();
+};
+
 export default function Admin() {
   const { user, login, logout } = useAuth();
 
   // Data State
   const [productos, setProductos] = useState([]);
   const [ordenes, setOrdenes] = useState([]);
+  const [reclamaciones, setReclamaciones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // UI State
@@ -77,6 +91,11 @@ export default function Admin() {
   // Order details modal
   const [selectedOrder, setSelectedOrder] = useState(null);
 
+  // Reclamaciones UI state
+  const [selectedReclamacion, setSelectedReclamacion] = useState(null);
+  const [reclamacionSearchTerm, setReclamacionSearchTerm] = useState("");
+  const [reclamacionTipoFilter, setReclamacionTipoFilter] = useState("");
+
   const handleReload = async () => {
     setIsReloading(true);
     setMessage(null);
@@ -96,11 +115,12 @@ export default function Admin() {
 
     let mounted = true;
 
-    Promise.all([fetchProductos(), fetchAdminOrders()])
-      .then(([productosData, ordenesData]) => {
+    Promise.all([fetchProductos(), fetchAdminOrders(), fetchAdminReclamaciones()])
+      .then(([productosData, ordenesData, reclamacionesData]) => {
         if (!mounted) return;
         setProductos(productosData);
         setOrdenes(ordenesData);
+        setReclamaciones(reclamacionesData);
       })
       .catch(() => {
         if (mounted) setMessage({ type: "error", text: "No se pudo cargar el panel." });
@@ -120,8 +140,29 @@ export default function Admin() {
       productos: productos.length,
       ordenes: ordenes.length,
       ingresos: totalRevenue,
+      reclamaciones: reclamaciones.length,
     };
-  }, [ordenes, productos.length]);
+  }, [ordenes, productos.length, reclamaciones.length]);
+
+  const filteredReclamaciones = useMemo(() => {
+    const term = reclamacionSearchTerm.trim().toLowerCase();
+    return reclamaciones.filter((reclamacion) => {
+      const matchesTipo = reclamacionTipoFilter
+        ? reclamacion.tipo === reclamacionTipoFilter
+        : true;
+      if (!matchesTipo) return false;
+      if (!term) return true;
+      return [
+        reclamacion.nombre,
+        reclamacion.correo,
+        reclamacion.motivo,
+        reclamacion.descripcion,
+        reclamacion.pedido,
+      ]
+        .filter(Boolean)
+        .some((field) => field.toLowerCase().includes(term));
+    });
+  }, [reclamaciones, reclamacionSearchTerm, reclamacionTipoFilter]);
 
   const filteredProducts = useMemo(() => {
     return productos.filter(p => {
@@ -428,6 +469,10 @@ export default function Admin() {
               <span className={styles.statValue}>{stats.ordenes}</span>
             </div>
             <div className={styles.statCard}>
+              <span className={styles.statLabel}>Reclamaciones</span>
+              <span className={styles.statValue}>{stats.reclamaciones}</span>
+            </div>
+            <div className={styles.statCard}>
               <span className={styles.statLabel}>Ingresos</span>
               <span className={styles.statValue}>{formatCurrency(stats.ingresos)}</span>
             </div>
@@ -447,10 +492,94 @@ export default function Admin() {
               <button type="button" className={`${styles.submit} ${activeView !== "productos" ? styles.submitSecondary : ""}`} onClick={() => { setActiveView("productos"); setCurrentPage(1); }}>
                 Productos
               </button>
+              <button type="button" className={`${styles.submit} ${activeView !== "reclamaciones" ? styles.submitSecondary : ""}`} onClick={() => setActiveView("reclamaciones")}>
+                Reclamaciones
+              </button>
             </div>
 
             {isLoading ? (
               <div className={styles.emptyState}>Cargando panel...</div>
+            ) : activeView === "reclamaciones" ? (
+              <div>
+                <div className={styles.toolbar}>
+                  <div className={styles.toolbarActions}>
+                    <input
+                      type="text"
+                      placeholder="Buscar por nombre, correo, motivo o pedido..."
+                      className={styles.searchInput}
+                      value={reclamacionSearchTerm}
+                      onChange={(e) => setReclamacionSearchTerm(e.target.value)}
+                    />
+                    <select
+                      className={styles.select}
+                      value={reclamacionTipoFilter}
+                      onChange={(e) => setReclamacionTipoFilter(e.target.value)}
+                    >
+                      <option value="">Todos los tipos</option>
+                      <option value="Reclamo">Reclamo</option>
+                      <option value="Queja">Queja</option>
+                    </select>
+                  </div>
+                </div>
+
+                {filteredReclamaciones.length === 0 ? (
+                  <div className={styles.emptyState}>
+                    {reclamaciones.length === 0
+                      ? "No hay reclamaciones registradas en el libro."
+                      : "No hay reclamaciones que coincidan con la búsqueda."}
+                  </div>
+                ) : (
+                  <div className={styles.tableWrap}>
+                    <table className={styles.table}>
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Cliente</th>
+                          <th>Contacto</th>
+                          <th>Tipo</th>
+                          <th>Motivo</th>
+                          <th>Pedido</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredReclamaciones.map((reclamacion) => (
+                          <tr key={reclamacion.id}>
+                            <td>{formatReclamacionDate(reclamacion.fecha)}</td>
+                            <td>
+                              <strong>{reclamacion.nombre}</strong>
+                            </td>
+                            <td>
+                              <div>{reclamacion.correo}</div>
+                              {reclamacion.telefono ? (
+                                <div style={{ color: "var(--color-text-soft)" }}>
+                                  {reclamacion.telefono}
+                                </div>
+                              ) : null}
+                            </td>
+                            <td>
+                              <span className={`${styles.pill} ${styles[getReclamacionTipoTone(reclamacion.tipo)]}`}>
+                                {reclamacion.tipo || "Sin tipo"}
+                              </span>
+                            </td>
+                            <td>{reclamacion.motivo}</td>
+                            <td>{reclamacion.pedido}</td>
+                            <td>
+                              <button
+                                type="button"
+                                className={styles.actionButton}
+                                onClick={() => setSelectedReclamacion(reclamacion)}
+                              >
+                                Ver
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
             ) : activeView === "productos" ? (
               <div>
                 <div className={styles.toolbar}>
@@ -845,6 +974,13 @@ export default function Admin() {
         <OrderDetailsModal
           orden={selectedOrder}
           onClose={() => setSelectedOrder(null)}
+        />
+      ) : null}
+
+      {selectedReclamacion ? (
+        <ReclamacionDetailsModal
+          reclamacion={selectedReclamacion}
+          onClose={() => setSelectedReclamacion(null)}
         />
       ) : null}
     </main>
