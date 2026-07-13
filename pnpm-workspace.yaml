@@ -15,6 +15,7 @@ trustPolicyExclude:
 
 # SECURITY: pnpm blocks install scripts by default, enabled explicitly for:
 allowBuilds:
+  core-js: set this to true or false
   esbuild: true
   rolldown: true
   unrs-resolver: true
