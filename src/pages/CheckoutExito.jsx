@@ -4,6 +4,9 @@ import styles from "../css_components/CheckoutExito.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { obtenerOrden } from "../services/checkoutApi";
 import { useLanguage } from "../context/LanguageContext";
+import { generarBoletaPdf } from "../services/comprasPdf";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilePdf } from "@fortawesome/free-solid-svg-icons";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -26,6 +29,19 @@ export default function CheckoutExito() {
 
   const [orden, setOrden] = useState(null);
   const [loading, setLoading] = useState(Boolean(orderId && user?.id));
+  const [generandoPdf, setGenerandoPdf] = useState(false);
+
+  const handleDescargarBoleta = () => {
+    if (!orden || generandoPdf) return;
+    setGenerandoPdf(true);
+    try {
+      const doc = generarBoletaPdf({ order: orden, user, t });
+      const fecha = new Date().toISOString().slice(0, 10);
+      doc.save(`technova-boleta-${orden.id}-${fecha}.pdf`);
+    } finally {
+      setGenerandoPdf(false);
+    }
+  };
 
   useEffect(() => {
     if (!orderId || !user?.id) {
@@ -198,6 +214,13 @@ export default function CheckoutExito() {
           <Link to="/mis-compras" className={styles.ctaPrimary}>
             {t.checkoutExito.verMisCompras}
           </Link>
+          <button
+            onClick={handleDescargarBoleta}
+            className={styles.ctaSecondary}
+            disabled={generandoPdf}
+          >
+            <FontAwesomeIcon icon={faFilePdf} /> {t.checkoutExito.descargarBoleta || "Descargar Boleta"}
+          </button>
           <Link to="/productos" className={styles.ctaSecondary}>
             {t.checkoutExito.seguirComprando}
           </Link>
