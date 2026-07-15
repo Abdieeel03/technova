@@ -29,6 +29,13 @@
   max-width: 520px;
 }
 
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .summaryCard {
   background: #ffffff;
   border-radius: var(--radius-md);
@@ -36,6 +43,35 @@
   box-shadow: inset 0 0 0 1px rgba(47, 127, 155, 0.12);
   min-width: 220px;
   text-align: right;
+}
+
+.pdfButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(var(--color-primary-rgb), 0.22);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.pdfButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.pdfButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .summaryLabel {
@@ -478,3 +514,156 @@
     text-align: left;
   }
 }
+
+/* ── Modal PDF Preview ── */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.modalContent {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 1000px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  border-bottom: 1px solid #eef1f3;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-soft);
+  transition: color var(--transition-fast);
+}
+
+.closeButton:hover {
+  color: var(--color-danger);
+}
+
+.modalBody {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.pdfIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid #eef1f3;
+  background: #fff;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+.cancelButton {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.cancelButton:hover {
+  background: #f3f4f6;
+}
+
+.confirmButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
+  color: var(--color-white);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(var(--color-primary-rgb), 0.2);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.confirmButton:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ── Boleta Action ── */
+.boletaAction {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid #eef1f3;
+}
+
+.boletaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.6rem 1rem;
+  border: 1.5px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.boletaButton:hover:not(:disabled) {
+  background: rgba(var(--color-primary-rgb), 0.06);
+}
+
+.boletaButton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+

@@ -337,6 +337,8 @@ const translations = {
       metodoPago: "Método de pago",
       pagadoEl: "Pagado el",
       envioGratis: "Envío gratis",
+      descargarPdf: "Descargar PDF",
+      generandoPdf: "Generando...",
     },
     // NotFound
     notFound: {
@@ -800,6 +802,8 @@ const translations = {
       metodoPago: "Payment method",
       pagadoEl: "Paid on",
       envioGratis: "Free shipping",
+      descargarPdf: "Download PDF",
+      generandoPdf: "Generating...",
     },
     notFound: {
       tag: "Error 404",
@@ -1255,6 +1259,8 @@ const translations = {
       metodoPago: "Pagana forma",
       pagadoEl: "Pagasqa punchaw",
       envioGratis: "Envío gratis",
+      descargarPdf: "PDF-ta uraykuchiy",
+      generandoPdf: "Ruwachkan...",
     },
     notFound: {
       tag: "Error 404",

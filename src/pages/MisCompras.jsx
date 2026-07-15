@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import styles from "../css_components/MisCompras.module.css";
 import useAuth from "../auth/hooks/useAuth";
 import { getOrdersByUser } from "../services/ordersStorage";
 import { useLanguage } from "../context/LanguageContext";
 import OrderMap from "../components/orders/OrderMap";
+import { generarPdfCompras, generarBoletaPdf } from "../services/comprasPdf";
 
 const formatCurrency = (value) => {
   const numeric = Number(value || 0);
@@ -108,9 +109,65 @@ export default function MisCompras() {
   const { t } = useLanguage();
   const [orders, setOrders] = useState(null);
   const [expandedOrders, setExpandedOrders] = useState({});
+  const [generandoPdf, setGenerandoPdf] = useState(false);
+  const [pdfPreview, setPdfPreview] = useState(null);
+  const [pdfDoc, setPdfDoc] = useState(null);
+  const [pdfFilename, setPdfFilename] = useState("technova-compras.pdf");
 
   const toggleOrder = (orderId) => {
     setExpandedOrders((prev) => ({ ...prev, [orderId]: !prev[orderId] }));
+  };
+
+  const handlePrevisualizarPdf = async () => {
+    if (!orders || orders.length === 0 || generandoPdf) {
+      return;
+    }
+
+    setGenerandoPdf(true);
+    try {
+      const doc = generarPdfCompras({ orders, user, t });
+      const blobUrl = doc.output("bloburl");
+      setPdfDoc(doc);
+      setPdfPreview(blobUrl);
+      const fecha = new Date().toISOString().slice(0, 10);
+      setPdfFilename(`technova-compras-${fecha}.pdf`);
+    } catch (error) {
+      console.error("Error al generar PDF:", error);
+    } finally {
+      setGenerandoPdf(false);
+    }
+  };
+
+  const handlePrevisualizarBoleta = async (order) => {
+    if (generandoPdf) {
+      return;
+    }
+
+    setGenerandoPdf(true);
+    try {
+      const doc = generarBoletaPdf({ order, user, t });
+      const blobUrl = doc.output("bloburl");
+      setPdfDoc(doc);
+      setPdfPreview(blobUrl);
+      const fecha = new Date().toISOString().slice(0, 10);
+      setPdfFilename(`technova-boleta-${order.id}-${fecha}.pdf`);
+    } catch (error) {
+      console.error("Error al generar boleta PDF:", error);
+    } finally {
+      setGenerandoPdf(false);
+    }
+  };
+
+  const handleDescargarPdf = () => {
+    if (pdfDoc) {
+      pdfDoc.save(pdfFilename);
+      cerrarPrevisualizacion();
+    }
+  };
+
+  const cerrarPrevisualizacion = () => {
+    setPdfPreview(null);
+    setPdfDoc(null);
   };
 
   useEffect(() => {
@@ -156,11 +213,26 @@ export default function MisCompras() {
             {t.misCompras.subtitulo}
           </p>
         </div>
-        <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>{t.misCompras.totalGastado}</span>
-          <strong className={styles.summaryValue}>
-            {formatCurrency(totalCompras)}
-          </strong>
+        <div className={styles.heroActions}>
+          <div className={styles.summaryCard}>
+            <span className={styles.summaryLabel}>{t.misCompras.totalGastado}</span>
+            <strong className={styles.summaryValue}>
+              {formatCurrency(totalCompras)}
+            </strong>
+          </div>
+          {orders && orders.length > 0 ? (
+            <button
+              type="button"
+              className={styles.pdfButton}
+              onClick={handlePrevisualizarPdf}
+              disabled={generandoPdf}
+            >
+              <FontAwesomeIcon icon={faFilePdf} />
+              {generandoPdf
+                ? t.misCompras.generandoPdf
+                : t.misCompras.descargarPdf}
+            </button>
+          ) : null}
         </div>
       </section>
 
@@ -368,12 +440,45 @@ export default function MisCompras() {
                         ) : null}
                       </div>
                     ) : null}
+                    
+                    <div className={styles.boletaAction}>
+                      <button 
+                        type="button" 
+                        className={styles.boletaButton} 
+                        onClick={() => handlePrevisualizarBoleta(order)}
+                        disabled={generandoPdf}
+                      >
+                         <FontAwesomeIcon icon={faFilePdf} /> {t.misCompras?.descargarBoleta || "Descargar boleta"}
+                      </button>
+                    </div>
                   </div>
                 ) : null}
               </article>
             );
           })}
         </section>
+      )}
+
+      {pdfPreview && (
+        <div className={styles.modalOverlay} onClick={cerrarPrevisualizacion}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2>{t.misCompras?.previsualizacion || "Previsualización del PDF"}</h2>
+              <button onClick={cerrarPrevisualizacion} className={styles.closeButton}>&times;</button>
+            </div>
+            <div className={styles.modalBody}>
+              <iframe src={pdfPreview} title="PDF Preview" className={styles.pdfIframe} />
+            </div>
+            <div className={styles.modalFooter}>
+              <button onClick={cerrarPrevisualizacion} className={styles.cancelButton}>
+                {t.common?.cancelar || "Cancelar"}
+              </button>
+              <button onClick={handleDescargarPdf} className={styles.confirmButton}>
+                <FontAwesomeIcon icon={faFilePdf} /> {t.misCompras?.descargarPdf || "Descargar PDF"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );
